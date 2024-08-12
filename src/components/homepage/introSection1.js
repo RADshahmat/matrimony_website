@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/introSection_home.module.css'; 
+import styles from '../../styles/homepageStyle/introSec1.module.css'; 
 
 
 const IntroSecHome= () => {
