@@ -29,9 +29,18 @@ function StepItem({ title, subtitle, description, imageSrc, isReverse }) {
 const steps = [
   {
     title: "Enrollment",
-    subtitle: "Enroll in our Venus package",
-    description: "Our consultant will understand your criteria and recommend the most suitable package. Your information will be enrolled into our database, and you'll receive your credentials.",
-    imageSrc: "/assets/rings.png", // Corrected imageSrc
+    subtitle: (
+      <>
+        Enroll in our Venus package{' '}
+        <img 
+          loading="lazy" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/798aa715c3eacf622362b8d0cdda215a2e3bcf5d68198c751418e47b4d3d5768?apiKey=68c669943f1543b88775d643f2be81f3&&apiKey=68c669943f1543b88775d643f2be81f3" 
+          className={styles.closeIcon} 
+          alt="Package icon"
+        />
+      </>
+    ),    description: "Our consultant will understand your criteria and recommend the most suitable package. Your information will be enrolled into our database, and you'll receive your credentials.",
+    imageSrc: "/assets/rings.png", 
     isReverse: false
   },
   {
@@ -74,7 +83,6 @@ const steps = [
 function HowToFindSpecialSomeone() {
   return (
     <section className={styles.container}>
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/798aa715c3eacf622362b8d0cdda215a2e3bcf5d68198c751418e47b4d3d5768?apiKey=68c669943f1543b88775d643f2be81f3&&apiKey=68c669943f1543b88775d643f2be81f3" alt="" className={styles.closeIcon} />
       <div className={styles.contentWrapper}>
         <header className={styles.headerSection}>
             <div className={styles.titleContainer}>
