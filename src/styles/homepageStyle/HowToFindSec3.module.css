@@ -1,0 +1,358 @@
+.container {
+    background-color: rgba(240, 233, 222, 1);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    padding-top: 200px;
+  }
+  
+  @media (max-width: 767px) {
+    .container {
+      max-width: 100%;
+      padding: 100px 20px 0;
+    }
+  }
+  
+  .closeIcon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 20px;
+    align-self: flex-end;
+    z-index: 10;
+  }
+  
+  @media (max-width: 767px) {
+    .closeIcon {
+      margin-right: 10px;
+    }
+  }
+  
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  @media (max-width: 767px) {
+    .contentWrapper {
+      max-width: 100%;
+      margin-top: -200px;
+    }
+  }
+  
+  .headerSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  @media (max-width: 767px) {
+    .headerSection {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  
+  .titleContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+
+  }
+  
+  @media (max-width: 767px) {
+    .titleContainer {
+      max-width: 100%;
+      height: auto;
+      padding: 40px 12px 0;
+    }
+  }
+  
+
+  
+  .mainTitle {
+    color: var(--rn-53-themes-net-west-coast, #66451c);
+    text-align: center;
+    padding: 0 253px;
+    font: 600 46px/55px Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .mainTitle {
+      max-width: 100%;
+      font-size: 32px;
+      line-height: 40px;
+      padding: 0 20px;
+    }
+  }
+  
+  .logoContainer {
+    align-self: center;
+    display: flex;
+    width: 200px;
+    max-width: 100%;
+  }
+  
+  @media (max-width: 767px) {
+    .logoContainer {
+      width: 150px;
+    }
+  }
+  
+  .logo1 {
+    aspect-ratio: 1.69;
+    object-fit: contain;
+    object-position: center;
+    width: 200px;
+    max-width: 100%;
+  }
+  
+  @media (max-width: 767px) {
+    .logo1 {
+      width: 75px;
+    }
+  }
+  
+  
+  .stepsContainer {
+    display: flex;
+    min-width: 420px;
+    max-width: 100%;
+    width: 1320px;
+    flex-direction: column;
+
+  }
+  
+  @media (max-width: 767px) {
+    .stepsContainer {
+      min-width: auto;
+      padding: 0 20px;
+    }
+  }
+  
+  .stepsWrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+  
+  @media (max-width: 767px) {
+    .stepsWrapper {
+      padding: 0;
+    }
+  }
+  
+  .stepsList {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  @media (max-width: 767px) {
+    .stepsList {
+      max-width: 100%;
+    }
+  }
+  
+  .verticalDivider {
+    background: var(--rn-53-themes-net-bone, #ddcebc);
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    min-height: 1370px;
+    width: 1px;
+    right: 671px;
+    top: 0px;
+    bottom: 0px;
+  }
+  
+  @media (max-width: 767px) {
+    .verticalDivider {
+      display: none;
+    }
+  }
+  
+  .stepItem {
+    z-index: 0;
+    display: flex;
+    width: 100%;
+    padding-bottom: 50px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  @media (max-width: 767px) {
+    .stepItem {
+      max-width: 100%;
+      padding-bottom: 30px;
+    }
+  }
+  
+  .stepContent {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  @media (max-width: 767px) {
+    .stepContent {
+      max-width: 100%;
+      flex-direction: column;
+    }
+  }
+  
+  .stepImageContainer {
+    display: flex;
+    width: 50%;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+  
+  @media (max-width: 767px) {
+    .stepImageContainer {
+      max-width: 100%;
+      padding: 0;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .stepImage {
+    aspect-ratio: 1;
+    object-position: center;
+    width: 128px;
+    max-width: 450px;
+    padding-right: 80px;
+    padding-left: 28px;
+  }
+  
+  @media (max-width: 767px) {
+    .stepImage {
+      width: 100px;
+    }
+  }
+  
+  .stepTextContainer {
+    display: flex;
+    width: 50%;
+    padding-left: 40px;
+    flex-direction: column;
+    font-family: Poppins, sans-serif;
+    color: var(--rn-53-themes-net-west-coast, #66451c);
+    justify-content: flex-start;
+    flex: 1;
+    text-align: left;
+  }
+  
+  @media (max-width: 767px) {
+    .stepTextContainer {
+      max-width: 100%;
+      padding-left: 0;
+      text-align: center;
+    }
+  }
+  
+  .stepTitle {
+    color: #66451C;
+    font-family: "Playfair Display";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 36px;
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .stepTitle {
+      white-space: normal;
+      font-size: 24px;
+    }
+  }
+  
+  .stepSubtitle {
+    color: var(--rn-53-themes-net-razzmatazz, #eb0359);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 11px;
+  }
+  
+  .stepDescription {
+    margin-top: 11px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    padding: 10px 0 15px;
+  }
+  
+  @media (max-width: 767px) {
+    .stepDescription {
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+  
+  .stepItemReverse .stepTextContainer {
+    text-align: right;
+    padding-left: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .stepItemReverse .stepTextContainer {
+      text-align: center;
+      padding-right: 0;
+    }
+  }
+  
+  .stepItemReverse .stepSubtitle {
+    align-self: flex-end;
+  }
+  
+  @media (max-width: 767px) {
+    .stepItemReverse .stepSubtitle {
+      align-self: center;
+    }
+  }
+  
+  .stepItemReverse .stepImageContainer {
+    padding: 0 0 0 70px;
+    justify-content: flex-start;
+  }
+  
+  @media (max-width: 767px) {
+    .stepItemReverse .stepImageContainer {
+      padding: 0;
+    }
+  }
+  
+  .backgroundBorderShadow {
+    border-radius: 50px;
+    border: 4px solid var(--rn-53-themes-net-nero, #fff);
+    background: var(--rn-53-themes-net-west-coast, #66451c);
+    box-shadow: 0px 0px 10px 0.6px rgba(40, 30, 20, 0.08);
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    min-height: 25px;
+    width: 25px;
+    height: 25px;
+    right: 656px;
+  }
+  
+  @media (max-width: 767px) {
+    .backgroundBorderShadow {
+      display: none;
+    }
+  }
