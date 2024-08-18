@@ -5,7 +5,7 @@
     flex-direction: column;
     overflow: hidden;
     align-items: center;
-    padding-top: 200px;
+    padding-top: 150px;
   }
   
   @media (max-width: 767px) {
@@ -20,8 +20,6 @@
     object-fit: contain;
     object-position: center;
     width: 20px;
-    align-self: flex-end;
-    z-index: 10;
   }
   
   @media (max-width: 767px) {
@@ -60,7 +58,8 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
 
   }
   
@@ -94,8 +93,6 @@
   .logoContainer {
     align-self: center;
     display: flex;
-    width: 200px;
-    max-width: 100%;
   }
   
   @media (max-width: 767px) {
@@ -108,8 +105,7 @@
     aspect-ratio: 1.69;
     object-fit: contain;
     object-position: center;
-    width: 200px;
-    max-width: 100%;
+    width: 240px;
   }
   
   @media (max-width: 767px) {
@@ -170,7 +166,7 @@
     display: flex;
     min-height: 1370px;
     width: 1px;
-    right: 671px;
+    right: 667px;
     top: 0px;
     bottom: 0px;
   }
@@ -200,9 +196,9 @@
   .stepContent {
     display: flex;
     width: 100%;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+
   }
   
   @media (max-width: 767px) {
@@ -214,7 +210,7 @@
   
   .stepImageContainer {
     display: flex;
-    width: 50%;
+    width: 34%;
     align-items: flex-start;
     justify-content: flex-end;
   }
@@ -233,8 +229,6 @@
     object-position: center;
     width: 128px;
     max-width: 450px;
-    padding-right: 80px;
-    padding-left: 28px;
   }
   
   @media (max-width: 767px) {
@@ -245,20 +239,17 @@
   
   .stepTextContainer {
     display: flex;
-    width: 50%;
-    padding-left: 40px;
+    width: 34%;
     flex-direction: column;
     font-family: Poppins, sans-serif;
     color: var(--rn-53-themes-net-west-coast, #66451c);
     justify-content: flex-start;
-    flex: 1;
     text-align: left;
   }
   
   @media (max-width: 767px) {
     .stepTextContainer {
       max-width: 100%;
-      padding-left: 0;
       text-align: center;
     }
   }
@@ -306,13 +297,11 @@
   
   .stepItemReverse .stepTextContainer {
     text-align: right;
-    padding-left: 0;
   }
   
   @media (max-width: 767px) {
     .stepItemReverse .stepTextContainer {
       text-align: center;
-      padding-right: 0;
     }
   }
   
@@ -327,7 +316,6 @@
   }
   
   .stepItemReverse .stepImageContainer {
-    padding: 0 0 0 70px;
     justify-content: flex-start;
   }
   
@@ -345,10 +333,9 @@
     position: absolute;
     z-index: 0;
     display: flex;
-    min-height: 25px;
-    width: 25px;
-    height: 25px;
-    right: 656px;
+    width: 17px;
+    height: 17px;
+    right: 654px;
   }
   
   @media (max-width: 767px) {

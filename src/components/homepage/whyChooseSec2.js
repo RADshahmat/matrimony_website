@@ -32,6 +32,7 @@ const FeatureCard = ({ iconSrc, title, description }) => {
 const WhyChooseUsSec2 = () => {
   return (
     <section className={styles.container}>
+      <h3 className={styles.toptitle}>Why Choose Us!</h3>
       <div className={styles.cardList}>
         {featureData.map((feature, index) => (
           <div key={index} className={styles.cardWrapper}>
