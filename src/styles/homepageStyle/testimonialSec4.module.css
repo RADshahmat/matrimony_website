@@ -30,13 +30,20 @@
   }
   .testimonialList {
     display: flex;
-    min-height: 362px;
     justify-content: space-around;
-    padding: 97px 8px 30px 10px;
+    padding: 97px 8px 0px 10px;
+    align-items: center;
 
   }
   
-
+.arrowContainer{
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  border: 1px solid var(--rn-53-themes-net-nero-55, rgba(255, 255, 255, 0.55));
+  background: var(--rn-53-themes-net-japanese-laurel-52, rgba(255, 153, 0, 0.52));
+}
   
   .cardContent {
     border-radius: 10px;
@@ -159,3 +166,4 @@
       zoom: 45%;
     }
   }
+  

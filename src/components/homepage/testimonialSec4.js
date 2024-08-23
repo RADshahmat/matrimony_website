@@ -69,6 +69,7 @@ const TestimonialSec4 = () => {
         </div>
         <h3 className={styles.toptitle}>Testimonial</h3>
       <div className={styles.testimonialList}>
+      <img loading="grass_shadow" src={`${process.env.PUBLIC_URL}/assets/left_arrow.svg`}  alt="Error Loading" className={styles.arrowContainer} />
         {isMobile ? (
           <TestimonialCard {...testimonials[currentTestimonial]} />
         ) : (
@@ -76,6 +77,8 @@ const TestimonialSec4 = () => {
             <TestimonialCard key={index} {...testimonial} />
           ))
         )}
+      <img loading="grass_shadow" src={`${process.env.PUBLIC_URL}/assets/right_arrow.svg`}  alt="Error Loading" className={styles.arrowContainer} />
+
       </div>
       {isMobile && (
         <div className={styles.mobileControls}>

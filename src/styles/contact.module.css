@@ -1,0 +1,98 @@
+.container{
+  display: flex;
+  flex-direction: column;
+}
+.getintouch {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  z-index: 10;
+}
+
+.leftSection {
+  background: var(--preview-themeforest-net-old-lace, #FDF3E2);
+  text-align: left;
+  padding: 50px;
+  align-self: stretch;
+  width: 569.76px;
+}
+
+.leftSection h2 {
+  color: var(--preview-themeforest-net-black, #000);
+  font-family: Poppins;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 31.2px; /* 120% */
+}
+
+.leftSection p {
+  color: var(--preview-themeforest-net-black, #000);
+  font-family: 'Poppins','sans-serif';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 27.2px; /* 170% */
+  padding-top: 16px;
+}
+
+.signature {
+  margin-top: 30px;
+  color: var(--preview-themeforest-net-black, #000);
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 19.2px; /* 120% */
+}
+
+.logo {
+  margin-top: 10px;
+  width: 151.2px;
+  height: 60px;
+}
+
+.rightSection {
+  width: 340.24px;
+  background: var(--preview-themeforest-net-deep-bronze, #513606);
+  color: var(--preview-themeforest-net-white, var(--Neutrals-Colors-100, #FFF));
+  display: flex;
+  padding: 71.64px 40px 71.65px 40px;
+  align-items: center;
+  align-self: stretch;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.iconText {
+  display: flex;
+  align-items: center;
+}
+
+.iconText img {
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+}
+
+.iconText span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  color: #fff;
+}
+
+.mapImage {
+  object-fit: cover; /* Ensures the image covers the container */
+  object-position: center;
+  width: 100%;
+  height: 100%; /* Make sure it takes the full height of the container */
+  margin-top: -150px; /* Adjust this as needed */
+}
+

@@ -5,7 +5,7 @@ import styles from '../../styles/homepageStyle/introSec1.module.css';
 const IntroSecHome= () => {
     return (
         <div className={styles.container}>
-            <img className={styles.top_cover} src={`${process.env.PUBLIC_URL}/assets/top_cover.png`} alt='Cover' />
+            <img className={styles.top_cover} src={`${process.env.PUBLIC_URL}/assets/top_cover.svg`} alt='Cover' />
             <section className={styles.intro}>
                 <div className={styles.introframe}>
                     <div className={styles.intro_upper}>
