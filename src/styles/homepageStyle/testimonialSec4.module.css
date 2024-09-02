@@ -1,169 +1,174 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
-
 .testimonialSection {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    font-family: Poppins, sans-serif;
-    color: var(--rn-53-themes-net-west-coast, #66451c);
-    font-weight: 400;
-  }
-  .shadowImageContainer{
-    position: relative;
-    object-fit: contain;
-    object-position: center;
-    
-  }
-  .shadowImage{
-    width: 100%;
-  }
-  .toptitle{
-    color: var(--rn-53-themes-net-west-coast, #66451C);
-    text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin: 5px;
-    font-family: "Playfair Display";
-    font-size: 46px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 55.2px; /* 120% */
-  }
-  .testimonialList {
-    display: flex;
-    justify-content: space-around;
-    padding: 97px 8px 0px 10px;
-    align-items: center;
-
-  }
-  
-.arrowContainer{
-  width: 50px;
-  height: 50px;
-  flex-shrink: 0;
-  border-radius: 50px;
-  border: 1px solid var(--rn-53-themes-net-nero-55, rgba(255, 255, 255, 0.55));
-  background: var(--rn-53-themes-net-japanese-laurel-52, rgba(255, 153, 0, 0.52));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Poppins, sans-serif;
+  color: var(--rn-53-themes-net-west-coast, #66451c);
+  font-weight: 400;
+  position: relative;
 }
-  
-  .cardContent {
-    border-radius: 10px;
-    position: relative;
-    display: flex;
-    max-width: 333px;
-    max-height: 185px;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 91px 36px 31px;
-    border: 1px solid rgba(143, 44, 90, 1);
-    text-align: left;
-  }
-  
-  .testimonialText {
-    width: 100%;
-    font-size: 15px;
-    line-height: 23px;
-    text-align: left;
 
+.shadowImageContainer {
+  position: relative;
+  object-fit: contain;
+  object-position: center;
+}
+
+.shadowImage {
+  width: 100%;
+}
+
+.toptitle {
+  color: var(--rn-53-themes-net-west-coast, #66451C);
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 5px;
+  font-family: "Playfair Display";
+  font-size: 46px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 55.2px; /* 120% */
+}
+
+.testimonialList {
+  display: flex;
+  justify-content: space-around;
+  padding: 97px 8px 0px 10px;
+  align-items: center;
+  scroll-behavior: smooth;
+  width: 100%;
+  margin-left: 100px;
+}
+
+.arrowContainer {
+  width: 50px;
+  height: 50px; /* Make sure the arrow container is square */
+  border-radius: 50%; /* Change to make the container circular */
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 153, 0, 0.52);
+  cursor: pointer;
+  position: absolute;
+  top: 60%; /* Center the arrow vertically */
+  transform: translateY(-60%); /* Adjust the vertical positioning */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for better visibility */
+  z-index: 10; /* Ensure the arrow is on top of other elements */
+}
+
+.leftArrow {
+  left: 10px; /* Adjust as needed */
+}
+
+.rightArrow {
+  right: 10px; /* Adjust as needed */
+}
+.cardlistcontainer{
+  margin: 0 50px;
+}
+.cardContent {
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  max-width: 333px;
+  max-height: 185px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 91px 36px 31px;
+  border: 1px solid rgba(143, 44, 90, 1);
+  text-align: left;
+  flex-shrink: 0; /* Prevent the card from shrinking */
+  margin-right: 16px; /* Add spacing between the cards */
+}
+
+.testimonialText {
+  width: 100%;
+  font-size: 15px;
+  line-height: 23px;
+  text-align: left;
+}
+
+.authorName {
+  margin-top: 16px;
+  width: 100%;
+  padding-top: 15px;
+  font: 700 18px/1 'Cinzel Decorative', -apple-system, Roboto, Helvetica, sans-serif;
+  text-align: left;
+}
+
+.authorInfo {
+  font-size: 16px;
+  z-index: 0;
+  margin-top: 16px;
+}
+
+.box1, .box2, .box3 {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+}
+
+.box1 {
+  left: 12px;
+  top: 25px;
+  border: 2px solid var(--rn-53-themes-net-green, #FFC600);
+}
+
+.box2 {
+  left: 31px;
+  top: -67px;
+  border: 2px solid var(--rn-53-themes-net-geraldine, #FD8686);
+}
+
+.box3 {
+  left: 142px;
+  top: -55px;
+  border: 2px solid var(--rn-53-themes-net-rio-grande, #BDCCFF);
+}
+
+.authorImage {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 130px;
+  position: absolute;
+  z-index: 0;
+  max-width: 100%;
+  left: 36px;
+  top: -64px;
+}
+
+@media (max-width: 1024px) {
+  .testimonialSection {
+    zoom: 70%;
   }
-  
-  .authorName {
-    margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .testimonialSection {
+    zoom: 60%;
+  }
+
+  .testimonialCard {
     width: 100%;
-    padding-top: 15px;
-    font: 700 18px/1 'Cinzel Decorative', -apple-system, Roboto, Helvetica, sans-serif;
-    text-align: left;
+    max-width: 300px;
+    margin-bottom: 20px;
   }
-  
-  .authorInfo {
-    font-size: 16px;
-    z-index: 0;
-    margin-top: 16px;
+
+  .cardContent {
+    padding: 91px 20px 31px;
   }
-  .box1, .box2 , .box3{
-    width: 10px;
-    height: 10px;
-    position: absolute;
+}
+
+@media (max-width: 375px) {
+  .testimonialSection {
+    zoom: 45%;
   }
-  .box1{
-    left: 12px;
-    top: 25px;
-    border: 2px solid var(--rn-53-themes-net-green, #FFC600);
+}
+
+@media (max-width: 316px) {
+  .testimonialSection {
+    zoom: 45%;
   }
-  .box2{
-    left: 31px;
-    top: -67px;
-    border: 2px solid var(--rn-53-themes-net-geraldine, #FD8686);
-  }
-  .box3{
-    left: 142px;
-    top: -55px;
-    border: 2px solid var(--rn-53-themes-net-rio-grande, #BDCCFF);
-  }
-  .authorImage {
-    aspect-ratio: 1;
-    object-fit: contain;
-    object-position: center;
-    width: 130px;
-    position: absolute;
-    z-index: 0;
-    max-width: 100%;
-    left: 36px;
-    top: -64px;
-  }
-  
-  .mobileControls {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .controlButton {
-    padding: 10px 20px;
-    background-color: var(--rn-53-themes-net-west-coast, #66451c);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  @media (max-width: 1024px) {
-    .testimonialSection {
-      zoom: 70%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .testimonialSection {
-      zoom: 50%;
-      padding-top: 32px;
-    }
-  
-    .testimonialList {
-      padding: 0;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .testimonialCard {
-      width: 100%;
-      max-width: 300px;
-      margin-bottom: 20px;
-    }
-  
-    .cardContent {
-      padding: 91px 20px 31px;
-    }
-  }
-  
-  @media (max-width: 375px) {
-    .testimonialSection {
-      zoom: 45%;
-    }
-  }
-  
-  @media (max-width: 316px) {
-    .testimonialSection {
-      zoom: 45%;
-    }
-  }
-  
+}

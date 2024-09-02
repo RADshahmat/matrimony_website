@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS styles
 import styles from '../../styles/homepageStyle/whyChooseUsSec2.module.css';
 
 const featureData = [
@@ -21,7 +23,7 @@ const featureData = [
 
 const FeatureCard = ({ iconSrc, title, description }) => {
   return (
-    <article className={styles.card}>
+    <article className={styles.card} data-aos="fade-up">
       <img loading="lazy" src={iconSrc} alt="" className={styles.icon} />
       <h3 className={styles.title}>{title}</h3>
       <p className={styles.description}>{description}</p>
@@ -30,12 +32,20 @@ const FeatureCard = ({ iconSrc, title, description }) => {
 };
 
 const WhyChooseUsSec2 = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false, // Ensure animations occur on every scroll
+    });
+  }, []);
+
   return (
     <section className={styles.container}>
       <h3 className={styles.toptitle}>Why Choose Us!</h3>
       <div className={styles.cardList}>
         {featureData.map((feature, index) => (
-          <div key={index} className={styles.cardWrapper}>
+          <div key={index} className={styles.cardWrapper} data-aos="fade-up" data-aos-delay={index * 200}>
             <FeatureCard
               iconSrc={feature.iconSrc}
               title={feature.title}

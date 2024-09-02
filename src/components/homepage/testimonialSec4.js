@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from '../../styles/homepageStyle/testimonialSec4.module.css';
 
 const testimonials = [
@@ -21,71 +21,90 @@ const testimonials = [
     name: "Name Name Name",
     designation: "Designation",
     company: "Company name",
-    imageSrc: "assets/siam.png"
+    imageSrc: "/assets/siam.png"
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/biddya.png"
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/siam.png"
   }
 ];
 
 const TestimonialCard = ({ content, name, designation, company, imageSrc }) => {
   return (
-      <div className={styles.cardContent}>
-                <img src={imageSrc} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
-                <div className={styles.box1} />
-                <div className={styles.box2} />
-                <div className={styles.box3} />
-        <p className={styles.testimonialText}>{content}</p>
-        <h3 className={styles.authorName}>{name}</h3>
-        <p className={styles.authorInfo}>{designation}, {company}</p>
-      </div>
+    <div className={styles.cardContent}>
+      <img src={imageSrc} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
+      <div className={styles.box1} />
+      <div className={styles.box2} />
+      <div className={styles.box3} />
+      <p className={styles.testimonialText}>{content}</p>
+      <h3 className={styles.authorName}>{name}</h3>
+      <p className={styles.authorInfo}>{designation}, {company}</p>
+    </div>
   );
 };
 
 const TestimonialSec4 = () => {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const testimonialListRef = useRef(null);
+  const testimonialsCount = testimonials.length;
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsCount);
+  }, [testimonialsCount]);
+
+  const handlePrevious = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonialsCount) % testimonialsCount);
+  }, [testimonialsCount]);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    const interval = setInterval(() => {
+      handleNext();
+    }, 3000); // Adjust the interval as needed
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    return () => clearInterval(interval);
+  }, [handleNext]);
 
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  useEffect(() => {
+    if (testimonialListRef.current) {
+      const container = testimonialListRef.current;
+      const cardWidth = container.firstChild.offsetWidth + 16; // Including margin
+      container.style.transition = 'transform 0.5s ease-out';
+      container.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+  }, [currentIndex]);
 
   return (
     <section className={styles.testimonialSection}>
-        <div className={styles.shadowImageContainer}>
-            <img loading="grass_shadow" src={`${process.env.PUBLIC_URL}/assets/grass_shadow.png`}  alt="Error Loading" className={styles.shadowImage} />
-        </div>
-        <h3 className={styles.toptitle}>Testimonial</h3>
-      <div className={styles.testimonialList}>
-      <img loading="grass_shadow" src={`${process.env.PUBLIC_URL}/assets/left_arrow.svg`}  alt="Error Loading" className={styles.arrowContainer} />
-        {isMobile ? (
-          <TestimonialCard {...testimonials[currentTestimonial]} />
-        ) : (
-          testimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} {...testimonial} />
-          ))
-        )}
-      <img loading="grass_shadow" src={`${process.env.PUBLIC_URL}/assets/right_arrow.svg`}  alt="Error Loading" className={styles.arrowContainer} />
-
+      <div className={styles.shadowImageContainer}>
+        <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/grass_shadow.png`} alt="Error Loading" className={styles.shadowImage} />
       </div>
-      {isMobile && (
-        <div className={styles.mobileControls}>
-          <button onClick={prevTestimonial} className={styles.controlButton}>Previous</button>
-          <button onClick={nextTestimonial} className={styles.controlButton}>Next</button>
+      
+      <h3 className={styles.toptitle}>Testimonial</h3>
+
+      <div className={styles.cardlistcontainer}>
+        <div className={styles.testimonialList} ref={testimonialListRef}>
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard key={index} {...testimonial} />
+          ))}
         </div>
-      )}
+      </div>
+
+      <div className={`${styles.arrowContainer} ${styles.leftArrow}`} onClick={handlePrevious}>
+        <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/left_arrow.svg`} alt="Previous" />
+      </div>
+      <div className={`${styles.arrowContainer} ${styles.rightArrow}`} onClick={handleNext}>
+        <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/right_arrow.svg`} alt="Next" />
+      </div>
     </section>
   );
 };

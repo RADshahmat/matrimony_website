@@ -1,28 +1,11 @@
 import styles from '../../styles/homepageStyle/meetFounder.module.css';
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
 function MeetFounder() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const element = document.querySelector(`.${styles.meetFounderSection}`);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        const isInViewport = rect.top <= window.innerHeight && rect.bottom >= 0;
-        setIsVisible(isInViewport);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <section className={`${styles.meetFounderSection} ${isVisible ? styles.visible : ''}`}>
+    <section className={styles.meetFounderSection}>
       <div className={styles.contentWrapper}>
         <div className={styles.textColumn}>
           <div className={styles.titleWrapper}>
@@ -37,51 +20,53 @@ function MeetFounder() {
           </div>
         </div>
         <div className={styles.imageColumn}>
-          <img 
-            loading="lazy" 
-            src="/assets/founderbackground.svg" 
-            className={styles.founderImage} 
-            alt="Our founder" 
-          />
-          <img 
-            loading="lazy" 
-            src="/assets/apu.svg" 
-            className={styles.founderTopImage} 
-            alt="Our founder" 
-          />
-      <div className={styles.namecardImage} aria-hidden="true">
-        <div className={styles.namecardTextContainer}>
-            <div className={styles.founderName}>Huraira Shishir</div>
-            <p className={styles.designation}>Founder & Relationship Consultant</p>
-            <p className={styles.designation}>Butterfly Matrimonial Ltd.</p>
-        </div>
-      </div>
+          <div className={styles.founderContainer}>
+              <img 
+                loading="lazy" 
+                src="/assets/founderbackground.svg" 
+                className={styles.founderImage} 
+                alt="Our founder" 
+              />
+              <img 
+                loading="lazy" 
+                src="/assets/apu.svg" 
+                className={styles.founderTopImage} 
+                alt="Our founder" 
+              />
+              <div className={styles.namecardImage} aria-hidden="true">
+                <div className={styles.namecardTextContainer}>
+                    <div className={styles.founderName}>Huraira Shishir</div>
+                    <p className={styles.designation}>Founder & Relationship Consultant</p>
+                    <p className={styles.designation}>Butterfly Matrimonial Ltd.</p>
+                </div>
+              </div>
 
-          <img 
-            loading="lazy" 
-            src="/assets/namecardbottom.svg" 
-            className={styles.namecardbottomImage} 
-            alt="Our founder" 
-          />
-         <div className={styles.socialLinks}>
-                <a href="https://www.google.com" className={styles.iconLink}>
-                  <img src={`${process.env.PUBLIC_URL}/assets/facebook.svg`} alt="Facebook" />
-                </a>
-                <a href="https://www.google.com" className={styles.iconLink}>
-                  <img src={`${process.env.PUBLIC_URL}/assets/twitter.svg`} alt="Twitter" />
-                </a>
-                <a href="https://www.google.com" className={styles.iconLink}>
-                  <img src={`${process.env.PUBLIC_URL}/assets/whatsapp.svg`} alt="WhatsApp" />
-                </a>
-                <a href="https://www.google.com" className={styles.iconLink}>
-                  <img src={`${process.env.PUBLIC_URL}/assets/linkedin.svg`} alt="LinkedIn" />
-                </a>
-                <a href="https://www.google.com" className={styles.iconLink}>
-                  <img src={`${process.env.PUBLIC_URL}/assets/youtube.svg`} alt="YouTube" />
-                </a>
-                <a href="https://www.google.com" className={styles.iconLink}>
-                  <img src={`${process.env.PUBLIC_URL}/assets/instagram.svg`} alt="Instagram" />
-                </a>
+              <img 
+                loading="lazy" 
+                src="/assets/namecardbottom.svg" 
+                className={styles.namecardbottomImage} 
+                alt="Our founder" 
+              />
+              <div className={styles.socialLinks}>
+                  <a href="https://www.google.com" className={styles.iconLink}>
+                    <img src={`${process.env.PUBLIC_URL}/assets/facebook.svg`} alt="Facebook" />
+                  </a>
+                  <a href="https://www.google.com" className={styles.iconLink}>
+                    <img src={`${process.env.PUBLIC_URL}/assets/twitter.svg`} alt="Twitter" />
+                  </a>
+                  <a href="https://www.google.com" className={styles.iconLink}>
+                    <img src={`${process.env.PUBLIC_URL}/assets/whatsapp.svg`} alt="WhatsApp" />
+                  </a>
+                  <a href="https://www.google.com" className={styles.iconLink}>
+                    <img src={`${process.env.PUBLIC_URL}/assets/linkedin.svg`} alt="LinkedIn" />
+                  </a>
+                  <a href="https://www.google.com" className={styles.iconLink}>
+                    <img src={`${process.env.PUBLIC_URL}/assets/youtube.svg`} alt="YouTube" />
+                  </a>
+                  <a href="https://www.google.com" className={styles.iconLink}>
+                    <img src={`${process.env.PUBLIC_URL}/assets/instagram.svg`} alt="Instagram" />
+                  </a>
+              </div>
           </div>
         </div>
       </div>

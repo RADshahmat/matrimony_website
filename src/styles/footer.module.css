@@ -15,8 +15,6 @@
   .footersection {
     text-align: left;
     width: 30%;
-    position: relative;
-    left: 30px;
   }
   .footerTitle {
     color: var(--preview-themeforest-net-white, var(--Neutrals-Colors-100, #FFF));
@@ -117,24 +115,18 @@
     color: #f5a623;
 }
 
-@media (max-width: 375px) {
-  .container {
-    zoom: 45%;
-  }
-}
-
-@media (max-width: 316px) {
-  .container {
-    zoom: 45%;
-  }
-}
 @media (max-width: 768px) {
   .container {
-    zoom: 55%;
+    zoom: 80%;
   }
-}
-@media (max-width: 1350px) {
-  .container {
-    zoom: 70%;
+  .upperfooter{
+    flex-direction: column;
+  }
+  .footersection{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .footerTitle{
+    margin-bottom: 15px
   }
 }

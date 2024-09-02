@@ -96,3 +96,14 @@
   margin-top: -150px; /* Adjust this as needed */
 }
 
+@media (max-width: 768px) {
+    .getintouch{
+      zoom: 60%;
+    }
+    .leftSection, .rightSection{
+      width: auto;
+    }
+    .mapImage{
+      margin-top: 0px;
+    }
+}

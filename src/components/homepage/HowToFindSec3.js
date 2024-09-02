@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import styles from '../../styles/homepageStyle/HowToFindSec3.module.css';
 
-function StepItem({ title, subtitle, description, imageSrc, isReverse }) {
+function StepItem({ title, subtitle, description, imageSrc, isReverse, isMobile }) {
   return (
-    <div className={`${styles.stepItem} ${isReverse ? styles.stepItemReverse : ''}`}>
+    <div 
+      className={`${styles.stepItem} ${isReverse ? styles.stepItemReverse : ''}`}
+      {...(!isMobile && { "data-aos": "fade-up" })}
+    >
       <div className={styles.stepContent}>
-          {!isReverse && (
-            <div className={styles.stepImageContainer}>
-              <img loading="lazy" src={imageSrc} alt={title} className={styles.stepImage} />
-            </div>
-          )}
-          <div className={styles.stepTextContainer}>
-            <h2 className={styles.stepTitle}>{title}</h2>
-            <div className={styles.stepSubtitle}>{subtitle}</div>
-            <p className={styles.stepDescription}>{description}</p>
+        {!isReverse && (
+          <div className={styles.stepImageContainer}>
+            <img loading="lazy" src={imageSrc} alt={title} className={styles.stepImage} />
           </div>
-          {isReverse && (
-            <div className={styles.stepImageContainer}>
-              <img loading="lazy" src={imageSrc} alt={title} className={styles.stepImage} />
-            </div>
-          )}
+        )}
+        <div className={styles.stepTextContainer}>
+          <h2 className={styles.stepTitle}>{title}</h2>
+          <div className={styles.stepSubtitle}>{subtitle}</div>
+          <p className={styles.stepDescription}>{description}</p>
+        </div>
+        {isReverse && (
+          <div className={styles.stepImageContainer}>
+            <img loading="lazy" src={imageSrc} alt={title} className={styles.stepImage} />
+          </div>
+        )}
       </div>
       <div className={styles.backgroundBorderShadow} />
     </div>
@@ -39,7 +44,8 @@ const steps = [
           alt="Package icon"
         />
       </>
-    ),    description: "Our consultant will understand your criteria and recommend the most suitable package. Your information will be enrolled into our database, and you'll receive your credentials.",
+    ),    
+    description: "Our consultant will understand your criteria and recommend the most suitable package. Your information will be enrolled into our database, and you'll receive your credentials.",
     imageSrc: "/assets/rings.png", 
     isReverse: false
   },
@@ -67,7 +73,7 @@ const steps = [
   {
     title: "Start Communicate",
     subtitle: "Get to know each other through communication.",
-    description: "You can communicate through our secure built-in chat system or over the phone to get to Understand the person better.",
+    description: "You can communicate through our secure built-in chat system or over the phone to get to understand the person better.",
     imageSrc: "/assets/chat.png",
     isReverse: false
   },
@@ -79,18 +85,37 @@ const steps = [
     isReverse: true
   }
 ];
-
 function HowToFindSpecialSomeone() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
+    
+    checkIfMobile(); // Initial check
+    window.addEventListener('resize', checkIfMobile); // Re-check on window resize
+
+    if (!isMobile) {
+      AOS.init({
+        duration: 1000,
+        easing: 'ease-in-out',
+        once: false,
+      });
+    }
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, [isMobile]);
+
   return (
     <section className={styles.container}>
       <div className={styles.contentWrapper}>
         <header className={styles.headerSection}>
-            <div className={styles.titleContainer}>
-                  <h1 className={styles.mainTitle}>How can I find a special someone?</h1>
-                  <div className={styles.logoContainer}>
-                      <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/flower.png`} alt="Logo 1" className={styles.logo1} />
-                  </div>
+          <div className={styles.titleContainer}>
+            <h1 className={styles.mainTitle}>How can I find a special someone?</h1>
+            <div className={styles.logoContainer}>
+              <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/flower.png`} alt="Logo 1" className={styles.logo1} />
             </div>
+          </div>
         </header>
 
         <div className={styles.stepsContainer}>
@@ -98,7 +123,13 @@ function HowToFindSpecialSomeone() {
             <div className={styles.stepsList}>
               <div className={styles.verticalDivider} />
               {steps.map((step, index) => (
-                <StepItem key={index} {...step} />
+                <StepItem 
+                  key={index} 
+                  {...step} 
+                  isMobile={isMobile} // Pass isMobile to control AOS on each step
+                  data-aos="fade-up" 
+                  data-aos-delay={index * 200}
+                />
               ))}
             </div>
           </div>

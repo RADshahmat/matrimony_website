@@ -1,7 +1,6 @@
 .meetFounderSection {
     background-color: #fff;
     overflow: hidden;
-    padding: 0 0 0 48px;
   }
   
   .contentWrapper {
@@ -14,7 +13,7 @@
     display: flex;
     flex-direction: column;
     line-height: normal;
-    width: 65%;
+    margin-left: 40px;
   }
   
   .titleWrapper {
@@ -23,9 +22,7 @@
     align-self: stretch;
     color: #bf5a5a;
     font: 700 30px Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
-    width: 100%;
-    padding-left: 20px;
-    padding-top: 105px;
+    margin: 110px 30px 0 35px;
   }
   
   .title {
@@ -51,19 +48,23 @@
   }
   .imageColumn {
     display: flex;
+    justify-content: center;
+    align-items: end;
     flex-direction: column;
     line-height: normal;
     margin-left: 20px;
-    position: relative; 
-    padding-top: 20px;
+    position: relative;
   }
-  
+.founderContainer{
+  position: relative;
+}
   .founderImage {
     aspect-ratio: 0.83;
     object-fit: contain;
     object-position: center;
     transition: transform 0.3s ease-in-out;
     position: relative;
+    width: 558px;
   }
   
   .founderTopImage{
@@ -147,7 +148,7 @@
     }
     
     
-  @media (max-width: 1024px) {
+  @media (max-width: 1250px) {
     .meetFounderSection {
       zoom: 70%;
     }
@@ -155,33 +156,21 @@
   
   @media (max-width: 768px) {
     .meetFounderSection {
-      zoom: 50%;
-      padding-left: 20px;
+      zoom: 70%;
     }
   
     .contentWrapper {
       flex-direction: column;
-      align-items: stretch;
       gap: 0;
     }
-  
-    .textColumn,
-    .imageColumn {
-      width: 100%;
-    }
-  
-    .titleWrapper {
-      max-width: 100%;
-      margin-top: 40px;
-    }
-  
-    .decorativeBorder {
-      max-width: 100%;
-    }
-  
-    .founderImage {
-      margin-top: 40px;
-    }
+   .founderContainer{
+    zoom: 70%;
+    margin-right: 20px;
+   }
+   .textColumn{
+    margin-left: 0px;
+   }
+
   }
   
   @media (max-width: 375px) {
@@ -193,10 +182,5 @@
   @media (max-width: 316px) {
     .meetFounderSection {
       zoom: 45%;
-    }
-  }
-  @media (max-width: 1350px) {
-    .meetFounderSection {
-      zoom: 70%;
     }
   }

@@ -21,10 +21,8 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    max-width: 460px;
-    padding: 0 15px;
-    flex: 1;
-    flex-basis: 0%;
+
+    padding: 0 15px 10px 15px;
   }
   
   .cardContent {
@@ -99,59 +97,18 @@
   }
   
   @media (max-width: 1024px) {
-    .card {
-      zoom: 70%;
+    .container {
+
     }
   }
   
   @media (max-width: 768px) {
-    .card {
-      zoom: 50%;
-      max-width: 100%;
+    .container{
+   
     }
-  
-    .textContent {
-      padding: 20px;
-    }
-  
-    .readMore {
-      padding: 15px 20px;
-    }
-  }
-  
-  @media (max-width: 375px) {
-    .card {
-      zoom: 45%;
-    }
-  }
-  
-  @media (max-width: 316px) {
-    .card {
-      zoom: 45%;
-    }
-  }
-  @media (max-width: 1024px) {
-    .container {
-      zoom: 70%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      zoom: 50%;
+    .blogscardContainer{
       flex-direction: column;
       align-items: center;
     }
   }
-  
-  @media (max-width: 375px) {
-    .container {
-      zoom: 45%;
-    }
-  }
-  
-  @media (max-width: 316px) {
-    .container {
-      zoom: 45%;
-    }
-  }
+

@@ -13,7 +13,7 @@ const ContactSection = () => {
               to ensuring it is magical.
             </p>
             <p className={styles.signature}>Best Wishes,</p>
-            <img src={`${process.env.PUBLIC_URL}/assets/butterfly_matrimony.png`} className={styles.logo} />
+            <img src={`${process.env.PUBLIC_URL}/assets/butterfly_matrimony.png`} className={styles.logo} alt='logo' />
           </div>
 
           <div className={styles.rightSection}>

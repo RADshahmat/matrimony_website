@@ -15,12 +15,12 @@ const HomePage = () => {
         <div className="homepage">
             <Header />
             <div className='main-content'>
-            <IntroSecHome />
-            <WhyChooseUsSec2 />
-            <HowToFindSpecialSomeone />
-            <TestimonialSec4 />
-            <MeetFounder />
-            <BlogPostsSection />
+                <IntroSecHome />
+                <WhyChooseUsSec2 />
+                <HowToFindSpecialSomeone />
+                <TestimonialSec4 />
+                <MeetFounder />
+                <BlogPostsSection />
             </div>
             <ContactSection />
             <Footer />

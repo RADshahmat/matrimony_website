@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import styles from '../../styles/homepageStyle/storiesNblogsSec6.module.css';
 
-
+// Define the blogPosts array
 const blogPosts = [
   {
     image: "https://cdn.builder.io/api/v1/image/assets/TEMP/2700a5bc1ae895e3eadedb67d4bd4266b19b0470797815dd5e579b7dab9d8e21?placeholderIfAbsent=true&apiKey=68c669943f1543b88775d643f2be81f3",
@@ -23,41 +25,52 @@ const blogPosts = [
   }
 ];
 
-const BlogPostCard = ({ image, category, title, excerpt }) => {
-  return (
-    <article className={styles.card}>
-      <div className={styles.cardContent}>
-        <div className={styles.imageWrapper}>
-          <img src={image} alt={title} className={styles.image} />
-          <div className={styles.category}>
-            <span className={styles.categoryTag}>{category}</span>
-          </div>
-        </div>
-        <div className={styles.textContent}>
-          <div className={styles.pinType}>
-            <img src={`${process.env.PUBLIC_URL}/assets/pin.svg`} alt="pin" className={styles.pin} />
-            <span className={styles.pintext}>{category}</span>
-          </div>
-          <h2 className={styles.title}>{title}</h2>
-          <p className={styles.excerpt}>{excerpt}</p>
-          <a href="#" className={styles.readMore}>Read More</a>
-        </div>
-      </div>
-    </article>
-  );
-};
-
-
 const BlogPostsSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: false, // Animation will occur only once
+    });
+  }, []);
+
   return (
     <section className={styles.container}>
       <h3 className={styles.sectionTitle}>Stories And Blogs</h3>
       <div className={styles.blogscardContainer}>
         {blogPosts.map((post, index) => (
-        <BlogPostCard key={index} {...post} />
-      ))}
+          <article
+            key={index}
+            className={styles.card}
+            data-aos="fade-up"
+            data-aos-delay={`${index * 200}`} // Delaying animation for a staggered effect
+          >
+            <div className={styles.cardContent}>
+              <div className={styles.imageWrapper}>
+                <img src={post.image} alt={post.title} className={styles.image} />
+                <div className={styles.category}>
+                  <span className={styles.categoryTag}>{post.category}</span>
+                </div>
+              </div>
+              <div className={styles.textContent}>
+                <div className={styles.pinType}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/assets/pin.svg`}
+                    alt="pin"
+                    className={styles.pin}
+                  />
+                  <span className={styles.pintext}>{post.category}</span>
+                </div>
+                <h2 className={styles.title}>{post.title}</h2>
+                <p className={styles.excerpt}>{post.excerpt}</p>
+                <a href="google.com" className={styles.readMore}>
+                  Read More
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
-      
     </section>
   );
 };
