@@ -41,8 +41,7 @@ const Header = () => {
                         </a>
                         <a href="#blog" className={styles.navItem}>Blog</a>
                         <a href="#contact" className={styles.navItem}>Contact</a>
-                        <a href="#create-cv" className={styles.navItem}>Create CV</a>
-                        <a href="#premium" className={styles.navItem}>Venus Premium</a>
+                    
                 </div>
                 <div className={styles.rightSection}>
                     <button className={styles.createCvButton}>Create CV</button>

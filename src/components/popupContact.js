@@ -38,7 +38,7 @@ const PopupContact = ({ closePopup }) => {
     ];
   
     return (
-      <section className={styles.popup}>
+      <section className={styles.popup} data-aos="slide-left">
         <button className={styles.closeButton} onClick={closePopup} aria-label="Close">
           <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/b0fcd9e36f961f5baf1db6087351f5a4b0e5cf2217c86d37a0183a1c8b508d1d?placeholderIfAbsent=true&apiKey=68c669943f1543b88775d643f2be81f3" alt="" className={styles.closeIcon} />
         </button>

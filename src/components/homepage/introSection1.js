@@ -1,21 +1,16 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React from 'react';
 import styles from '../../styles/homepageStyle/introSec1.module.css'; 
 
 const IntroSecHome = () => {
-    useEffect(() => {
-        AOS.init({ duration: 1000, easing: 'ease-in-out', once: false });
-    }, []);
 
     return (
         <div className={styles.container}>
             <img className={styles.top_cover} src={`${process.env.PUBLIC_URL}/assets/top_cover.svg`} alt='Cover' />
 
-            <section className={styles.intro} data-aos="fade-up">
-                <div className={styles.introframe}>
+            <section className={styles.intro} >
+                <div className={styles.introframe} data-aos="flip-right">
                     <div className={styles.intro_upper}>
-                        <div className={styles.intro_heading} data-aos="zoom-in">Butterfly Matrimony</div>
+                        <div className={styles.intro_heading}>Butterfly Matrimony</div>
                         <div className={styles.subheading_intro} >Your perfect matchmaker</div>
                     </div>                    
                     <div className={styles.matrimony_desc}>
@@ -28,12 +23,12 @@ const IntroSecHome = () => {
             <section className={styles.biodata} >
                 <div className={styles.contentWrapper}>
                     <div className={styles.textColumn}>
-                        <div className={styles.textContent}>
+
                             <h1 className={styles.title}>
                                 Effortlessly <br /> Create Your Bio-Data Today!
                             </h1>
                             <button type="submit" className={styles.ctaButton} >Get Started</button>
-                        </div>
+
                     </div>
                     <div className={styles.imageColumn} >
                         <img

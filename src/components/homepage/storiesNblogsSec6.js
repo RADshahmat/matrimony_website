@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css'; 
+import React from 'react';
 import styles from '../../styles/homepageStyle/storiesNblogsSec6.module.css';
 
-// Define the blogPosts array
+
 const blogPosts = [
   {
     image: "https://cdn.builder.io/api/v1/image/assets/TEMP/2700a5bc1ae895e3eadedb67d4bd4266b19b0470797815dd5e579b7dab9d8e21?placeholderIfAbsent=true&apiKey=68c669943f1543b88775d643f2be81f3",
@@ -26,14 +24,6 @@ const blogPosts = [
 ];
 
 const BlogPostsSection = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: false, // Animation will occur only once
-    });
-  }, []);
-
   return (
     <section className={styles.container}>
       <h3 className={styles.sectionTitle}>Stories And Blogs</h3>
@@ -43,7 +33,7 @@ const BlogPostsSection = () => {
             key={index}
             className={styles.card}
             data-aos="fade-up"
-            data-aos-delay={`${index * 200}`} // Delaying animation for a staggered effect
+            data-aos-delay={`${index * 100}`} 
           >
             <div className={styles.cardContent}>
               <div className={styles.imageWrapper}>

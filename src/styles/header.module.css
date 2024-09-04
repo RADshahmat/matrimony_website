@@ -120,9 +120,14 @@
 
 /* Create CV Button (no slide animation) */
 .createCvButton {
+  color: var(--Neutrals-Colors-100, #FFF);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  text-transform: uppercase;
   border-radius: 10px;
   background-color: #ea2f6f;
-  color: #fff;
   text-transform: uppercase;
   padding: 7px 11px;
   border: none;
@@ -245,12 +250,12 @@
 /* Mobile styles */
 @media (max-width: 1163px) {
   .navbar {
-    padding: 7px 10px;
+    padding: 4px 10px;
     border-radius: 0;
     z-index: 1001;
   }
   .logo{
-    width: 90px;
+    width: 80px;
     margin-bottom: 15px;
   }
   .hamiconNtitlepic {
@@ -259,10 +264,9 @@
     align-items: center;      
   }
   .supportContainer{
-    zoom: 80%;
-    padding-right: 25px;
+    display: none;
   }
-  .createCvButton, .premiumSection{
+  .premiumSection{
     display: none;
   }
   .navLinks {
@@ -291,10 +295,13 @@
   }
 
   .rightSection {
-    margin-right: 0;
+    margin-right: 25px;
   }
 
   .mobileMenuIcon {
     display: block;
+  }
+  .createCvButton{
+    font-size: 12px;
   }
 }

@@ -138,6 +138,7 @@ const TestimonialSec4 = () => {
 
   return (
     <section className={styles.testimonialSection}>
+      <img src={`${process.env.PUBLIC_URL}/assets/grass_shadow.png`} alt='grass'></img>
       <h3 className={styles.toptitle}>Testimonial</h3>
 
       <div className={styles.cardlistcontainer}>
