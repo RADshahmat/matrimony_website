@@ -2,7 +2,7 @@
 .popup {
     max-width: 355px;
     background: var(--rn-53-themes-net-nero, #fff);
-    -webkit-backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px); 
     box-shadow: 6px 0px 26px -9px rgba(0, 0, 0, 0.28);
     position: fixed;
     top: 77.1px; 

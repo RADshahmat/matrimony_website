@@ -28,6 +28,34 @@ const testimonials = [
     name: "Name Name Name",
     designation: "Designation",
     company: "Company name",
+    imageSrc: "/assets/siam.png"
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/siam.png"
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/siam.png"
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/tushi.png",
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
     imageSrc: "/assets/biddya.png"
   },
   {
@@ -36,16 +64,34 @@ const testimonials = [
     designation: "Designation",
     company: "Company name",
     imageSrc: "/assets/siam.png"
-  }
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/siam.png"
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/siam.png"
+  },
+  {
+    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    name: "Name Name Name",
+    designation: "Designation",
+    company: "Company name",
+    imageSrc: "/assets/siam.png"
+  },
 ];
 
 const TestimonialCard = ({ content, name, designation, company, imageSrc }) => {
   return (
     <div className={styles.cardContent}>
       <img src={imageSrc} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
-      <div className={styles.box1} />
-      <div className={styles.box2} />
-      <div className={styles.box3} />
       <p className={styles.testimonialText}>{content}</p>
       <h3 className={styles.authorName}>{name}</h3>
       <p className={styles.authorInfo}>{designation}, {company}</p>
@@ -58,13 +104,20 @@ const TestimonialSec4 = () => {
   const testimonialListRef = useRef(null);
   const testimonialsCount = testimonials.length;
 
-  const handleNext = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsCount);
-  }, [testimonialsCount]);
+  // Determine how many cards to show based on the screen width
+  const getVisibleCards = () => (window.innerWidth >= 768 ? 3 : 1); // 3 cards for desktop, 1 for mobile
 
-  const handlePrevious = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonialsCount) % testimonialsCount);
-  }, [testimonialsCount]);
+  const [visibleCards, setVisibleCards] = useState(getVisibleCards());
+
+  useEffect(() => {
+    const handleResize = () => setVisibleCards(getVisibleCards());
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + visibleCards) % testimonialsCount);
+  }, [testimonialsCount, visibleCards]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -81,14 +134,10 @@ const TestimonialSec4 = () => {
       container.style.transition = 'transform 0.5s ease-out';
       container.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
     }
-  }, [currentIndex]);
+  }, [currentIndex, visibleCards]);
 
   return (
     <section className={styles.testimonialSection}>
-      <div className={styles.shadowImageContainer}>
-        <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/grass_shadow.png`} alt="Error Loading" className={styles.shadowImage} />
-      </div>
-      
       <h3 className={styles.toptitle}>Testimonial</h3>
 
       <div className={styles.cardlistcontainer}>
@@ -99,7 +148,7 @@ const TestimonialSec4 = () => {
         </div>
       </div>
 
-      <div className={`${styles.arrowContainer} ${styles.leftArrow}`} onClick={handlePrevious}>
+      <div className={`${styles.arrowContainer} ${styles.leftArrow}`} onClick={() => setCurrentIndex((prevIndex) => (prevIndex - visibleCards + testimonialsCount) % testimonialsCount)}>
         <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/left_arrow.svg`} alt="Previous" />
       </div>
       <div className={`${styles.arrowContainer} ${styles.rightArrow}`} onClick={handleNext}>

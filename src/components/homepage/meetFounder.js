@@ -7,20 +7,19 @@ function MeetFounder() {
   return (
     <section className={styles.meetFounderSection}>
       <div className={styles.contentWrapper}>
-        <div className={styles.textColumn}>
+        <div className={styles.textColumn} data-aos="fade-up">
           <div className={styles.titleWrapper}>
-            <h2 className={styles.title}>Meet, Our Founder</h2>
-            <div className={styles.decorativeBorder} aria-hidden="true">
-            <p className={styles.founderText}>
-  With over two decades of experience, I am a seasoned professional dedicated to fostering meaningful connections. As an expert relationship consultant, I have guided countless individuals and couples toward building strong, respectful relationships. I also run an innovative consultation platform, helping people find their perfect match.<br /> <br />
-  I believe that simplicity and respect are the cornerstones of happiness and success. My empathetic and practical approach makes me a trusted advisor for those seeking to improve their personal connections. Whether you're looking for relationship guidance or a life partner, I am here to help.
-</p>
-
+            <h2 className={styles.title} data-aos="fade-right">Meet, Our Founder</h2>
+            <div className={styles.decorativeBorder} aria-hidden="true" data-aos="fade-left">
+            <p className={styles.founderText} data-aos="fade-up">
+              With over two decades of experience, I am a seasoned professional dedicated to fostering meaningful connections. As an expert relationship consultant, I have guided countless individuals and couples toward building strong, respectful relationships. I also run an innovative consultation platform, helping people find their perfect match.<br /> <br />
+              I believe that simplicity and respect are the cornerstones of happiness and success. My empathetic and practical approach makes me a trusted advisor for those seeking to improve their personal connections. Whether you're looking for relationship guidance or a life partner, I am here to help.
+            </p>
             </div>
           </div>
         </div>
-        <div className={styles.imageColumn}>
-          <div className={styles.founderContainer}>
+        <div className={styles.imageColumn} >
+          <div className={styles.founderContainer} data-aos="zoom-in">
               <img 
                 loading="lazy" 
                 src="/assets/founderbackground.svg" 
@@ -47,7 +46,7 @@ function MeetFounder() {
                 className={styles.namecardbottomImage} 
                 alt="Our founder" 
               />
-              <div className={styles.socialLinks}>
+              <div className={styles.socialLinks} data-aos="fade-up">
                   <a href="https://www.google.com" className={styles.iconLink}>
                     <img src={`${process.env.PUBLIC_URL}/assets/facebook.svg`} alt="Facebook" />
                   </a>
