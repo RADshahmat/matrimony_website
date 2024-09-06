@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HamburgerMenu from 'react-hamburger-menu';
 import styles from '../styles/header.module.css';
 import PopupContact from './popupContact';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -35,16 +36,15 @@ const Header = () => {
                     <img src={`${process.env.PUBLIC_URL}/assets/butterfly_matrimony.png`} alt="Company Logo" className={styles.logo} />
                 </div>
                 <div className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
-                        <a href="#home" className={styles.navItem}>Home</a>
+                        <a href="/" className={styles.navItem}>Home</a>
                         <a href="#all-pages" className={styles.navItem}>All pages
                         <img src={`${process.env.PUBLIC_URL}/assets/down arrow.png`} alt="" className={styles.dropdownIcon} />
                         </a>
                         <a href="#blog" className={styles.navItem}>Blog</a>
                         <a href="#contact" className={styles.navItem}>Contact</a>
-                    
                 </div>
                 <div className={styles.rightSection}>
-                    <button className={styles.createCvButton}>Create CV</button>
+                   <Link to={'/createCV'}><button className={styles.createCvButton}>Create CV</button></Link> 
                     <div className={styles.premiumSection}>
                         <span className={styles.premiumLabel}>Venus Premium</span>
                         <img src={`${process.env.PUBLIC_URL}/assets/premium.png`} alt="Premium Icon" className={styles.premiumIcon} />

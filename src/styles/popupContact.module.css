@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 36px; 
     z-index: 10001;
     text-align: left;
@@ -24,7 +24,7 @@
     width: 21.6px; 
     padding-bottom: 2.7px; 
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     right: 18px; 
     top: 18px; 
     background: none;
@@ -44,7 +44,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .title {
@@ -59,14 +59,14 @@
     margin-top: 21.6px;
     width: 100%;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .contactItem {
     display: flex;
     padding-bottom: 0.9px; 
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     margin-top: 10.8px; 
 }
 
@@ -120,7 +120,7 @@
 }
 
 .expertProfile {
-    align-self: start;
+    align-self: flex-start;
     display: flex;
     font-size: 14.4px; 
     font-weight: 400;
@@ -138,7 +138,7 @@
     display: flex;
     padding-left: 18px; 
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .expertName {
@@ -154,7 +154,7 @@
 }
 
 .askButton {
-    align-self: start;
+    align-self: flex-start;
     border-radius: 4px;
     background: var(--rn-53-themes-net-lynch, #607d8b);
     margin-top: 3.6px; 
@@ -171,9 +171,9 @@
     margin-top: 21.6px;
     width: 100%;
     padding-top: 5.4px; 
-    align-items: start;
+    align-items: flex-start;
     gap: 3.6px; 
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .socialLink {

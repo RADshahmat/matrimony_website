@@ -34,10 +34,7 @@
   text-decoration: none;
   color: #66451C;
   position: relative;
-  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and zoom */
-  opacity: 0; /* Initially hidden */
-  transform: translateX(100%); /* Positioned off-screen to the right */
-  animation: slideIn 0.5s ease forwards; /* Trigger the sliding animation */
+
 }
 
 /* Hover effect for nav links */
@@ -195,29 +192,6 @@
   100% {
     opacity: 1;
     transform: translateX(0); /* Slides into original position */
-  }
-}
-
-/* Still keep sliding for nav items if required */
-.navItem {
-  text-decoration: none;
-  color: #66451C;
-  position: relative;
-  transition: color 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  transform: translateX(100%); /* Positioned off-screen to the right */
-  animation: slideIn 0.5s ease forwards;
-}
-
-/* Add fade-in and slide for navItems */
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 

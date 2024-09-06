@@ -1,0 +1,106 @@
+/* profileInformation.module.css */
+
+.formContainer {
+  width: 80%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  font-family: Nunito;
+  font-weight: 600;
+}
+
+.title{
+  padding: 10px 0;
+  color: #484848;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.formGroupContainer{
+  display: flex;
+  gap: 10px;
+}
+.formGroup {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #484848;
+  font-family: Nunito;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.638rem;
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(204, 204, 204);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box; 
+}
+
+.inputError {
+  border-color: red;
+}
+
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.radioInput {
+  display: none;
+}
+.radioContainer{
+  padding: 0.5rem 0;
+}
+.radioLabel {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.radioInput:checked + .radioLabel {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.dobGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.submitButton {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #0b5ed7;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}

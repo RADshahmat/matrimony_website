@@ -26,7 +26,7 @@
 }
 
 .title {
-  align-self: start;
+  align-self: flex-start;
   margin-left: 10px;
 }
 
@@ -49,7 +49,7 @@
 .imageColumn {
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   flex-direction: column;
   line-height: normal;
   margin-left: 20px;
@@ -93,7 +93,7 @@ position: relative;
   line-height: normal;
 }
 .namecardImage {
-  background-image: url(../../../public/assets/namecard.svg); 
+  background-image: url('/assets/namecard.svg');
   background-size: contain; 
   background-repeat: no-repeat; 
   background-position: center; 

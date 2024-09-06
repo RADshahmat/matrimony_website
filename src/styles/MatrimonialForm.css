@@ -1,0 +1,45 @@
+.CVpagecontainer{
+    margin-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    form{
+        text-align: left;
+    }
+    
+    .form-check.me-3:first-child {
+        padding-left: 0;
+    }
+    .CVdescription {
+        width: 100%;
+        max-width: 874px;
+        color: rgba(0, 0, 0, 1);
+        text-align: center;
+        padding: -5px 0 0;
+        font: 400 16px Nunito, sans-serif;
+      }
+      
+      .boldText {
+        margin-top: 1rem;
+        font-weight: 700;
+      }
+      
+      @media (max-width: 991px) {
+        .description {
+          max-width: 100%;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .description {
+          font-size: 14px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .description {
+          font-size: 12px;
+        }
+      }
