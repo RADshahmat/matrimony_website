@@ -11,6 +11,7 @@ function BioDataPage2() {
       <div className={styles.content}>
         <div className={styles.mainInfo}>
           <div className={styles.details}>
+              <h2 className={styles.personName}>Tanvir Ahmed Tamim</h2>
               <div className={styles.sideInfo}>
                 <p className={styles.intro}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation llamco laboris nisi ut aliquip ex ea commodo consequat.

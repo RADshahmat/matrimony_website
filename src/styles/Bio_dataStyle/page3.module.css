@@ -3,9 +3,19 @@
     background-color: #fff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   width: 595px;
+  height: 842px;
     overflow: hidden;
+    position: relative;
   }
-  
+  .personName{
+    color: #0B1165;
+    font-family: Prata;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 10px;
+  }
   .content {
     display: flex;
   }
@@ -13,6 +23,13 @@
     display: grid;
     grid-template-columns: 150px auto; /* Adjust the width of the label column as needed */
     gap: 2px;
+
+    color: #000;
+    font-family: Prata;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
   .address{
     margin-bottom: 2px;

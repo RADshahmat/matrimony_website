@@ -10,7 +10,7 @@ import CVpreview from './pages/cvpreview';
 function App() {
   useEffect(() => {
     AOS.init({
-      duration: 700,
+      duration: 900,
       easing: 'ease-in-out',
       once: false, 
     });

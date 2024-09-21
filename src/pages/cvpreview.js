@@ -11,7 +11,6 @@ function CVpreview() {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
     useEffect(() => {
-        // Update the isMobile state when the window is resized
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
         };
@@ -29,8 +28,8 @@ function CVpreview() {
     ];
 
     const visiblePages = isMobile
-        ? pages.slice(currentIndex, currentIndex + 1) // Show 1 page for mobile
-        : pages.slice(currentIndex, currentIndex + 2); // Show 2 pages for desktop
+        ? pages.slice(currentIndex, currentIndex + 1) 
+        : pages.slice(currentIndex, currentIndex + 2); 
 
     const handleNext = () => {
         if (currentIndex + (isMobile ? 1 : 2) < pages.length) {

@@ -1,7 +1,7 @@
 .pageWrapper {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the page and its index */
+    align-items: center; 
 }
 
 .CVpreview {
@@ -18,9 +18,8 @@
 
 .pagecontainer {
     display: flex;
-    justify-content: center;
-    gap: 5%;
-    margin: 14px 0px 30px 0px;
+    justify-content: space-evenly;
+    margin: 24px 0px 30px 0px;
     position: relative;
 }
 
@@ -31,7 +30,7 @@
     border: 1px solid rgba(255, 255, 255, 0.55);
     background: rgba(255, 153, 0, 0.52);
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -52,17 +51,17 @@
 .pageIndex {
     text-align: center;
     margin-top: 10px;
-    font-size: 18px;
-    color: #333;
+    color: #000;
+    font-family: "Playfair Display";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 @media (max-width: 768px) {
-    .arrowLeft, .arrowRight {
-        width: 20px;
-        height: 20px;
-    }
 
-    .pageIndex {
-        font-size: 16px;
+    .pageWrapper{
+        zoom: 60%;
     }
 }

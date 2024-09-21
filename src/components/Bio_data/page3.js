@@ -11,12 +11,7 @@ const BioDataPage3 = () => {
         {/* Main Information Section */}
         <div className={styles.content}>
           <div className={styles.mainInfo}>
-              <section className={styles.container}>
-                      <h2 className={styles.sectionTitle}>Educational Background:</h2>
-                            <div className={styles.value}>BRAC University</div>
-                            <div className={styles.value}>2022-Present</div>
-                            <div className={styles.value}>BSC at CSE</div>
-              </section>
+          <h2 className={styles.personName}>Tanvir Ahmed Tamim</h2>
             <h2 className={styles.sectionTitle}>Profession:</h2>
             <div className={styles.sectionContent}>
               <div className={styles.detailItem}>

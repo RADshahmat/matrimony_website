@@ -5,6 +5,16 @@
   width: 595px;
   height: 842px;
     overflow: hidden;
+    position: relative;
+  }
+  .personName{
+    color: #0B1165;
+    font-family: Prata;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 10px;
   }
   
   .content {
@@ -77,7 +87,8 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 5px;
+    margin-bottom:5px;
+    margin-top: 15px;
   }
   
 
@@ -136,4 +147,5 @@
     .sideImage {
       margin-top: 40px;
     }
+    
   }
