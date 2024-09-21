@@ -41,7 +41,7 @@ const Header = () => {
                         <img src={`${process.env.PUBLIC_URL}/assets/down arrow.png`} alt="" className={styles.dropdownIcon} />
                         </a>
                         <a href="#blog" className={styles.navItem}>Blog</a>
-                        <a href="#contact" className={styles.navItem}>Contact</a>
+                        <Link to={'/biodata'} className={styles.navItem}>Contact</Link>
                 </div>
                 <div className={styles.rightSection}>
                    <Link to={'/createCV'}><button className={styles.createCvButton}>Create CV</button></Link> 

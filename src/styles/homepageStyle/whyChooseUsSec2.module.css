@@ -75,11 +75,14 @@
 
   @media (max-width: 991px) {
     .container{
-      zoom: 80%;
       height: auto;
     }
     .toptitle{
       font-size: 30px
+    }
+    .card{
+      max-width: 17rem;
+      min-height: 149px;
     }
     .cardList{
       flex-direction: column;
