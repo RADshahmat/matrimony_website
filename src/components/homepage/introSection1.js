@@ -5,7 +5,7 @@ const IntroSecHome = () => {
 
     return (
         <div className={styles.container}>
-            <img className={styles.top_cover} src={`${process.env.PUBLIC_URL}/assets/top_cover.svg`} alt='Cover' />
+            <img className={styles.top_cover} src={`https://backend.butterfly.hurairaconsultancy.com/uploads/landingCoverImage.webp`} alt='Cover' />
 
             <section className={styles.intro} >
                 <div className={styles.introframe} data-aos="flip-right">
