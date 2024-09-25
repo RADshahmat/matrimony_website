@@ -5,6 +5,8 @@ import BioDataPage1 from '../components/Bio_data/page1';
 import BioDataPage2 from '../components/Bio_data/page2';
 import BioDataPage3 from '../components/Bio_data/page3';
 import styles from '../styles/Bio_dataStyle/cvpreview.module.css';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 function CVpreview() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,6 +45,41 @@ function CVpreview() {
         }
     };
 
+    const downloadPDF = async () => {
+        // Temporarily render all pages to the DOM
+        setCurrentIndex(0); // Set to the first page index for rendering
+        const doc = new jsPDF("portrait", "mm", "a4");
+
+        for (let i = 0; i < pages.length; i++) {
+            setCurrentIndex(i); // Show each page one by one
+            await new Promise(resolve => setTimeout(resolve, 500)); // Wait for the page to render
+
+            const pageElement = document.getElementById(`cv-page-${i + 1}`);
+            if (!pageElement) continue;
+
+            const canvas = await html2canvas(pageElement, { scale: 2 });
+            const imgData = canvas.toDataURL('image/png');
+            let imgWidth = 210; // A4 width in mm
+            const pageHeight = 297; // A4 height in mm
+            let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            if (imgHeight > pageHeight) {
+                const ratio = pageHeight / imgHeight;
+                imgWidth *= ratio;
+                imgHeight = pageHeight;
+            }
+
+            if (i > 0) doc.addPage(); // Add new page after the first one
+            doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        }
+
+        // Save the PDF
+        doc.save('cv-preview.pdf');
+
+        // Restore the currentIndex back to original position
+        setCurrentIndex(0);
+    };
+
     return (
         <div>
             <Header />
@@ -50,7 +87,7 @@ function CVpreview() {
                 <p className={styles.pagetitle}>Preview Your CV</p>
                 <div className={styles.pagecontainer}>
                     {visiblePages.map(({ component, pageIndex }) => (
-                        <div key={pageIndex} className={styles.pageWrapper}>
+                        <div key={pageIndex} id={`cv-page-${pageIndex}`} className={styles.pageWrapper}>
                             {component}
                             <div className={styles.pageIndex}>Page {pageIndex}</div>
                         </div>
@@ -71,6 +108,11 @@ function CVpreview() {
                             onClick={handleNext}
                         />
                     )}
+                </div>
+                   <div className={styles.buttonContainer}>
+                    <button className={styles.downloadButton} onClick={downloadPDF}>
+                        Request Venus & Download
+                    </button>
                 </div>
             </div>
             <Footer />

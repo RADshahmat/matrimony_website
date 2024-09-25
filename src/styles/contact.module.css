@@ -71,6 +71,7 @@
 .iconText {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .iconText img {
@@ -98,7 +99,7 @@
 
 @media (max-width: 768px) {
     .getintouch{
-      zoom: 60%;
+      flex-direction: column;
     }
     .leftSection, .rightSection{
       width: auto;

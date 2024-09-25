@@ -25,9 +25,35 @@
     line-height: 26.4px; /* 120% */
     margin-bottom: 30px;
   }
-  .arrow{
+  .socialLinks{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .iconLink{
+    width: 21px;
+    height: 21px;
+  }
+  .arrow {
+    transition: transform 0.3s ease;
+    margin-right: 10px;
+    display: inline-block; /* Ensure the arrow stays inline with the text */
+    vertical-align: middle; /* Align the arrow vertically with the text */
+  }
+  
+  .arrowDown {
+    transform: rotate(90deg); /* Rotate the arrow */
+  }
+  
+  .expandedText {
+    padding-left: 25px;
     padding-right: 10px;
   }
+  .answer{
+    cursor: pointer;
+  }
+  
+
   .footersection p {
     color: var(--preview-themeforest-net-white, var(--Neutrals-Colors-100, #FFF));
     font-family: Poppins;
@@ -45,15 +71,7 @@
   .footersection a:hover {
     text-decoration: underline;
   }
-  .social-icons {
-    display: flex;
-    margin-top: 10px;
-  }
-  .social-icons i {
-    font-size: 1.5em;
-    margin-right: 10px;
-    cursor: pointer;
-  }
+
   .form-section {
     width: 20%;
     position: relative;
@@ -62,6 +80,7 @@
   }
   .container input[type="text"], .footersection
   input[type="email"] {
+    color: #fff;
     background: var(--preview-themeforest-net-black, #000);
     border: none; /* Remove all borders */
     border-bottom: 2px solid var(--preview-themeforest-net-white, #FFF);
@@ -70,11 +89,21 @@
     width: 279.13px;
     display: flex;
   }
+  .messageInput {
+    width: 93%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: var(--preview-themeforest-net-black, #000);
+    border-radius: 4px;
+    resize: none;
+    color: #fff;
+  }
+  
   .sendmsgbutton {
     background: var(--preview-themeforest-net-black, #000);
     color: #fff;
     padding: 10px 20px;
-    margin-top: 20px;
     border-radius: 5px;
     border: 2px solid var(--preview-themeforest-net-white, #FFF);
     cursor: pointer;
@@ -89,31 +118,19 @@
     width: 94%;
   }
   .footerbottom {
-    color: var(--preview-themeforest-net-white, var(--Neutrals-Colors-100, #FFF));
-    background: var(--preview-themeforest-net-black, #000);
     display: flex;
     padding: 30.07px 0px 14.99px 0px;
     flex-direction: column;
     align-items: center;
     align-self: stretch;
+    color: var(--preview-themeforest-net-white, var(--Neutrals-Colors-100, #FFF));
+    font-family: Poppins;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19.5px;
   }
 
-  .social-icons {
-    margin-top: 20px;
-    height: 21px;
-    width: 21px;
-}
-
-.social-icons a {
-    color: #fff;
-    margin-right: 15px;
-    font-size: 18px;
-    text-decoration: none;
-}
-
-.social-icons a:hover {
-    color: #f5a623;
-}
 
 @media (max-width: 768px) {
   .container {

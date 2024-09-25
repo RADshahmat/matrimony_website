@@ -111,11 +111,11 @@ position: relative;
     top: 569px;
     left: -238px;
   }
-.socialLinks{
-  position: absolute;
-  border-radius: 15px;
-  background: rgba(217, 217, 217, 0.70);
-  backdrop-filter: blur(2px);
+  .socialLinks {
+    position: absolute;
+    border-radius: 15px;
+    background: rgba(217, 217, 217, 0.70);
+    backdrop-filter: blur(2px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,28 +126,76 @@ position: relative;
     left: 148px;
     gap: 5px; 
   }
-  .iconLink{
+  
+  .iconLink {
+    padding: 9px 11px;
+    border-radius: 14px;
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   }
   
-  .iconLink img {
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 9px 11px;
-    background: var(--rn-53-themes-net-wild-sand, #F7F7F7);
+  .iconLink svg {
+    color: black; /* Default black icons */
     width: 18px;
     height: 18px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease; 
+    transition: transform 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
   }
   
-  .iconLink img:hover {
-    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-    transform: rotate(360deg); 
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); 
+  .iconLink:hover svg {
+    transform: scale(1.2);
+    color: #fff; /* Icons will turn white on hover */
   }
   
+  .iconLink::before {
+    content: "";
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    left: -110%;
+    top: 80%;
+    transform: rotate(45deg);
+  }
+  
+  .iconLink:hover::before {
+    animation: slide 0.7s forwards;
+  }
+  
+  @keyframes slide {
+    50% {
+      left: 10%;
+      top: -40%;
+    }
+    100% {
+      left: -15%;
+      top: -15%;
+    }
+  }
+  
+  /* Specific colors for each hover effect */
+  .iconLink.facebook:hover::before {
+    background: #3b5998;
+  }
+  .iconLink.instagram:hover::before {
+    background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
+  }
+  .iconLink.twitter:hover::before {
+    background: #1da1f2;
+  }
+  .iconLink.whatsapp:hover::before {
+    background: #25d366;
+  }
+  .iconLink.linkedin:hover::before {
+    background: #0077b5;
+  }
+  .iconLink.youtube:hover::before {
+    background: #ff0000;
+  }
   
 
 
@@ -199,14 +247,3 @@ position: relative;
 
 }
 
-@media (max-width: 375px) {
-  .meetFounderSection {
-    zoom: 45%;
-  }
-}
-
-@media (max-width: 316px) {
-  .meetFounderSection {
-    zoom: 45%;
-  }
-}

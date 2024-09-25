@@ -1,6 +1,6 @@
 import styles from '../../styles/homepageStyle/meetFounder.module.css';
+import { FaFacebookF, FaTwitter, FaWhatsapp, FaLinkedinIn, FaYoutube, FaInstagram } from 'react-icons/fa';
 import React from "react";
-
 
 function MeetFounder() {
 
@@ -46,26 +46,27 @@ function MeetFounder() {
                 className={styles.namecardbottomImage} 
                 alt="Our founder" 
               />
-              <div className={styles.socialLinks} data-aos="fade-up">
-                  <a href="https://www.google.com" className={styles.iconLink}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/facebook.svg`} alt="Facebook" />
+             <div className={styles.socialLinks} data-aos="slide-up">
+                  <a href="https://www.facebook.com" className={`${styles.iconLink} ${styles.facebook}`}>
+                    <FaFacebookF />
                   </a>
-                  <a href="https://www.google.com" className={styles.iconLink}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/twitter.svg`} alt="Twitter" />
+                  <a href="https://www.twitter.com" className={`${styles.iconLink} ${styles.twitter}`}>
+                    <FaTwitter />
                   </a>
-                  <a href="https://www.google.com" className={styles.iconLink}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/whatsapp.svg`} alt="WhatsApp" />
+                  <a href="https://www.whatsapp.com" className={`${styles.iconLink} ${styles.whatsapp}`}>
+                    <FaWhatsapp />
                   </a>
-                  <a href="https://www.google.com" className={styles.iconLink}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/linkedin.svg`} alt="LinkedIn" />
+                  <a href="https://www.linkedin.com" className={`${styles.iconLink} ${styles.linkedin}`}>
+                    <FaLinkedinIn />
                   </a>
-                  <a href="https://www.google.com" className={styles.iconLink}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/youtube.svg`} alt="YouTube" />
+                  <a href="https://www.youtube.com" className={`${styles.iconLink} ${styles.youtube}`}>
+                    <FaYoutube />
                   </a>
-                  <a href="https://www.google.com" className={styles.iconLink}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/instagram.svg`} alt="Instagram" />
+                  <a href="https://www.instagram.com" className={`${styles.iconLink} ${styles.instagram}`}>
+                    <FaInstagram />
                   </a>
-              </div>
+            </div>
+
           </div>
         </div>
       </div>
