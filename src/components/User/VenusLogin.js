@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../../styles/UserStyle/VenusLoginStyle.module.css';
+import { Link } from 'react-router-dom';
 
 function VenusLogin() {
   return (
@@ -36,7 +37,7 @@ function VenusLogin() {
                 className={styles.inputField} 
                 aria-label="Enter your password"
               />
-              <button type="submit" className={styles.loginButton}>Login</button>
+              <Link to={'/userDashboard'} className={styles.loginButton}>Login</Link>
             </form>
           </div>
         </div>

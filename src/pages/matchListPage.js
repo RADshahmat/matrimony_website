@@ -4,7 +4,7 @@ import Footer from '../components/footer';
 import MatchList from '../components/User/matchList';
 
 
-function UserPage() {
+function MatchListPage() {
 
     return (
         <div>
@@ -17,4 +17,4 @@ function UserPage() {
     );
 }
 
-export default UserPage;
+export default MatchListPage;

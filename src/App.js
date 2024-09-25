@@ -6,7 +6,10 @@ import 'aos/dist/aos.css';
 import HomePage from './pages/homepage';
 import CreateCV from './pages/createCV';
 import CVpreview from './pages/cvpreview';
-import UserPage from './pages/userPage';
+import UserLoginPage from './pages/userLogin';
+import UserDashboard from './pages/userDashboardPage';
+import MatchListPage from './pages/matchListPage';
+import ProfileViewPage from './pages/profilePreviewPage';
 
 function App() {
   useEffect(() => {
@@ -23,7 +26,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/createCV" element={<CreateCV />} />
             <Route path="/biodata" element={<CVpreview />} />
-            <Route path="/login" element={<UserPage />} />
+            <Route path="/login" element={<UserLoginPage />} />
+            <Route path="/userdashboard" element={<UserDashboard />} />
+            <Route path="/matchlist" element={<MatchListPage />} />
+            <Route path="/ProfileViewPage" element={<ProfileViewPage />} />
           </Routes>
         </Router>
     </div>

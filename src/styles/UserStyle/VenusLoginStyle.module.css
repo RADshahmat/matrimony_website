@@ -129,6 +129,9 @@ line-height: normal;
   font-size: 18px;
   cursor: pointer;
   border: none;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
 }
 
 .loginButton:hover {
