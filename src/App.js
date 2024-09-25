@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 import HomePage from './pages/homepage';
 import CreateCV from './pages/createCV';
 import CVpreview from './pages/cvpreview';
+import Chat from './pages/chat';
 
 function App() {
   useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="createCV" element={<CreateCV />} />
             <Route path="biodata" element={<CVpreview />} />
+            <Route path="chat" element={<Chat />} />
           </Routes>
         </Router>
     </div>
