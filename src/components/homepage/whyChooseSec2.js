@@ -45,7 +45,7 @@ const WhyChooseUsSec2 = () => {
       <h3 className={styles.toptitle}>Why Choose Us!</h3>
       <div className={styles.cardList}>
         {featureData.map((feature, index) => (
-          <div key={index} className={styles.cardWrapper} data-aos="fade-up" data-aos-delay={index * 200}>
+          <div key={index} className={styles.cardWrapper} data-aos="fade-up">
             <FeatureCard
               iconSrc={feature.iconSrc}
               title={feature.title}

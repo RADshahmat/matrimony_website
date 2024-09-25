@@ -1,0 +1,151 @@
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  width: 595px;
+  height: 842px;
+    overflow: hidden;
+    position: relative;
+  }
+  .personName{
+    color: #0B1165;
+    font-family: Prata;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 10px;
+  }
+  
+  .content {
+    display: flex;
+  }
+  .sectionContent {
+    display: grid;
+    grid-template-columns: 150px auto; /* Adjust the width of the label column as needed */
+
+  }
+  .address{
+    margin-bottom: 2px;
+  }
+  
+  .detailItem {
+    display: contents;
+    color: #000;
+    font-family: Prata;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 3px;
+  }
+  
+  
+  .value {
+    text-align: left; /* Aligns the value to the left */
+  }
+  
+  @media (max-width: 991px) {
+    .content {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+  }
+  
+  .mainInfo {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+
+    margin-left: 0;
+    text-align: left;
+  }
+  
+
+  
+  
+  .details {
+    display: flex;
+    padding-left: 45px;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 10px;
+    color: #000;
+  }
+  
+  @media (max-width: 991px) {
+    .details {
+      padding-left: 20px;
+    }
+  }
+  
+  .sectionTitle {
+    color: #132A7B;
+    font-family: Prata;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom:5px;
+    margin-top: 15px;
+  }
+  
+
+  
+  @media (max-width: 991px) {
+    .sectionContent {
+      margin-right: 10px;
+    }
+  }
+  
+  .sideInfo {
+    display: flex;
+    line-height: normal;
+    margin: 0 20px 0 0;
+    gap: 5px;
+  }
+  
+
+  
+  .sideContent {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  @media (max-width: 991px) {
+    .sideContent {
+      margin-top: 18px;
+    }
+  }
+  
+  .profilePic {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    align-self: flex-start;
+    z-index: 10;
+    margin-top: -16px;
+  }
+  
+  .sideImage {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 100px;
+    margin-top: 538px;
+    max-width: 100%;
+  }
+  
+  @media (max-width: 991px) {
+    .sideImage {
+      margin-top: 40px;
+    }
+    
+  }
