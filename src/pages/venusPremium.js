@@ -11,11 +11,11 @@ const VenusPremium = () => {
       <div className={styles.container}>
         <div className={styles.topCoverContainer}>
             <img className={styles.top_cover} src={`${process.env.PUBLIC_URL}/assets/top_cover.svg`} alt='Cover' /> 
+            <img src={`${process.env.PUBLIC_URL}/assets/lotapata.png`} alt="" className={styles.lotapata} />
+            <img src={`${process.env.PUBLIC_URL}/assets/venusrings.png`} alt="" className={styles.venusrings} />
         </div>
         <section className={styles.hero}>
             <h1 className={styles.heroTitle}>Discover Venus: The Premier Experience with Butterfly Matrimonial</h1>
-            <img src={`${process.env.PUBLIC_URL}/assets/lotapata.png`} alt="" className={styles.lotapata} />
-            <img src={`${process.env.PUBLIC_URL}/assets/venusrings.png`} alt="" className={styles.venusrings} />
         </section>
 
         {/* Description Section */}

@@ -18,17 +18,16 @@
 }
 .lotapata{
   position: absolute;
-  bottom: 13px;
+  bottom: -83px;
   left: 13px;
   width: 250px;
   opacity: 0.2;
 }
 .venusrings{
   position: absolute;
-  bottom: -10px;
+  bottom: -98px;
   right: 18px;
   width: 250px;
-  opacity: 0.7;
 }
 .hero {
   display: flex;
@@ -384,10 +383,5 @@
   .stepDescription{
     font-size: 10px;
     line-height: normal;
-  }
-  .contactInfo {
-    max-width: 100%;
-    margin-top: -200px;
-    padding: 0 20px;
   }
 }
