@@ -332,31 +332,43 @@
 
   .hero {
     max-width: 100%;
-    padding: 100px 20px 0;
+    padding: 0;
+    margin: 0;
   }
 
 
   .heroTitle {
     max-width: 100%;
+    font-size: 18px;
+    padding: 15px;
+    margin: -50px 1rem 1rem 1rem;
   }
-
+  .whatVenus{
+    margin: 0 1rem;
+  }
+  .whatExpect{
+    margin: 0 1rem;
+  }
   .sectionTitle {
-    margin-top: 40px;
+    margin-top: 20px;
   }
-
+  .sectionTitleText{
+    font-size: 18px;
+  }
   .descriptionSection {
     max-width: 100%;
   }
 
   .description {
     max-width: 100%;
-    padding: 0 20px;
+    padding: 20px;
+    font-size: 15px;
   }
-
 
   .benefits {
     max-width: 100%;
-    padding: 0 20px;
+    padding: 20px;
+    font-size: 15px;
   }
 
   .howvenuscontainer{
@@ -383,5 +395,8 @@
   .stepDescription{
     font-size: 10px;
     line-height: normal;
+  }
+  .contactInfo{
+    font-size: 16px;
   }
 }

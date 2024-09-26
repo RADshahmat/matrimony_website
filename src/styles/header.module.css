@@ -128,8 +128,10 @@
 }
 
 .createCvButton:hover {
-  transform: translateY(-3px); /* Slight lift up on hover */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+  box-shadow: 0 5px 15px rgb(89 13 65 / 78%);
+  color: #ea2f6f;
+  background-color: white;
+  border: 1px solid #ea2f6f;
 }
 
 /* Premium Section - Desktop */
