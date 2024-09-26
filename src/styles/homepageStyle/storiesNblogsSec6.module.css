@@ -95,7 +95,10 @@
   text-decoration: none;
   color: inherit;
 }
-
+.readMore:hover{
+  background-color: #8f2c5a;
+  color: #fff;
+}
 
 @media (max-width: 768px) {
   .sectionTitle{
