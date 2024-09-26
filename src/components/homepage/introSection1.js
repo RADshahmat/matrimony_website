@@ -1,8 +1,21 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import styles from '../../styles/homepageStyle/introSec1.module.css'; 
 import { Link } from 'react-router-dom';
+import axiosInstance from '../../Axios/axios_instance';
 
 const IntroSecHome = () => {
+const [intro_text,setIntroText]=useState('ytcxytcuyviugyh');
+
+useEffect(() => {
+     
+}, []);
+
+const getText=async()=>{
+
+   // const response=await axiosInstance.get(`/get_intro_text`);
+   // setIntroText(response.data.text);
+
+}
 
     return (
         <div className={styles.container}>

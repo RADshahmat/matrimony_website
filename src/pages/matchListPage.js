@@ -11,7 +11,7 @@ function MatchListPage() {
         <div>
             <Header />
                 <div className="main-content">
-                    <UserDashboard />
+                    <MatchList />
                 </div>
             <Footer />
         </div>

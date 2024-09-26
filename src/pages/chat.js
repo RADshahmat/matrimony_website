@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import '../styles/chatUi.css';
+import { FaArrowLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ChatUI = () => {
   const [selectedChat, setSelectedChat] = useState(null);
@@ -31,7 +33,7 @@ const ChatUI = () => {
   return (
     <div className="messenger-container">
       <div className={`chat-sidebar ${showSidebar ? '' : 'show'}`}>
-        <h3>Chats</h3>
+       <div style={{display:'flex',alignItems:'end'}}><Link to={`/userDashboard`}><FaArrowLeft/></Link><h3 style={{marginBottom:'0',width:'85%'}}>Chats</h3></div> 
         <ul>
           {chats.map((chat) => (
             <li key={chat.id} onClick={() => handleChatClick(chat)} className={selectedChat && selectedChat.id === chat.id ? 'active' : ''}>

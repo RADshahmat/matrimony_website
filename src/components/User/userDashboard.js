@@ -1,8 +1,10 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
 import styles from '../../styles/UserStyle/userDashboard.module.css';
+import { useAuth } from '../../Axios/authContext';
 
 function UserDashboard() {
+  const { login } = useAuth();
   const profileData = {
     name: "Tanvir Ahmed Tamim",
     age: 25,
@@ -12,7 +14,6 @@ function UserDashboard() {
     maritalStatus: "Never married",
     userId: 12345,  // Assuming this is the user ID that you want to send to the match list
   };
-
   const handleSupportClick = () => {
     console.log('Support button clicked');
   };
@@ -55,6 +56,20 @@ function UserDashboard() {
                 className={styles.actionIcon}
               />
               <span className={styles.actionText}>Match</span>
+            </div>
+          </Link>
+          <Link 
+            to={"/chat"} 
+            state={{ userId: profileData.userId }} // Passing userId through state
+            className={`${styles.actionButton} ${styles.matchButton}`}
+          >
+            <div className={styles.actionButtonContent}>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/03ffc636607730b55f260859a5e3721cca0f6240b725fd6cf2e79ef30b895d06"
+                alt="Match icon"
+                className={styles.actionIcon}
+              />
+              <span className={styles.actionText}>Message</span>
             </div>
           </Link>
 
