@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../../styles/homepageStyle/introSec1.module.css'; 
+import { Link } from 'react-router-dom';
 
 const IntroSecHome = () => {
 
@@ -23,12 +24,10 @@ const IntroSecHome = () => {
             <section className={styles.biodata} >
                 <div className={styles.contentWrapper}>
                     <div className={styles.textColumn}>
-
                             <h1 className={styles.title}>
                                 Effortlessly <br /> Create Your Bio-Data Today!
                             </h1>
-                            <button type="submit" className={styles.ctaButton} >Get Started</button>
-
+                            <Link to={'/createCV'} className={styles.ctaButton} >Get Started</Link>
                     </div>
                     <div className={styles.imageColumn} >
                         <img
