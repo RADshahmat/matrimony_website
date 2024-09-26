@@ -1,21 +1,44 @@
 /* matchListstyle.module.css */
-
 .userDashboard {
+    background-color: #211d18;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    overflow: hidden;
+  }
+  
+  .cardcontainer {
+    height: 509px;
+    border-radius: 15px;
+    background: #FFF;
+    margin: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px;
+    overflow-y: auto;
+  }
+  .title{
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: left;
+    margin-left: 72px;
   }
   
   .profileCard {
     display: flex;
-    justify-content: space-between;
-    background-color: #1b1b1b; /* dark background */
+    justify-content: space-around;
+    background-color: #1b1b1b;
     border-radius: 20px;
-    padding: 20px;
+    padding: 20px 99px 20px 20px;
     align-items: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-    color: #fff; /* Text color for readability */
+    color: #fff;
     max-width: 100%;
+    margin: 0 72px;
   }
   
   .userInfo {
@@ -31,7 +54,7 @@
     width: 80px;
   }
   
-  .img {
+  .avatarSection img {
     border-radius: 12px;
     object-fit: cover;
     width: 100%;
@@ -42,6 +65,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: left;
   }
   
   .exampleCodeName {
@@ -62,31 +86,42 @@
   }
   
   .viewProfile {
-    background-color: #b7c8ff;
-    border: none;
-    border-radius: 12px;
-    padding: 10px 20px;
+    display: inline-flex;
+    padding: 11px 62px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #BDCCFF;
     color: #000;
-    font-family: 'Nunito', sans-serif;
-    font-weight: bold;
+    font-family: Poppins;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
     cursor: pointer;
+    text-decoration: none;
   }
   
   .requestChatContainer {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    background-color: #404040; /* Dark button background */
-    padding: 10px;
-    border-radius: 12px;
+    display: inline-flex;
+    padding: 11px 39px 11px 17px;
+    align-items: flex-start;
+    gap: 29px;
+    border-radius: 10px;
+    background: #454545;
+    cursor: pointer;
   }
   
   .requestChat {
     background: none;
     border: none;
-    color: #fff;
+    color: #D9D9D9;
+    font-family: Poppins;
     cursor: pointer;
-    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
   
   .chatImg {
@@ -95,8 +130,49 @@
   }
   
   .heartIcon {
-    color: #ff5a5a; /* Heart color */
-    font-size: 24px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
+    background-color: #ffffff; /* Initially white */
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23000000"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'); /* Heart shape */
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
   }
+  
+  .liked {
+    background-color: #ff5a5a; /* Change to red when liked */
+  }
+  
+  /* For mobile responsiveness */
+@media (max-width: 768px) {
+    .cardcontainer {
+      margin: 0;   /* Remove margin on mobile */
+      padding: 0;  /* Remove padding on mobile */
+      width: 100%; /* Full width on mobile */
+      overflow-y: auto;
+    }
+  
+    .profileCard {
+      padding: 20px; /* Adjust padding for mobile */
+      margin: 0;     /* No margin on mobile */
+    }
+  
+    .viewProfile {
+      padding: 10px 20px; /* Adjust button size */
+    }
+  
+    .requestChatContainer {
+      padding: 10px 20px 10px 10px; /* Adjust chat button padding */
+    }
+  
+    .heartIcon {
+      width: 30px;  /* Adjust heart icon size */
+      height: 30px; /* Adjust heart icon size */
+    }
+  }
+  
   

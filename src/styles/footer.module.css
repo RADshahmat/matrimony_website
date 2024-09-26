@@ -15,6 +15,7 @@
   .footersection {
     text-align: left;
     width: 30%;
+    margin-right: 5px
   }
   .footerTitle {
     color: var(--preview-themeforest-net-white, var(--Neutrals-Colors-100, #FFF));

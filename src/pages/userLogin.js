@@ -1,21 +1,20 @@
 import React from "react";
 import Header from '../components/header'; 
 import Footer from '../components/footer'; 
-import MatchList from '../components/User/matchList';
-import UserDashboard from "../components/User/userDashboard";
+import VenusLogin from '../components/User/VenusLogin';
 
 
-function UserPage() {
+function UserLoginPage() {
 
     return (
         <div>
             <Header />
                 <div className="main-content">
-                    <UserDashboard />
+                    <VenusLogin />
                 </div>
             <Footer />
         </div>
     );
 }
 
-export default UserPage;
+export default UserLoginPage;

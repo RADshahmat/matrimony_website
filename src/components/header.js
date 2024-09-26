@@ -58,20 +58,20 @@ const Header = () => {
                     <Link to={'/biodata'} className={styles.navItem}>Contact</Link>
 
                     {/* Premium Section - Mobile */}
-                    <div className={`${styles.navItem} ${styles.premiumSectionMobile}`}>
+                    <Link to={'/venuspremium'} className={`${styles.navItem} ${styles.premiumSectionMobile}`}>
                         <span className={styles.premiumLabel}>Venus Premium</span>
                         <img src={`${process.env.PUBLIC_URL}/assets/premium.png`} alt="Premium Icon" className={styles.premiumIcon} />
-                    </div>
+                    </Link>
                 </div>
 
                 <div className={styles.rightSection}>
                     <Link to={'/createCV'}><button className={styles.createCvButton}>Create CV</button></Link> 
 
                     {/* Premium Section - Desktop */}
-                    <div className={styles.premiumSection}>
+                    <Link to={'/venuspremium'} className={styles.premiumSection}>
                         <span className={styles.premiumLabel}>Venus Premium</span>
                         <img src={`${process.env.PUBLIC_URL}/assets/premium.png`} alt="Premium Icon" className={styles.premiumIcon} />
-                    </div>
+                    </Link>
 
                     <div className={styles.supportContainer} onClick={togglePopup}>
                         <img src={`${process.env.PUBLIC_URL}/assets/hur icon.png`} alt="Support Icon" className={styles.supportIcon} />

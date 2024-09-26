@@ -11,7 +11,6 @@ import ContactSection from '../components/contact';
 
 const HomePage = () => {
     return (
-
         <div className="homepage">
             <Header />
             <div className='main-content'>

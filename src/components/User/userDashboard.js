@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from '../../styles/UserStyle/userDashboard.module.css';
 
 function UserDashboard() {
@@ -8,18 +9,17 @@ function UserDashboard() {
     height: "6 feet 0 inch",
     religion: "Muslim",
     bloodGroup: "O+ve",
-    maritalStatus: "Never married"
+    maritalStatus: "Never married",
+    userId: 12345,  // Assuming this is the user ID that you want to send to the match list
   };
 
-  const actionButtons = [
-    { type: 'match', text: 'Match', icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/03ffc636607730b55f260859a5e3721cca0f6240b725fd6cf2e79ef30b895d06?placeholderIfAbsent=true&apiKey=68c669943f1543b88775d643f2be81f3' },
-    { type: 'support', text: 'Support', icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/b9d22d0cc660212d6cd000ca585cc53e8a02ede7998970d84361912195fba421?placeholderIfAbsent=true&apiKey=68c669943f1543b88775d643f2be81f3' }
-  ];
+  const handleSupportClick = () => {
+    console.log('Support button clicked');
+  };
 
   return (
     <main className={styles.userDashboard}>
       <section className={styles.dashboardContent}>
-
         {/* Profile Section */}
         <div className={styles.profileSection}>
           <div className={styles.profileLayout}>
@@ -42,16 +42,33 @@ function UserDashboard() {
 
         {/* Action Buttons Section */}
         <div className={styles.actionSection}>
-          {actionButtons.map((button, index) => (
-            <div key={index} className={`${styles.actionButton} ${styles[`${button.type}Button`]}`}>
-              <div className={styles.actionButtonContent}>
-                <img src={button.icon} alt={`${button.text} icon`} className={styles.actionIcon} />
-                <span className={styles.actionText}>{button.text}</span>
-              </div>
+          {/* Match button sends userId via state */}
+          <Link 
+            to={"/matchlist"} 
+            state={{ userId: profileData.userId }} // Passing userId through state
+            className={`${styles.actionButton} ${styles.matchButton}`}
+          >
+            <div className={styles.actionButtonContent}>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/03ffc636607730b55f260859a5e3721cca0f6240b725fd6cf2e79ef30b895d06"
+                alt="Match icon"
+                className={styles.actionIcon}
+              />
+              <span className={styles.actionText}>Match</span>
             </div>
-          ))}
-        </div>
+          </Link>
 
+          <div className={`${styles.actionButton} ${styles.supportButton}`} onClick={handleSupportClick}>
+            <div className={styles.actionButtonContent}>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/b9d22d0cc660212d6cd000ca585cc53e8a02ede7998970d84361912195fba421"
+                alt="Support icon"
+                className={styles.actionIcon}
+              />
+              <span className={styles.actionText}>Support</span>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );
