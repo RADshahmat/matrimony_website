@@ -1,110 +1,9 @@
-import React, { useEffect, useState } from "react";
-import AOS from 'aos';
+import React from "react";
 import 'aos/dist/aos.css';
 import styles from '../../styles/homepageStyle/HowToFindSec3.module.css';
 
-function StepItem({ title, subtitle, description, imageSrc, isReverse, isMobile }) {
-  return (
-    <div 
-      className={`${styles.stepItem} ${isReverse ? styles.stepItemReverse : ''}`}
-      {...(!isMobile && { "data-aos": "fade-up" })}
-    >
-      <div className={styles.stepContent}>
-        {!isReverse && (
-          <div className={styles.stepImageContainer}>
-            <img loading="lazy" src={imageSrc} alt={title} className={styles.stepImage} />
-          </div>
-        )}
-        <div className={styles.stepTextContainer}>
-          <h2 className={styles.stepTitle}>{title}</h2>
-          <div className={styles.stepSubtitle}>{subtitle}</div>
-          <p className={styles.stepDescription}>{description}</p>
-        </div>
-        {isReverse && (
-          <div className={styles.stepImageContainer}>
-            <img loading="lazy" src={imageSrc} alt={title} className={styles.stepImage} />
-          </div>
-        )}
-      </div>
-      <div className={styles.backgroundBorderShadow} />
-    </div>
-  );
-}
-
-const steps = [
-  {
-    title: "Enrollment",
-    subtitle: (
-      <>
-        Enroll in our Venus package{' '}
-        <img 
-          loading="lazy" 
-          src="/assets/venus 1.png" 
-          className={styles.closeIcon} 
-          alt="Package icon"
-        />
-      </>
-    ),    
-    description: "Our consultant will understand your criteria and recommend the most suitable package. Your information will be enrolled into our database, and you'll receive your credentials.",
-    imageSrc: "/assets/rings.png", 
-    isReverse: false
-  },
-  {
-    title: "Find Your Match",
-    subtitle: "You will get profiles based on your priority",
-    description: "We'll send you profiles that match your criteria and align with your values, ensuring you find a life partner who truly fits your vision.",
-    imageSrc: "/assets/wedding-2.png",
-    isReverse: true
-  },
-  {
-    title: "Send Interest",
-    subtitle: "Show interest on a profile",
-    description: "When both you and the other person express interest, we'll consider it a match and facilitate communication between you.",
-    imageSrc: "/assets/love-birds.png",
-    isReverse: false
-  },
-  {
-    title: "Get Contact Information",
-    subtitle: "Both of you will get contact information",
-    description: "You'll receive additional details about the profile, including personal information such as email, phone number, and address.",
-    imageSrc: "/assets/network.png",
-    isReverse: true
-  },
-  {
-    title: "Start Communicate",
-    subtitle: "Get to know each other through communication.",
-    description: "You can communicate through our secure built-in chat system or over the phone to get to understand the person better.",
-    imageSrc: "/assets/chat.png",
-    isReverse: false
-  },
-  {
-    title: "Getting Marriage",
-    subtitle: "Create a strong bond",
-    description: "When both of you feel you're a good match, you can take the relationship to the next level.",
-    imageSrc: "/assets/wedding-couple.png",
-    isReverse: true
-  }
-];
 function HowToFindSpecialSomeone() {
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
-    
-    checkIfMobile(); // Initial check
-    window.addEventListener('resize', checkIfMobile); // Re-check on window resize
-
-    if (!isMobile) {
-      AOS.init({
-        duration: 1000,
-        easing: 'ease-in-out',
-        once: false,
-      });
-    }
-
-    // Clean up event listener on component unmount
-    return () => window.removeEventListener('resize', checkIfMobile);
-  }, [isMobile]);
 
   return (
     <section className={styles.container}>
@@ -122,15 +21,117 @@ function HowToFindSpecialSomeone() {
           <div className={styles.stepsWrapper}>
             <div className={styles.stepsList}>
               <div className={styles.verticalDivider} />
-              {steps.map((step, index) => (
-                <StepItem 
-                  key={index} 
-                  {...step} 
-                  isMobile={isMobile} // Pass isMobile to control AOS on each step
-                  data-aos="fade-up" 
-                  data-aos-delay={index * 200}
-                />
-              ))}
+
+              {/* Step 1 */}
+              <div className={styles.stepItem} data-aos="slide-up">
+                <div className={styles.stepContent}>
+                  <div className={styles.stepImageContainer}>
+                    <img loading="lazy" src="/assets/rings.png" alt="Enrollment" className={styles.stepImage} />
+                  </div>
+                  <div className={styles.stepTextContainer}>
+                    <h2 className={styles.stepTitle}>Enrollment</h2>
+                    <div className={styles.stepSubtitle}>
+                      Enroll in our Venus package{' '}
+                      <img loading="lazy" src="/assets/venus 1.png" className={styles.closeIcon} alt="Package icon" />
+                    </div>
+                    <p className={styles.stepDescription}>
+                      Our consultant will understand your criteria and recommend the most suitable package. Your
+                      information will be enrolled into our database, and you'll receive your credentials.
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.backgroundBorderShadow} />
+              </div>
+
+              {/* Step 2 */}
+              <div className={`${styles.stepItem} ${styles.stepItemReverse}`} data-aos="slide-up">
+                <div className={styles.stepContent}>
+                  <div className={styles.stepTextContainer}>
+                    <h2 className={styles.stepTitle}>Find Your Match</h2>
+                    <div className={styles.stepSubtitle}>You will get profiles based on your priority</div>
+                    <p className={styles.stepDescription}>
+                      We'll send you profiles that match your criteria and align with your values, ensuring you find a life
+                      partner who truly fits your vision.
+                    </p>
+                  </div>
+                  <div className={styles.stepImageContainer}>
+                    <img loading="lazy" src="/assets/wedding-2.png" alt="Find Your Match" className={styles.stepImage} />
+                  </div>
+                </div>
+                <div className={styles.backgroundBorderShadow} />
+              </div>
+
+              {/* Step 3 */}
+              <div className={styles.stepItem} data-aos="slide-up">
+                <div className={styles.stepContent}>
+                  <div className={styles.stepImageContainer}>
+                    <img loading="lazy" src="/assets/love-birds.png" alt="Send Interest" className={styles.stepImage} />
+                  </div>
+                  <div className={styles.stepTextContainer}>
+                    <h2 className={styles.stepTitle}>Send Interest</h2>
+                    <div className={styles.stepSubtitle}>Show interest on a profile</div>
+                    <p className={styles.stepDescription}>
+                      When both you and the other person express interest, we'll consider it a match and facilitate
+                      communication between you.
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.backgroundBorderShadow} />
+              </div>
+
+              {/* Step 4 */}
+              <div className={`${styles.stepItem} ${styles.stepItemReverse}`} data-aos="slide-up">
+                <div className={styles.stepContent}>
+                  <div className={styles.stepTextContainer}>
+                    <h2 className={styles.stepTitle}>Get Contact Information</h2>
+                    <div className={styles.stepSubtitle}>Both of you will get contact information</div>
+                    <p className={styles.stepDescription}>
+                      You'll receive additional details about the profile, including personal information such as email,
+                      phone number, and address.
+                    </p>
+                  </div>
+                  <div className={styles.stepImageContainer}>
+                    <img loading="lazy" src="/assets/network.png" alt="Get Contact Information" className={styles.stepImage} />
+                  </div>
+                </div>
+                <div className={styles.backgroundBorderShadow} />
+              </div>
+
+              {/* Step 5 */}
+              <div className={styles.stepItem} data-aos="slide-up">
+                <div className={styles.stepContent}>
+                  <div className={styles.stepImageContainer}>
+                    <img loading="lazy" src="/assets/chat.png" alt="Start Communication" className={styles.stepImage} />
+                  </div>
+                  <div className={styles.stepTextContainer}>
+                    <h2 className={styles.stepTitle}>Start Communication</h2>
+                    <div className={styles.stepSubtitle}>Get to know each other through communication.</div>
+                    <p className={styles.stepDescription}>
+                      You can communicate through our secure built-in chat system or over the phone to get to understand the
+                      person better.
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.backgroundBorderShadow} />
+              </div>
+
+              {/* Step 6 */}
+              <div className={`${styles.stepItem} ${styles.stepItemReverse}`} data-aos="slide-up">
+                <div className={styles.stepContent}>
+                  <div className={styles.stepTextContainer}>
+                    <h2 className={styles.stepTitle}>Getting Married</h2>
+                    <div className={styles.stepSubtitle}>Create a strong bond</div>
+                    <p className={styles.stepDescription}>
+                      When both of you feel you're a good match, you can take the relationship to the next level.
+                    </p>
+                  </div>
+                  <div className={styles.stepImageContainer}>
+                    <img loading="lazy" src="/assets/wedding-couple.png" alt="Getting Married" className={styles.stepImage} />
+                  </div>
+                </div>
+                <div className={styles.backgroundBorderShadow} />
+              </div>
+
             </div>
           </div>
         </div>

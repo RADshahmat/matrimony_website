@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from '../../styles/homepageStyle/testimonialSec4.module.css';
 
+
 const testimonials = [
   {
     content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
@@ -88,6 +89,7 @@ const testimonials = [
   },
 ];
 
+
 const TestimonialCard = ({ content, name, designation, company, imageSrc }) => {
   return (
     <div className={styles.cardContent}>
@@ -101,57 +103,74 @@ const TestimonialCard = ({ content, name, designation, company, imageSrc }) => {
 
 const TestimonialSec4 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const testimonialListRef = useRef(null);
   const testimonialsCount = testimonials.length;
 
-  // Determine how many cards to show based on the screen width
-  const getVisibleCards = () => (window.innerWidth >= 768 ? 3 : 1); // 3 cards for desktop, 1 for mobile
+  const clonedTestimonials = [...testimonials, ...testimonials.slice(0, 3)];
 
-  const [visibleCards, setVisibleCards] = useState(getVisibleCards());
-
-  useEffect(() => {
-    const handleResize = () => setVisibleCards(getVisibleCards());
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+  // Handle next card
+  const handleNext = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => prevIndex + 1);
   }, []);
 
-  const handleNext = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + visibleCards) % testimonialsCount);
-  }, [testimonialsCount, visibleCards]);
+  // Handle previous card
+  const handlePrev = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => prevIndex - 1);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 3000); // Adjust the interval as needed
-
+    }, 3000); // Auto slide every 3 seconds
     return () => clearInterval(interval);
   }, [handleNext]);
 
   useEffect(() => {
     if (testimonialListRef.current) {
       const container = testimonialListRef.current;
-      const cardWidth = container.firstChild.offsetWidth + 16; // Including margin
-      container.style.transition = 'transform 0.5s ease-out';
+      const cardWidth = container.firstChild.offsetWidth + 16; // Include margin
+      container.style.transition = isTransitioning ? 'transform 0.7s ease-out' : 'none';
       container.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+
+      // Reset to the real first card after sliding through the clone
+      if (currentIndex === testimonialsCount) {
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setCurrentIndex(0); // Reset to the original first card
+        }, 500); // Time should match the CSS transition duration
+      }
+
+      // Reset to the real last card when going back from cloned beginning
+      if (currentIndex === -1) {
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setCurrentIndex(testimonialsCount - 1); // Jump to the last card in the original list
+        }, 500); // Time should match the CSS transition duration
+      }
     }
-  }, [currentIndex, visibleCards]);
+  }, [currentIndex, testimonialsCount, isTransitioning]);
 
   return (
     <section className={styles.testimonialSection}>
-      <img src={`${process.env.PUBLIC_URL}/assets/grass_shadow.png`} alt='grass'></img>
+      <img src={`${process.env.PUBLIC_URL}/assets/grass_shadow.png`} alt='grass' className={styles.grass} />
       <h3 className={styles.toptitle}>Testimonial</h3>
 
       <div className={styles.cardlistcontainer}>
         <div className={styles.testimonialList} ref={testimonialListRef}>
-          {testimonials.map((testimonial, index) => (
+          {clonedTestimonials.map((testimonial, index) => (
             <TestimonialCard key={index} {...testimonial} />
           ))}
         </div>
       </div>
 
-      <div className={`${styles.arrowContainer} ${styles.leftArrow}`} onClick={() => setCurrentIndex((prevIndex) => (prevIndex - visibleCards + testimonialsCount) % testimonialsCount)}>
+      {/* Left Arrow */}
+      <div className={`${styles.arrowContainer} ${styles.leftArrow}`} onClick={handlePrev}>
         <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/left_arrow.svg`} alt="Previous" />
       </div>
+      {/* Right Arrow */}
       <div className={`${styles.arrowContainer} ${styles.rightArrow}`} onClick={handleNext}>
         <img loading="lazy" src={`${process.env.PUBLIC_URL}/assets/right_arrow.svg`} alt="Next" />
       </div>

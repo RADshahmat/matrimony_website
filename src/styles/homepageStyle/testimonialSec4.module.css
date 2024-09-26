@@ -1,11 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
 .testimonialSection {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   overflow: hidden;
   font-family: Poppins, sans-serif;
   color: var(--rn-53-themes-net-west-coast, #66451c);
   font-weight: 400;
   position: relative;
+}
+.grass {
+  width: 100%;            /* Makes the image take up 100% of the width of the parent div */
+  height: 100%;           /* Makes the image take up 100% of the height of the parent div */
+  object-fit: cover;      /* Ensures the image covers the entire area, maintaining aspect ratio and cropping if necessary */
+  object-position: center; /* Centers the image within the div */
 }
 
 .shadowImageContainer {
@@ -37,7 +47,6 @@
   align-items: center;
   scroll-behavior: smooth;
   width: 100%;
-  margin-left: 100px;
 }
 .cardsss{
   width: 80%;
@@ -67,7 +76,9 @@
   right: 10px; /* Adjust as needed */
 }
 .cardlistcontainer{
-  margin: 0 50px;
+  max-width: 1272px;
+  overflow: hidden;
+  margin-top: 30px;
 }
 .cardContent {
   border-radius: 10px;
@@ -141,15 +152,9 @@
   top: -64px;
 }
 
-@media (max-width: 1024px) {
-  .testimonialSection {
-    zoom: 70%;
-  }
-}
-
 @media (max-width: 768px) {
   .testimonialSection {
-    zoom: 60%;
+    zoom: 82%;
   }
 
   .testimonialCard {
@@ -157,7 +162,9 @@
     max-width: 300px;
     margin-bottom: 20px;
   }
-
+.cardlistcontainer{
+  max-width: 387px;
+}
   .cardContent {
     padding: 91px 20px 31px;
   }

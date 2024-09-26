@@ -1,0 +1,163 @@
+.loginContainer {
+  background-color: #211d18;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  min-height: 100vh; /* Full viewport height */
+}
+
+.loginCard {
+  border-radius: 20px;
+  background-color: #640a29;
+  width: 900px; /* Smaller width for a cleaner layout */
+  max-width: 100%; /* Responsive: don't exceed screen size */
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* Reduced gap between form and image */
+}
+
+.imageColumn {
+  flex: 1; /* Allow image column to adapt to space */
+}
+
+.loginImage {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.formColumn {
+  flex: 1; /* Allow form column to adapt to space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.headerText {
+  color: var(--Neutrals-Colors-100, #FFF);
+font-family: Poppins;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.premiumText {
+  color: var(--Neutrals-Colors-100, #FFF);
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 200% */
+  text-transform: uppercase;
+  position: relative;
+}
+/* Wave animation for the premium icon */
+@keyframes wave {
+  0% {
+    transform: rotate(0deg); /* Starting position */
+  }
+  25% {
+    transform: rotate(15deg); /* Rotate slightly to the right */
+  }
+  50% {
+    transform: rotate(0deg); /* Back to the original position */
+  }
+  75% {
+    transform: rotate(-15deg); /* Rotate slightly to the left */
+  }
+  100% {
+    transform: rotate(0deg); /* Return to original */
+  }
+}
+.premiumIcon{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: -21px;
+  top: -7px;
+  transition: transform 0.3s ease;
+  animation: wave 2s infinite ease-in-out; 
+}
+.inputLabel {
+  color: var(--Neutrals-Colors-100, #FFF);
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 10px 0px;
+}
+
+.inputField {
+  border-radius: 8px;
+  background-color: #eae6e6;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+.loginButton {
+  border-radius: 8px;
+  background-color: #28221f;
+  color: #ffffff;
+  margin-top: 30px;
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+}
+
+.loginButton:hover {
+  background-color: #4a1c24; /* Button hover effect */
+}
+
+@media (max-width: 991px) {
+  .loginContainer{
+    min-height: auto;
+  }
+  .loginCard {
+    width: 100%; /* Full width on smaller screens */
+    padding: 20px;
+  }
+
+  .cardContent {
+    flex-direction: column;
+  }
+   .loginImage{
+    max-height: 400px;
+   }
+
+  .inputLabel {
+    margin-top: 15px;
+  }
+
+  .loginButton {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 16px;
+  }
+}

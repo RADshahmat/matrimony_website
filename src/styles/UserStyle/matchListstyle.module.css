@@ -1,0 +1,102 @@
+/* matchListstyle.module.css */
+
+.userDashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .profileCard {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1b1b1b; /* dark background */
+    border-radius: 20px;
+    padding: 20px;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    color: #fff; /* Text color for readability */
+    max-width: 100%;
+  }
+  
+  .userInfo {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .avatarSection {
+    background-color: #d9d9d9; /* Placeholder background for image */
+    border-radius: 12px;
+    height: 80px;
+    width: 80px;
+  }
+  
+  .img {
+    border-radius: 12px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .detailsSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .exampleCodeName {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Nunito', sans-serif; /* You already prefer this font */
+  }
+  
+  .ageHeightStatus {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .actionsSection {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .viewProfile {
+    background-color: #b7c8ff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    color: #000;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .requestChatContainer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background-color: #404040; /* Dark button background */
+    padding: 10px;
+    border-radius: 12px;
+  }
+  
+  .requestChat {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  .chatImg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .heartIcon {
+    color: #ff5a5a; /* Heart color */
+    font-size: 24px;
+    cursor: pointer;
+  }
+  

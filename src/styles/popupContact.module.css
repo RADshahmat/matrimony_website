@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400&display=swap');
 .popup {
-    max-width: 355px;
-    background: var(--rn-53-themes-net-nero, #fff);
-    backdrop-filter: blur(10px); 
+    position: absolute;
+    max-width: 400px;
+    background: var(--rn-53-themes-net-nero, #FFF);
     box-shadow: 6px 0px 26px -9px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(10px); 
     position: fixed;
-    top: 77.1px; 
-    right: 6.3px; 
+    top: 69.9px;
+    right: 0px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -14,7 +15,6 @@
     padding: 36px; 
     z-index: 10001;
     text-align: left;
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.1);
 }
 
 .closeButton {
@@ -51,7 +51,7 @@
     width: 100%;
     padding-bottom: 6.3px; 
     color: var(--rn-53-themes-net-west-coast, #66451c);
-    font: 400 18px/27px Poppins, -apple-system, Roboto, Helvetica, sans-serif; 
+    font: 400 20px/27px Poppins, -apple-system, Roboto, Helvetica, sans-serif; 
 }
 
 .contactList {
@@ -68,6 +68,7 @@
     align-items: center;
     justify-content: flex-start;
     margin-top: 10.8px; 
+    text-decoration: none;
 }
 
 .contactItem:first-child {
@@ -77,7 +78,7 @@
 .contactLink {
     color: var(--rn-53-themes-net-ebony-clay, #202b3a);
     padding: 0 0 0 22.5px;
-    font: 500 12.6px Poppins, sans-serif; 
+    font: 500 14px Poppins, sans-serif; 
     text-align: left;
     text-decoration: none;
 }
@@ -113,7 +114,7 @@
 
 .expertSupportTitle {
     padding-bottom: 13.5px; 
-    font-size: 12.6px; 
+    font-size: 14px; 
     font-weight: 700;
     text-transform: uppercase;
     line-height: 1.2;
@@ -149,7 +150,7 @@
 }
 
 .expertTitle {
-    font-size: 11.7px; 
+    font-size: 13px; 
     margin-top: 3.6px; 
 }
 
@@ -176,29 +177,78 @@
     justify-content: flex-start;
 }
 
-.socialLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34.2px; 
-    height: 34.2px; 
+  .socialLink {
+    padding: 9px 11px;
     border-radius: 5px;
-    background: var(--rn-53-themes-net-wild-sand, #f7f7f7);
+    background: var(--rn-53-themes-net-wild-sand, #F7F7F7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
     text-decoration: none;
-    transition: transform 0.4s ease, box-shadow 0.4s ease; 
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-.socialLink:hover {
-    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-    transform: rotate(360deg); 
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
   }
-.socialIcon {
-    width: 16.2px; 
-    height: 16.2px; 
-    object-fit: contain;
-}
-
+  
+  .socialLink svg {
+    color: black; /* Default black icons */
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+  }
+  
+  .socialLink:hover svg {
+    transform: scale(1.2);
+    color: #fff; /* Icons will turn white on hover */
+  }
+  
+  .socialLink::before {
+    content: "";
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    left: -110%;
+    top: 80%;
+    transform: rotate(45deg);
+    transition: background 0.7s ease;
+  }
+  
+  .socialLink:hover::before {
+    animation: slide 0.7s forwards;
+  }
+  
+  @keyframes slide {
+    50% {
+      left: 10%;
+      top: -40%;
+    }
+    100% {
+      left: -15%;
+      top: -15%;
+    }
+  }
+  
+  /* Specific colors for each hover effect */
+  .socialLink.facebook:hover::before {
+    background: #3b5998;
+  }
+  .socialLink.instagram:hover::before {
+    background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
+  }
+  .socialLink.twitter:hover::before {
+    background: #1da1f2;
+  }
+  .socialLink.whatsapp:hover::before {
+    background: #25d366;
+  }
+  .socialLink.linkedin:hover::before {
+    background: #0077b5;
+  }
+  .socialLink.youtube:hover::before {
+    background: #ff0000;
+  }
+  
 @media (max-width: 768px) {
     .popup {
         zoom: 80%;

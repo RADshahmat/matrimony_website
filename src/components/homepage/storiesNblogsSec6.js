@@ -32,8 +32,7 @@ const BlogPostsSection = () => {
           <article
             key={index}
             className={styles.card}
-            data-aos="fade-up"
-            data-aos-delay={`${index * 100}`} 
+            data-aos="slide-up"
           >
             <div className={styles.cardContent}>
               <div className={styles.imageWrapper}>

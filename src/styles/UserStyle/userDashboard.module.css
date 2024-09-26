@@ -1,0 +1,191 @@
+.userDashboard {
+    background-color: #211d18;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .dashboardContent {
+    border-radius: 15px;
+    background-color: #fff;
+    align-self: center;
+    display: flex;
+    margin: 55px;
+    width: 100%;
+    max-width: 1200px;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 79px 70px;
+  }
+  
+  .profileSection {
+    width: 956px;
+    max-width: 100%;
+  }
+  
+  .profileLayout {
+    gap: 20px;
+    display: flex;
+  }
+  
+  .profileImageColumn {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 33%;
+    margin-left: 0;
+  }
+  
+  .profileImage {
+    border-radius: 15px;
+    background-color: #100000;
+    display: flex;
+    width: 295px;
+    height: 305px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+  
+  .profileInfoColumn {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 67%;
+    margin-left: 20px;
+  }
+  
+  .profileInfo {
+    display: flex;
+    margin-top: 77px;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Poppins, sans-serif;
+    color: #000;
+  }
+  
+  .profileName {
+    font-size: 35px;
+    font-weight: 700;
+  }
+  
+  .profileDetails {
+    font-size: 22px;
+    font-weight: 300;
+    align-self: stretch;
+    margin-top: 15px;
+    text-align: left;
+  }
+  
+  .editButton {
+    border-radius: 10px;
+    background-color: #000;
+    margin-top: 26px;
+    overflow: hidden;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 400;
+    padding: 6px 54px;
+  }
+  
+  .actionSection {
+    align-self: end;
+    display: flex;
+    margin-top: 61px;
+    width: 794px;
+    max-width: 100%;
+    gap: 40px 58px;
+    color: #fff;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    font: 700 35px Poppins, sans-serif;
+  }
+  
+  .actionButton {
+    border-radius: 15px;
+    display: flex;
+    gap: 40px 91px;
+    overflow: hidden;
+    flex: 1;
+    flex-grow: 1;
+    flex-basis: auto;
+    padding: 9px 18px 9px 38px;
+  }
+  
+  .actionButtonContent {
+    display: flex;
+    gap: 38px;
+  }
+  
+  .actionIcon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 50px;
+    align-self: flex-start;
+  }
+  
+  .actionText {
+    flex-basis: auto;
+  }
+  
+  .matchButton {
+    background-color: #171717;
+  }
+  
+  .supportButton {
+    background-color: #5671d0;
+  }
+  
+  @media (max-width: 991px) {
+    .dashboardContent {
+      max-width: 100%;
+      margin-top: 40px;
+      padding: 40px 20px;
+    }
+  
+    .profileLayout {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 40px;
+    }
+  
+    .profileImageColumn,
+    .profileInfoColumn {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .profileImage {
+      margin-top: 0;
+    }
+  
+    .profileInfo {
+      margin-top: 0;
+    }
+  
+    .profileDetails {
+      max-width: 100%;
+    }
+  
+    .editButton {
+      align-self: center;
+      padding: 10px 20px;
+    }
+  
+    .actionSection {
+      margin-top: 40px;
+      white-space: initial;
+      justify-content: center;
+    }
+  
+    .actionButton {
+      padding: 15px 20px;
+      white-space: initial;
+      width: 100%;
+    }
+  
+    .actionButtonContent {
+      justify-content: center;
+    }
+  }
