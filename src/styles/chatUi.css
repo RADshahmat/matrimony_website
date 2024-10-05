@@ -108,7 +108,7 @@
     padding: 15px;
     overflow-y: auto;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .message {
@@ -138,6 +138,17 @@
     color: black;
     align-self: flex-start;
 }
+
+  
+.message-text {
+    white-space: normal;        
+    word-wrap: break-word;           
+    max-width: 150px;             
+    padding: 10px;        
+    border-radius: 10px; 
+    text-align: right;  
+  }
+  
 
 .chat-footer {
     display: flex;
