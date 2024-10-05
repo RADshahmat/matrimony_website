@@ -5,14 +5,7 @@ import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import axiosInstance from "../Axios/axios_instance";
 
-const socket = io('https://backend.butterfly.hurairaconsultancy.com', {
-  withCredentials: true,
-});
 
-
-setTimeout(() => {
-  console.log("Socket connected:", socket.connected); // This should now return true if connected
-}, 1000);
 
 function debounce(func, wait) {
   let timeout;
@@ -23,6 +16,14 @@ function debounce(func, wait) {
 }
 
 const Chat = () => {
+  const socket = io('http://localhost:3004', {
+    withCredentials: true,
+  });
+  
+  
+  setTimeout(() => {
+    console.log("Socket connected:", socket.connected); // This should now return true if connected
+  }, 1000);
   const [selectedChat, setSelectedChat] = useState(null);
   const [showSidebar, setShowSidebar] = useState(true);
   const [chats, setChats] = useState([]);
