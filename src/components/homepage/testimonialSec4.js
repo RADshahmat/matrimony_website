@@ -2,24 +2,38 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axiosInstance from '../../Axios/axios_instance'; // Import the Axios instance
 import styles from '../../styles/homepageStyle/testimonialSec4.module.css';
 
-const TestimonialCard = ({ content, name, designation, company, imageSrc }) => {
+const TestimonialCard = ({ details, name, designation, company, image }) => {
   return (
     <div className={styles.cardContent}>
-      <img src={imageSrc} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
-      <p className={styles.testimonialText}>{content}</p>
-      <h3 className={styles.authorName}>{name}</h3>
-      <p className={styles.authorInfo}>{designation}, {company}</p>
+      <img src={image} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
+      <div className={styles.testimonialText}>{details}</div>
+      <div>
+          <h3 className={styles.authorName}>{name}</h3>
+          <p className={styles.authorInfo}>{designation}, {company}</p>
+      </div>
     </div>
   );
 };
 
-const TestimonialSec4 = (props) => {
-  const [testimonials, setTestimonials] = useState(props.testimonials); // State to store testimonials
+const TestimonialSec4 = () => {
+  const [testimonials, setTestimonials] = useState([]); // State to store testimonials
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const testimonialListRef = useRef(null);
   
- 
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await axiosInstance.get('/testimonial');
+        setTestimonials(response.data); // Set fetched testimonials
+        console.log('Fetched Testimonials:', response.data); // Log the testimonials to the console
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      }
+    };
+
+    fetchTestimonials(); // Call the function to fetch data
+  }, []);
 
   // Clone testimonials for seamless transition
   const clonedTestimonials = [...testimonials, ...testimonials.slice(0, 3)];

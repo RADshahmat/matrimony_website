@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback,useEffect } from "react";
 import Cropper from "react-easy-crop";
 import { getCroppedImg } from "../cropImage";
 import imageCompression from 'browser-image-compression';
+import { MdOutlineCheck } from "react-icons/md";
 
 const FilePicker = (props) => {
   const [image, setImage] = useState(null);
@@ -12,6 +13,14 @@ const FilePicker = (props) => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [cropping, setCropping] = useState(false);
 
+  useEffect(() => {
+    if (props.images instanceof File) {
+      setImage(URL.createObjectURL(props.images));
+    } else {
+      setImage(null); 
+    }
+  }, [props.images]);
+  
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -29,9 +38,8 @@ const FilePicker = (props) => {
     try {
       const croppedImg = await getCroppedImg(image, croppedAreaPixels);
       
-      // Compress the cropped image
       const options = {
-        maxSizeMB: 0.1, // 100KB
+        maxSizeMB: 0.1, 
         maxWidthOrHeight: 800,
         useWebWorker: true,
         fileType: 'image/webp',
@@ -41,8 +49,8 @@ const FilePicker = (props) => {
       const compressedBlob = await imageCompression(croppedBlob, options);
       const compressedFile = new File([compressedBlob], 'dp.webp', { type: 'image/webp' });
       
-      setCroppedImage(URL.createObjectURL(compressedFile)); // Optional: To display the image
-      props.setImageFunc(compressedFile); // Pass the File object instead of the Blob URL
+      setCroppedImage(URL.createObjectURL(compressedFile)); 
+      props.setImageFunc(compressedFile); 
       setCropping(false);
     } catch (error) {
       console.error("Error compressing the image:", error);
@@ -62,7 +70,7 @@ const FilePicker = (props) => {
       setCropping(true);
     }
   };
-
+console.log('the image',image)
   return (
     <div style={{ display: 'flex' }}>
       <div
@@ -74,11 +82,11 @@ const FilePicker = (props) => {
         {!cropping ? (
           <div
             className="d-flex flex-column align-items-center justify-content-center"
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "150px", height: "150px" }}
             onClick={() => document.getElementById("fileInput").click()}
           >
             <img
-              src={croppedImage || `${process.env.PUBLIC_URL}/assets/image.png`}
+              src={image || croppedImage || `${process.env.PUBLIC_URL}/assets/image.png`}
               alt="Selected"
               style={{ width: "150px", height: "150px", objectFit: "cover" }}
               className="img-thumbnail"
@@ -89,6 +97,7 @@ const FilePicker = (props) => {
               accept="image/*"
               onChange={handleImageChange}
               style={{ display: "none" }}
+              
             />
           </div>
         ) : (
@@ -110,16 +119,16 @@ const FilePicker = (props) => {
                 onCropChange={setCrop}
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
-                style={{ containerStyle: { height: "100%", width: "100%" } }}
+                style={{ containerStyle: { height: "350px", width: "290px",background:'darkslategrey',zIndex:'500' },    background: 'darkslategrey' }}
               />
             </div>
             <button
               type="button"
-              className="btn btn-primary mt-3"
+              className="btn"
               onClick={handleSaveCrop}
-              style={{ position: "absolute", bottom: "-2rem" }}
+              style={{ position: "absolute", bottom: "-2rem",zIndex:'501',bottom: '100px',right: '-270px' }}
             >
-              OK
+              <MdOutlineCheck size={25}/>
             </button>
           </>
         )}

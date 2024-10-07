@@ -6,6 +6,9 @@ import io from "socket.io-client";
 import axiosInstance from "../Axios/axios_instance";
 
 
+const socket = io("", {
+  withCredentials: true,
+});
 
 function debounce(func, wait) {
   let timeout;
@@ -16,48 +19,60 @@ function debounce(func, wait) {
 }
 
 const Chat = () => {
-  const socket = io('http://localhost:3004', {
-    withCredentials: true,
-  });
-  
-  
-  setTimeout(() => {
-    console.log("Socket connected:", socket.connected); // This should now return true if connected
-  }, 1000);
   const [selectedChat, setSelectedChat] = useState(null);
   const [showSidebar, setShowSidebar] = useState(true);
   const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [userId, setuserId] = useState("");
+  const [userId, setUserId] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [offset, setOffset] = useState(20);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [mySocketId, setMySocketId] = useState("");
-  const [selectedPeerSocketId, setSelectedPeerSocketId] = useState(""); // Declare state here
+  const [selectedPeerSocketId, setSelectedPeerSocketId] = useState("");
+  const [activeUsers, setActiveUsers] = useState([]);
+  const [typingTimeout, setTypingTimeout] = useState(null);
+  const [peerId,setPeerId]=useState('');
 
   useEffect(() => {
-    socket.on("registerSocket", (data) => {
-      console.log("Received socket registration:", data); // Add logging here
-      setMySocketId(data.socketId); // Store your own socket ID
-    });
-  
+    console.log('ballu')
+    if (socket) {
+      console.log('ballu1')
+      socket.on("connect", () => {
+        console.log("Socket connected with ID:", socket.id);
+        socket.on("activeUsers", (activeUserIds) => {
+          console.log("Active Users received:", activeUserIds);
+          setActiveUsers(activeUserIds);
+        });
+
+        socket.on("registerSocket", (data) => {
+          console.log("Socket registered:", data);
+          setMySocketId(data.socketId);
+        });
+      });
+    }
     return () => {
-      socket.off("registerSocket");
+      if (socket) {
+        socket.off("connect");
+        socket.off("activeUsers");
+        socket.off("registerSocket");
+      }
     };
   }, []);
   useEffect(() => {
+    scrollToBottom(); 
+  }, [isTyping]);
+ 
+  useEffect(() => {
     if (userId) {
+      console.log("Emitting registerUserId for:", userId);
       socket.emit("registerUserId", { userId: userId });
-      // Emit the userId to the socket server
     }
   }, [userId]);
-  
-  
 
+  // Fetch chats and handle new messages
   useEffect(() => {
-    console.log(socket.id,'dekhi ki ase')
     axiosInstance
       .get(`/chats?socId=${socket.id}`)
       .then((response) => {
@@ -66,14 +81,12 @@ const Chat = () => {
       .catch((error) => {
         console.error("Error fetching chats:", error);
       });
+
     socket.on("newMessage", (messageData) => {
-      console.log("message Data", messageData);
-  
-        setMessages((prevMessages) => [ ...prevMessages,messageData]);
-        setTimeout(() => {
-          scrollToBottom();
-        }, 0);
-      
+      setMessages((prevMessages) => [...prevMessages, messageData]);
+      setTimeout(() => {
+        scrollToBottom();
+      }, 0);
     });
 
     return () => {
@@ -90,26 +103,25 @@ const Chat = () => {
     }
 
     return () => {
-      //socket.off("peerTyping");
+      socket.off("peerTyping");
     };
   }, [selectedChat]);
 
   const handleChatClick = async (chat) => {
     setSelectedChat(chat);
     setShowSidebar(false);
-  
+    console.log('chat dekhi',chat)
+
     try {
       const response = await axiosInstance.get(
         `/messages/${chat.peerId}?limit=20&offset=0`
       );
       setMessages(response.data.messages);
-      setuserId(response.data.userId);
+      setUserId(response.data.userId);
+      setPeerId(chat.peerId);
       setOffset(20);
       setHasMore(true);
-  
-      // Store peer's socket ID
       setSelectedPeerSocketId(chat.peerSocketId);
-  
       setTimeout(() => {
         scrollToBottom();
       }, 0);
@@ -125,18 +137,17 @@ const Chat = () => {
 
   const handleSendMessage = () => {
     if (newMessage.trim() === "") return;
-  
+
     const messageData = {
       peerId: selectedChat.peerId,
       message: newMessage,
-      peerSocketId: selectedPeerSocketId, // Send the peer's socket ID with the message
+      peerSocketId: selectedPeerSocketId,
     };
-    
+
     axiosInstance
       .post("/messages", messageData)
       .then(() => {
-        socket.emit("newMessage", messageData); // Emit the message with the peer's socket ID
-  
+        socket.emit("newMessage", messageData);
         setMessages((prevMessages) => [
           ...prevMessages,
           {
@@ -156,11 +167,18 @@ const Chat = () => {
   };
 
   const handleTyping = () => {
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
     socket.emit("typing", { peerId: selectedChat.peerId });
   };
 
   const handleStopTyping = () => {
-    socket.emit("stopTyping", { peerId: selectedChat.peerId });
+    const timeout = setTimeout(() => {
+      socket.emit("stopTyping", { peerId: selectedChat.peerId });
+    }, 2000);
+
+    setTypingTimeout(timeout);
   };
 
   const scrollToBottom = () => {
@@ -177,20 +195,17 @@ const Chat = () => {
     try {
       const chatBody = document.querySelector(".chat-body");
       const prevScrollHeight = chatBody.scrollHeight;
-
       const response = await axiosInstance.get(
         `/messages/${selectedChat.peerId}?limit=20&offset=${offset}`
       );
       const newMessages = response.data.messages;
 
       if (newMessages.length > 0) {
-        setMessages((prevMessages) => [...newMessages, ...prevMessages]); // Append older messages at the top
+        setMessages((prevMessages) => [...newMessages, ...prevMessages]);
         setOffset(offset + 20);
-
-        // Adjust the scroll position to keep the user in the same spot
         setTimeout(() => {
           chatBody.scrollTop = chatBody.scrollHeight - prevScrollHeight;
-        }, 0); // Ensures that scroll happens after DOM update
+        }, 0);
       } else {
         setHasMore(false);
       }
@@ -201,15 +216,11 @@ const Chat = () => {
     }
   };
 
-  // Debounced scroll handler
   const debouncedScroll = useCallback(
     debounce(() => {
       const chatBody = document.querySelector(".chat-body");
-      if (chatBody) {
-        if (chatBody.scrollTop <= 200 && hasMore && !loading) {
-          // Scroll near the top (adjust value as needed)
-          fetchMoreMessages();
-        }
+      if (chatBody && chatBody.scrollTop <= 200 && hasMore && !loading) {
+        fetchMoreMessages();
       }
     }, 300),
     [hasMore, loading, selectedChat]
@@ -217,11 +228,9 @@ const Chat = () => {
 
   useEffect(() => {
     const chatBody = document.querySelector(".chat-body");
-
     if (chatBody) {
       chatBody.addEventListener("scroll", debouncedScroll);
     }
-
     return () => {
       if (chatBody) {
         chatBody.removeEventListener("scroll", debouncedScroll);
@@ -229,7 +238,7 @@ const Chat = () => {
     };
   }, [hasMore, loading, debouncedScroll, selectedChat]);
 
-  console.log(socket.id,'dekhi ki ase2')
+  console.log(activeUsers,"theese are active users")
 
   return (
     <div className="messenger-container">
@@ -250,7 +259,7 @@ const Chat = () => {
               }
             >
               <img
-                src={chat.avatar || "https://via.placeholder.com/40"}
+                src={`https://backend.butterfly.hurairaconsultancy.com/${chat.image[0].path}` || "https://via.placeholder.com/40"}
                 alt={`${chat.name} avatar`}
                 className="chat-avatar"
               />
@@ -259,9 +268,6 @@ const Chat = () => {
                 <br />
                 <span className="chat-last-message">{chat.lastMessage}</span>
               </div>
-              {selectedChat && selectedChat.id === chat.id && (
-                <span className="active-indicator"></span>
-              )}
             </li>
           ))}
         </ul>
@@ -271,9 +277,14 @@ const Chat = () => {
         {selectedChat ? (
           <>
             <div className="chat-header">
-              <h3>{selectedChat.name}</h3>
+              <h3>
+                {selectedChat.name}
+                {activeUsers.includes(peerId) && (
+                  <span className="active-indicator"></span>
+                )}
+              </h3>
               <button className="back-button" onClick={handleBackButtonClick}>
-                &#8592; {/* Back arrow */}
+                &#8592;
               </button>
             </div>
             <div className="chat-body">
@@ -283,11 +294,11 @@ const Chat = () => {
                 <div
                   key={index}
                   className={`message ${
-                    userId == message.sender_id ? "user" : "bot"
+                    userId === message.sender_id ? "user" : "bot"
                   }`}
                 >
                   <img
-                    src={message.avatar || "https://via.placeholder.com/40"}
+                    src={ userId === message.sender_id ?`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image0[0].path}`:`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}` || "https://via.placeholder.com/40"}
                     alt={`${message.user} avatar`}
                     className="message-avatar"
                   />
@@ -295,7 +306,21 @@ const Chat = () => {
                 </div>
               ))}
 
-              {isTyping && <p style={{marginTop:'-15px',textAlign:'left'}}>typing...</p>}
+              {isTyping && (
+                  <div
+                  className={`message ${
+                    false ? "user" : "bot"
+                  }`}
+                  
+                >
+                  <img
+                    src={`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}` || "https://via.placeholder.com/40"}
+                    alt={`avatar`}
+                    className="message-avatar"
+                  />
+                  <p className="message-text">Typing...</p>
+                </div>
+              )}
             </div>
             <div className="chat-footer">
               <input

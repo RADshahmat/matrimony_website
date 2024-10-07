@@ -7,9 +7,10 @@ import PartnerPreferences from './PartnerPreferences';
 import axiosInstance from '../../Axios/axios_instance';
 
 const MatrimonialForm = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(3);
   const [formData, setFormData] = useState({});
   const [images, setImages] = useState();
+  const [userId,setUserId]=useState();
   console.log('dp: ',images)
 
   const handleSubmit = async (data,compressedImages) => {
@@ -22,8 +23,9 @@ const MatrimonialForm = () => {
           'Content-Type': 'application/json',
         },
       });
+      setUserId(response.data.userId);
 
-      console.log('Form data response:', response.data);
+      console.log('Form data response:', response.data.userId);
 
       // Then, send the images
       if (compressedImages.length > 0) {
@@ -31,11 +33,11 @@ const MatrimonialForm = () => {
         compressedImages.forEach((image) => {
           formDataImages.append('images', image);
         });
-        console.log('dp name',images)
+        console.log('dp name',userId)
         formDataImages.append('images',images);
         formDataImages.append('dp',images.name);
 
-        const responseImages = await axiosInstance.post('/upload_images', formDataImages, {
+        const responseImages = await axiosInstance.post(`/upload_images?userId=${response.data.userId}`, formDataImages, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -50,10 +52,10 @@ const MatrimonialForm = () => {
   console.log('dp name',images)
   return (
     <div>
-      {page === 0 && <ProfileInformation pageFunc={setPage} formDataFunc={setFormData} images={setImages}/>}
-      {page === 1 && <AddressInfo pageFunc={setPage} formDataFunc={setFormData} />}
-      {page === 2 && <EducationProfessionForm pageFunc={setPage} formDataFunc={setFormData} />}
-      {page === 3 && <FamilyInformationForm pageFunc={setPage} formDataFunc={setFormData} />}
+      {page === 0 && <ProfileInformation pageFunc={setPage} formDataFunc={setFormData}  formData={formData} image={images} images={setImages}/>}
+      {page === 1 && <AddressInfo pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
+      {page === 2 && <EducationProfessionForm pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
+      {page === 3 && <FamilyInformationForm pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
       {page === 4 && (
         <PartnerPreferences
           pageFunc={setPage}

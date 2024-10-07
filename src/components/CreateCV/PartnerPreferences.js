@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Select from 'react-select';
 import imageCompression from 'browser-image-compression';
 import styles from '../../styles/CreateCvStyle/PartnerPreferences.module.css';
@@ -89,48 +89,52 @@ const PartnerPreferences = (props) => {
   const options = {
     age: [
       { value: '20', label: '20' },
-      // Add more options as needed
     ],
     height: [
       { value: "5'", label: "5'" },
-      // Add more options as needed
     ],
     educationalQualification: [
       { value: 'Higher Secondary', label: 'Higher Secondary' },
-      // Add more options as needed
     ],
     heightPreference: [
       { value: 'Not More Than', label: 'Not More Than' },
-      // Add more options as needed
     ],
     agePreference: [
       { value: 'Not less Than', label: 'Not less Than' },
-      // Add more options as needed
     ],
     minimumEducationalQualification: [
       { value: 'Higher Secondary', label: 'Higher Secondary' },
-      // Add more options as needed
     ],
   };
 
-  const handleChange = (selectedOption, { name }) => {
-    setFormData({
-      ...formData,
-      [name]: selectedOption ? selectedOption.value : '',
-    });
+  const handleChange = (eventOrOption, actionMeta) => {
+    if (actionMeta) {
+      // This handles react-select's onChange
+      const { name } = actionMeta;
+      setFormData({
+        ...formData,
+        [name]: eventOrOption ? eventOrOption.value : '',
+      });
+    } else {
+      // This handles regular input's onChange
+      const { name, value } = eventOrOption.target;
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Compress images and add them to formData
     const compressedImages = await Promise.all(
       images.map(async (image) => {
         const response = await fetch(image);
         const blob = await response.blob();
         
         const options = {
-          maxSizeMB: 0.1, // 100KB
+          maxSizeMB: 0.1,
           maxWidthOrHeight: 800,
           useWebWorker: true,
           fileType: 'image/webp'
@@ -240,6 +244,7 @@ const PartnerPreferences = (props) => {
                 type="text"
                 className={styles.input}
                 placeholder="Enter height"
+                name="heightPreferenceValue"
                 id="heightPreferenceValue"
                 onChange={handleChange}
               />
@@ -259,6 +264,7 @@ const PartnerPreferences = (props) => {
                 type="text"
                 className={styles.input}
                 placeholder="Enter Age"
+                name="agePreferenceValue"
                 id="agePreferenceValue"
                 onChange={handleChange}
               />
@@ -272,7 +278,7 @@ const PartnerPreferences = (props) => {
               <Select
                 options={districts}
                 name="notReferredDistricts"
-                value={districts.filter(district => formData.notReferredDistricts.includes(district.value))}
+                value={districts.find(option => option.value === formData.notReferredDistricts)}
                 onChange={(selectedOptions) => handleChange(selectedOptions, { name: 'notReferredDistricts' })}
                 isMulti
               />
