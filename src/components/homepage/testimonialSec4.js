@@ -66,7 +66,7 @@ const TestimonialSec4 = () => {
       const container = testimonialListRef.current;
       const cardWidth = container.firstChild ? container.firstChild.offsetWidth + 16 : 0; // Include margin
       container.style.transition = isTransitioning ? 'transform 0.7s ease-out' : 'none';
-      container.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      //container.style.transform = translateX(-${currentIndex * cardWidth}px);
 
       // Reset to the real first card after sliding through the clone
       if (currentIndex === testimonialsCount) {

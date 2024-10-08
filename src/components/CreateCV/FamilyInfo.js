@@ -1,31 +1,54 @@
-import React, { useState } from "react";
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
 import styles from "../../styles/CreateCvStyle/FamilyInformationForm.module.css";
 
 const FamilyInformationForm = (props) => {
   const [brotherCount, setBrotherCount] = useState(0);
   const [sisterCount, setSisterCount] = useState(0);
+  const[navigation,setNavigation]=useState(1);
   const [formData, setFormData] = useState({
-    fatherName: '',
-    fatherOccupation: '',
-    motherName: '',
-    motherOccupation: '',
+    fatherName: "",
+    fatherOccupation: "",
+    motherName: "",
+    motherOccupation: "",
     brotherFields: [],
-    sisterFields: []
+    sisterFields: [],
   });
+  useEffect(() => {
+    if (props.formData) {
+      const {
+        fatherName = "",
+        fatherOccupation = "",
+        motherName = "",
+        motherOccupation = "",
+        brotherFields = [],
+        sisterFields = [],
+      } = props.formData;
 
+      setFormData({
+        fatherName,
+        fatherOccupation,
+        motherName,
+        motherOccupation,
+        brotherFields,
+        sisterFields,
+      });
+      setBrotherCount(brotherFields.length);
+      setSisterCount(sisterFields.length);
+    }
+  }, [props.formData]);
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [id]: value
+      [id]: value,
     }));
   };
 
   const handleSelectChange = (name, value) => {
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value ? value.value : ''
+      [name]: value ? value.value : "",
     }));
   };
 
@@ -34,11 +57,11 @@ const FamilyInformationForm = (props) => {
     const newBrotherFields = [...formData.brotherFields];
     newBrotherFields[index] = {
       ...newBrotherFields[index],
-      [name]: value
+      [name]: value,
     };
     setFormData((prevState) => ({
       ...prevState,
-      brotherFields: newBrotherFields
+      brotherFields: newBrotherFields,
     }));
   };
 
@@ -47,21 +70,26 @@ const FamilyInformationForm = (props) => {
     const newSisterFields = [...formData.sisterFields];
     newSisterFields[index] = {
       ...newSisterFields[index],
-      [name]: value
+      [name]: value,
     };
     setFormData((prevState) => ({
       ...prevState,
-      sisterFields: newSisterFields
+      sisterFields: newSisterFields,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //alert("Form submitted successfully!");
     props.formDataFunc((prevData) => ({
       ...prevData,
-      ...formData
+      ...formData,
     }));
-    props.pageFunc(4);
+    if(navigation==1){
+      props.pageFunc(4);
+    }else{
+      props.pageFunc(2);
+    }
   };
 
   const renderBrotherFields = () => {
@@ -79,6 +107,7 @@ const FamilyInformationForm = (props) => {
               type="text"
               name="brotherName"
               className={styles.textField}
+              value={formData.brotherFields[i].brotherName || ""}
               placeholder={`Enter ${
                 i === 0 ? "Elder" : `${i + 1}th`
               } Brother's Name`}
@@ -88,16 +117,31 @@ const FamilyInformationForm = (props) => {
           <div className={styles.fieldColumn}>
             <label className={styles.fieldLabel}>Brother Occupation</label>
             <Select
+              isSearchable={false}
               name="brotherOccupation"
               className={styles.selectField}
               options={[
-                { value: 'business', label: 'Business' },
-                { value: 'governmentJob', label: 'Government Job' },
-                { value: 'selfEmployed', label: 'Self-employed' },
-                { value: 'student', label: 'Student' }
+                { value: "Business", label: "Business" },
+                { value: "Government Job", label: "Government Job" },
+                { value: "Self-employed", label: "Self-employed" },
+                { value: "Student", label: "Student" },
               ]}
-              onChange={(selectedOption) => handleBrotherChange(i, { target: { name: 'brotherOccupation', value: selectedOption.value } })}
-              value={formData.brotherFields[i] ? { value: formData.brotherFields[i].brotherOccupation, label: formData.brotherFields[i].brotherOccupation } : null}
+              onChange={(selectedOption) =>
+                handleBrotherChange(i, {
+                  target: {
+                    name: "brotherOccupation",
+                    value: selectedOption.value,
+                  },
+                })
+              }
+              value={
+                formData.brotherFields[i]
+                  ? {
+                      value: formData.brotherFields[i].brotherOccupation,
+                      label: formData.brotherFields[i].brotherOccupation,
+                    }
+                  : ""
+              }
             />
           </div>
         </div>
@@ -119,6 +163,7 @@ const FamilyInformationForm = (props) => {
               type="text"
               name="sisterName"
               className={styles.textField}
+              value={formData.sisterFields[i].sisterName || ""}
               placeholder={`Enter ${
                 i === 0 ? "Elder" : `${i + 1}`
               } Sister's Name`}
@@ -128,16 +173,31 @@ const FamilyInformationForm = (props) => {
           <div className={styles.fieldColumn}>
             <label className={styles.fieldLabel}>Sister Occupation</label>
             <Select
+              isSearchable={false}
               name="sisterOccupation"
               className={styles.selectField}
               options={[
-                { value: 'housewife', label: 'Housewife' },
-                { value: 'governmentJob', label: 'Government Job' },
-                { value: 'selfEmployed', label: 'Self-employed' },
-                { value: 'student', label: 'Student' }
+                { value: "Housewife", label: "Housewife" },
+                { value: "Government Job", label: "Government Job" },
+                { value: "Self-employed", label: "Self-employed" },
+                { value: "Student", label: "Student" },
               ]}
-              onChange={(selectedOption) => handleSisterChange(i, { target: { name: 'sisterOccupation', value: selectedOption.value } })}
-              value={formData.sisterFields[i] ? { value: formData.sisterFields[i].sisterOccupation, label: formData.sisterFields[i].sisterOccupation } : null}
+              onChange={(selectedOption) =>
+                handleSisterChange(i, {
+                  target: {
+                    name: "sisterOccupation",
+                    value: selectedOption.value,
+                  },
+                })
+              }
+              value={
+                formData.sisterFields[i]
+                  ? {
+                      value: formData.sisterFields[i].sisterOccupation,
+                      label: formData.sisterFields[i].sisterOccupation,
+                    }
+                  : null
+              }
             />
           </div>
         </div>
@@ -146,9 +206,6 @@ const FamilyInformationForm = (props) => {
     return sisterFields;
   };
 
-  const prev = () => {
-    props.pageFunc(2);
-  };
 
   return (
     <div className={styles.container}>
@@ -170,16 +227,26 @@ const FamilyInformationForm = (props) => {
           <div className={styles.fieldColumn}>
             <label className={styles.fieldLabel}>Father’s Occupation</label>
             <Select
+              isSearchable={false}
               id="fatherOccupation"
               className={styles.selectField}
               options={[
-                { value: 'governmentJob', label: 'Government Job' },
-                { value: 'business', label: 'Business' },
-                { value: 'selfEmployed', label: 'Self-employed' },
-                { value: 'retired', label: 'Retired' }
+                { value: "Government Job", label: "Government Job" },
+                { value: "Business", label: "Business" },
+                { value: "Self-employed", label: "Self-employed" },
+                { value: "Retired", label: "Retired" },
               ]}
-              onChange={(selectedOption) => handleSelectChange('fatherOccupation', selectedOption)}
-              value={formData.fatherOccupation ? { value: formData.fatherOccupation, label: formData.fatherOccupation } : null}
+              onChange={(selectedOption) =>
+                handleSelectChange("fatherOccupation", selectedOption)
+              }
+              value={
+                formData.fatherOccupation
+                  ? {
+                      value: formData.fatherOccupation,
+                      label: formData.fatherOccupation,
+                    }
+                  : null
+              }
             />
           </div>
         </div>
@@ -199,31 +266,44 @@ const FamilyInformationForm = (props) => {
           <div className={styles.fieldColumn}>
             <label className={styles.fieldLabel}>Mother’s Occupation</label>
             <Select
+              isSearchable={false}
               id="motherOccupation"
               className={styles.selectField}
               options={[
-                { value: 'housewife', label: 'Housewife' },
-                { value: 'governmentJob', label: 'Government Job' },
-                { value: 'business', label: 'Business' },
-                { value: 'selfEmployed', label: 'Self-employed' }
+                { value: "Housewife", label: "Housewife" },
+                { value: "Government Job", label: "Government Job" },
+                { value: "Business", label: "Business" },
+                { value: "Self-employed", label: "Self-employed" },
               ]}
-              onChange={(selectedOption) => handleSelectChange('motherOccupation', selectedOption)}
-              value={formData.motherOccupation ? { value: formData.motherOccupation, label: formData.motherOccupation } : null}
+              onChange={(selectedOption) =>
+                handleSelectChange("motherOccupation", selectedOption)
+              }
+              value={
+                formData.motherOccupation
+                  ? {
+                      value: formData.motherOccupation,
+                      label: formData.motherOccupation,
+                    }
+                  : null
+              }
             />
           </div>
         </div>
 
         <div className={styles.fieldRow}>
           <div className={styles.fieldColumn}>
-            <label className={styles.fieldLabel}>How Many Brothers do you have?</label>
+            <label className={styles.fieldLabel}>
+              How Many Brothers do you have?
+            </label>
             <Select
+              isSearchable={false}
               className={styles.selectField}
               options={[
-                { value: 0, label: '0' },
-                { value: 1, label: '1' },
-                { value: 2, label: '2' },
-                { value: 3, label: '3' },
-                { value: 4, label: '4' }
+                { value: 0, label: "0" },
+                { value: 1, label: "1" },
+                { value: 2, label: "2" },
+                { value: 3, label: "3" },
+                { value: 4, label: "4" },
               ]}
               value={{ value: brotherCount, label: brotherCount.toString() }}
               onChange={(selectedOption) => {
@@ -231,7 +311,7 @@ const FamilyInformationForm = (props) => {
                 setBrotherCount(count);
                 setFormData((prevState) => ({
                   ...prevState,
-                  brotherFields: Array(count).fill({})
+                  brotherFields: Array(count).fill({}),
                 }));
               }}
             />
@@ -239,15 +319,18 @@ const FamilyInformationForm = (props) => {
         </div>
         <div className={styles.fieldRow}>
           <div className={styles.fieldColumn}>
-            <label className={styles.fieldLabel}>How Many Sisters do you have?</label>
+            <label className={styles.fieldLabel}>
+              How Many Sisters do you have?
+            </label>
             <Select
+              isSearchable={false}
               className={styles.selectField}
               options={[
-                { value: 0, label: '0' },
-                { value: 1, label: '1' },
-                { value: 2, label: '2' },
-                { value: 3, label: '3' },
-                { value: 4, label: '4' }
+                { value: 0, label: "0" },
+                { value: 1, label: "1" },
+                { value: 2, label: "2" },
+                { value: 3, label: "3" },
+                { value: 4, label: "4" },
               ]}
               value={{ value: sisterCount, label: sisterCount.toString() }}
               onChange={(selectedOption) => {
@@ -255,7 +338,7 @@ const FamilyInformationForm = (props) => {
                 setSisterCount(count);
                 setFormData((prevState) => ({
                   ...prevState,
-                  sisterFields: Array(count).fill({})
+                  sisterFields: Array(count).fill({}),
                 }));
               }}
             />
@@ -266,10 +349,16 @@ const FamilyInformationForm = (props) => {
         {renderSisterFields()}
 
         <div className={styles.buttonGroup}>
-          <button type="button" onClick={prev} className={styles.button}>Back</button>
-          <button type="submit" className={styles.button}>Next</button>
+          <button type="submit" onClick={()=>{{setNavigation(0)}}} className={styles.button}>
+            Back
+          </button>
+          <button type="submit" className={styles.button}>
+            Next
+          </button>
         </div>
       </form>
+      <br />
+      <br />
     </div>
   );
 };

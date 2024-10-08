@@ -89,11 +89,13 @@ const BioDataPage3 = ({ userData }) => {
 
           {/* Preference Section */}
           <section className={styles.sec3}>
-            <h2 className={styles.sectionTitle}>Preference:</h2>
-            <div className={styles.value}>
-              {userData.preferences || "Preferences not specified."}
-            </div>
-          </section>
+          <h2 className={styles.sectionTitle}>Preference:</h2>
+          <div className={styles.value}>
+            I am looking for a person age around {userData.agePreference} years old, Height around 5 feet 7, and from Dhaka. 
+            I am open for Educational qualification and Employment. I may not prefer someone age more than 20 years 
+            or height less than 5 feet or he lives in Rangpur, Chittagong and Barishal.
+          </div>
+        </section>
         </div>
       </div>
       <Footer />

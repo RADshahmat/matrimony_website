@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../styles/CreateCvStyle/education.module.css';
 
 const EducationProfessionForm = (props) => {
+  const[navigation,setNavigation]=useState(1);
   const [formData, setFormData] = useState({
     highestEducationDegree: '',
     highestEducationDepartment: '',
@@ -20,6 +21,47 @@ const EducationProfessionForm = (props) => {
     otherIncomeSource: '',
   });
 
+  useEffect(() => {
+    if (props.formData) {
+      const {
+        highestEducationDegree = "",
+        highestEducationDepartment = "",
+        highestEducationInstitution = "",
+        secondEducationDegree = "",
+        secondEducationDepartment = "",
+        secondEducationInstitution = "",
+        thirdEducationDegree = "",
+        thirdEducationDepartment = "",
+        thirdEducationInstitution = "",
+        employedIn = "",
+        currentProfessionTitle = "",
+        currentProfessionDepartment = "",
+        currentProfessionCompany = "",
+        monthlyIncome = "",
+        otherIncomeSource = ""
+      } = props.formData;
+
+      setFormData((prevData) => ({
+        ...prevData,
+        highestEducationDegree,
+        highestEducationDepartment,
+        highestEducationInstitution,
+        secondEducationDegree,
+        secondEducationDepartment,
+        secondEducationInstitution,
+        thirdEducationDegree,
+        thirdEducationDepartment,
+        thirdEducationInstitution,
+        employedIn,
+        currentProfessionTitle,
+        currentProfessionDepartment,
+        currentProfessionCompany,
+        monthlyIncome,
+        otherIncomeSource
+      }));
+    }
+  }, [props.formData]);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData({
@@ -30,16 +72,18 @@ const EducationProfessionForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //alert('Form submitted successfully!');
     props.formDataFunc((prevData) => ({
       ...prevData,
       ...formData,
     }));
-    props.pageFunc(3);
+    if(navigation==1){
+      props.pageFunc(3);
+    }else{
+      props.pageFunc(1);
+    }
   };
 
-  const prev = () => {
-    props.pageFunc(1);
-  };
 
   return (
     <div className={styles.container}>
@@ -112,8 +156,8 @@ const EducationProfessionForm = (props) => {
           </div>
         </div>
 
-        {/* Profession */}
-        <h5 className={styles.title}>Profession*</h5>
+         {/* Profession */}
+         <h5 className={styles.title}>Profession*</h5>
         <div className={styles.row}>
           <div className={styles.col}>
           <label className={styles.formLabel}>Employed In*</label>
@@ -198,35 +242,31 @@ const EducationProfessionForm = (props) => {
           <div className={styles.col}>
             <label className={styles.formLabel}>Current profession*</label>
             <div className={styles.inlineFields}>
-            <input
-              type="text"
-              id="currentProfessionTitle"
-              className={styles.formControl}
-              placeholder="Job Title"
-              value={formData.currentProfessionTitle}
-              onChange={handleChange}
-            />
-
- 
-            <input
-              type="text"
-              id="currentProfessionDepartment"
-              className={styles.formControl}
-              placeholder="Department"
-              value={formData.currentProfessionDepartment}
-              onChange={handleChange}
-            />
-  
-
-            <input
-              type="text"
-              id="currentProfessionCompany"
-              className={styles.formControl}
-              placeholder="Company Name"
-              value={formData.currentProfessionCompany}
-              onChange={handleChange}
-            />
-      </div>
+              <input
+                type="text"
+                id="currentProfessionTitle"
+                className={styles.formControl}
+                placeholder="Job Title"
+                value={formData.currentProfessionTitle}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                id="currentProfessionDepartment"
+                className={styles.formControl}
+                placeholder="Department"
+                value={formData.currentProfessionDepartment}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                id="currentProfessionCompany"
+                className={styles.formControl}
+                placeholder="Company Name"
+                value={formData.currentProfessionCompany}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </div>
 
@@ -256,12 +296,12 @@ const EducationProfessionForm = (props) => {
           </div>
         </div>
         <div className={styles.buttonGroup}>
-            <button type="button" onClick={prev} className={styles.backButton}>
-              Back
-            </button>
-            <button type="submit" className={styles.submitButton}>
-              Next
-            </button>
+          <button type="submit" onClick={()=>{{setNavigation(0)}}} className={styles.backButton}>
+            Back
+          </button>
+          <button type="submit" className={styles.submitButton}>
+            Next
+          </button>
         </div>
       </form>
     </div>
