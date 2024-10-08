@@ -1,19 +1,48 @@
-import React,{useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from '../../styles/UserStyle/userDashboard.module.css';
 import { useAuth } from '../../Axios/authContext';
+import axiosInstance from '../../Axios/axios_instance';
 
 function UserDashboard() {
-  const { login } = useAuth();
-  const profileData = {
-    name: "Tanvir Ahmed Tamim",
-    age: 25,
-    height: "6 feet 0 inch",
-    religion: "Muslim",
-    bloodGroup: "O+ve",
-    maritalStatus: "Never married",
-    userId: 12345,  // Assuming this is the user ID that you want to send to the match list
-  };
+  const { login, userId } = useAuth(); // Assuming useAuth provides userId
+  const [profileData, setProfileData] = useState({
+    name: "",
+    age: "",
+    height: "",
+    religion: "",
+    bloodGroup: "",
+    maritalStatus: "",
+    picture: ""
+  });
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await axiosInstance.get(`/user-profile`, {
+          headers: {
+            Authorization: `Bearer ${login.token}`, // Assuming you have a token from login
+          },
+        });
+
+        const data = response.data;
+        setProfileData({
+          name: data.fullName,
+          age: data.age,
+          height: `${data.height}`,
+          religion: data.religion,
+          bloodGroup: data.bloodGroup,
+          maritalStatus: data.maritalStatus,
+          picture: data.picture // Assuming the picture URL is returned as part of the response
+        });
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+
+    fetchProfileData();
+  }, [login.token]);
+
   const handleSupportClick = () => {
     console.log('Support button clicked');
   };
@@ -25,7 +54,12 @@ function UserDashboard() {
         <div className={styles.profileSection}>
           <div className={styles.profileLayout}>
             <div className={styles.profileImageColumn}>
-              <div className={styles.profileImage} role="img" aria-label="Profile picture" />
+            <div 
+                className={styles.profileImage} 
+                role="img" 
+                aria-label="Profile picture" 
+                style={{ backgroundImage: `url(${profileData.picture})` }} // Set background image
+              />
             </div>
             <div className={styles.profileInfoColumn}>
               <div className={styles.profileInfo}>
@@ -46,7 +80,7 @@ function UserDashboard() {
           {/* Match button sends userId via state */}
           <Link 
             to={"/matchlist"} 
-            state={{ userId: profileData.userId }} // Passing userId through state
+            state={{ userId: userId }} // Passing userId through state
             className={`${styles.actionButton} ${styles.matchButton}`}
           >
             <div className={styles.actionButtonContent}>
@@ -60,7 +94,7 @@ function UserDashboard() {
           </Link>
           <Link 
             to={"/chat"} 
-            state={{ userId: profileData.userId }} // Passing userId through state
+            state={{ userId: userId }} // Passing userId through state
             className={`${styles.actionButton} ${styles.matchButton}`}
           >
             <div className={styles.actionButtonContent}>
