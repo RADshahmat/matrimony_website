@@ -128,11 +128,12 @@
   width: 10px;
   height: 10px;
   position: absolute;
+  z-index: 10;
 }
 
 .box1 {
-  left: 12px;
-  top: 25px;
+  left: 17px;
+  top: 34px;
   border: 2px solid var(--rn-53-themes-net-green, #FFC600);
 }
 
@@ -150,7 +151,7 @@
 
 .authorImage {
   aspect-ratio: 1;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   width: 130px;
   position: absolute;
@@ -158,6 +159,7 @@
   max-width: 100%;
   left: 36px;
   top: -64px;
+  border-radius: 10px;
 }
 
 @media (max-width: 768px) {

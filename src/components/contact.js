@@ -3,7 +3,7 @@ import styles from '../styles/contact.module.css';
 
 const ContactSection = () => {
   return (
-    <section className={styles.container}>
+    <section className={styles.container} id="contact">
       <div className={styles.getintouch} data-aos="flip-right">
         <div className={styles.leftSection}>
           <h2>Get In Touch</h2>

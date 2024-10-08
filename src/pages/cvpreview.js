@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axiosInstance from '../Axios/axios_instance';
 import Header from '../components/header'; 
 import Footer from '../components/footer'; 
 import BioDataPage1 from '../components/Bio_data/page1';
@@ -9,8 +11,23 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 function CVpreview() {
+    const { id } = useParams(); // Get the ID from the URL
+    const [userData, setUserData] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axiosInstance.get(`/users/${id}`);
+                setUserData(response.data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchData();
+    }, [id]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -24,9 +41,9 @@ function CVpreview() {
     }, []);
 
     const pages = [
-        { component: <BioDataPage1 key="page1" />, pageIndex: 1 },
-        { component: <BioDataPage2 key="page2" />, pageIndex: 2 },
-        { component: <BioDataPage3 key="page3" />, pageIndex: 3 }
+        { component: <BioDataPage1 key="page1" userData={userData} />, pageIndex: 1 },
+        { component: <BioDataPage2 key="page2" userData={userData} />, pageIndex: 2 },
+        { component: <BioDataPage3 key="page3" userData={userData} />, pageIndex: 3 }
     ];
 
     const visiblePages = isMobile
