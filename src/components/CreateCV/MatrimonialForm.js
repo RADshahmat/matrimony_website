@@ -67,7 +67,7 @@ const MatrimonialForm = () => {
       {page === 4 && (
         <PartnerPreferences
           pageFunc={setPage}
-          formDataFunc={setFormData} // Fixing this prop
+          formDataFunc={formData} // Fixing this prop
           submitCV={handleSubmit}
           images={setImages}
         />
