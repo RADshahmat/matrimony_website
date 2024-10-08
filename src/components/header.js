@@ -55,7 +55,7 @@ const Header = () => {
                         )}
                     </div>
                     <Link to={'/userDashboard'} className={styles.navItem}>Blog</Link>
-                    <Link to={'/biodata'} className={styles.navItem}>Contact</Link>
+                    <a href='#contact' className={styles.navItem}>Contact</a>
 
                     {/* Premium Section - Mobile */}
                     <Link to={'/venuspremium'} className={`${styles.navItem} ${styles.premiumSectionMobile}`}>

@@ -144,7 +144,7 @@ const PartnerPreferences = (props) => {
     const data = { ...props.formDataFunc, ...formData };
     props.images(compressedImages);
     
-    alert('Form submitted successfully!');
+
     props.submitCV(data, compressedImages);
   };
 

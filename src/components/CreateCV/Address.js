@@ -82,7 +82,6 @@ const AddressInfo = (props) => {
 
     if (Object.keys(formErrors).length === 0) {
       props.pageFunc(2);
-      alert("Form submitted successfully!");
       props.formDataFunc((prevData) => ({
         ...prevData,
         ...formData,

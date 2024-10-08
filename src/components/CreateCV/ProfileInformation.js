@@ -31,7 +31,6 @@ const ProfileInformation = (props) => {
       formData.append("maritalStatus", maritalStatus ? maritalStatus.value : '');
 
       props.pageFunc(1);
-      alert("Form submitted successfully!");
       props.formDataFunc((prevData) => ({
         ...prevData,
         ...Object.fromEntries(formData),

@@ -30,7 +30,6 @@ const EducationProfessionForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Form submitted successfully!');
     props.formDataFunc((prevData) => ({
       ...prevData,
       ...formData,

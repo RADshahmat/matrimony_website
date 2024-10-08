@@ -19,13 +19,12 @@ function App() {
   //const { login } = useAuth();
   useEffect(() => {
     AOS.init({
-      duration: 900,
+      duration: 1000,
       easing: 'ease-in-out',
       once: false, 
     });
     
   }, []);
- 
 
   return (
     <div className="App">
@@ -34,7 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/createCV" element={<CreateCV />} />
-            <Route path="/biodata" element={<CVpreview />} />
+            <Route path="/cvpreview/:id" element={<CVpreview />} />
             <Route path="/venuspremium" element={<VenusPremium />} />
             <Route path="/login" element={<UserLoginPage />} />
 

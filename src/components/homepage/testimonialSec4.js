@@ -5,6 +5,9 @@ import styles from '../../styles/homepageStyle/testimonialSec4.module.css';
 const TestimonialCard = ({ details, name, designation, company, image }) => {
   return (
     <div className={styles.cardContent}>
+      <div className={styles.box1} />
+      <div className={styles.box2} />
+      <div className={styles.box3} />
       <img src={image} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
       <div className={styles.testimonialText}>{details}</div>
       <div>
