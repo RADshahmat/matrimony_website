@@ -7,7 +7,7 @@ import PartnerPreferences from './PartnerPreferences';
 import axiosInstance from '../../Axios/axios_instance';
 
 const MatrimonialForm = () => {
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({});
   const [images, setImages] = useState();
   const [userId,setUserId]=useState();
