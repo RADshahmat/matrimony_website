@@ -1,7 +1,7 @@
 import React from "react";
 import 'aos/dist/aos.css';
 import styles from '../../styles/homepageStyle/HowToFindSec3.module.css';
-
+import axiosInstance from '../../Axios/axios_instance';
 function HowToFindSpecialSomeone() {
 
 
