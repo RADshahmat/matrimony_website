@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import axiosInstance from "../Axios/axios_instance";
 
-
-const socket = io("", {
+const socket = io("https://backend.butterfly.hurairaconsultancy.com", {
   withCredentials: true,
 });
 
@@ -33,12 +32,12 @@ const Chat = () => {
   const [selectedPeerSocketId, setSelectedPeerSocketId] = useState("");
   const [activeUsers, setActiveUsers] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
-  const [peerId,setPeerId]=useState('');
+  const [peerId, setPeerId] = useState("");
 
   useEffect(() => {
-    console.log('ballu')
+    console.log("ballu");
     if (socket) {
-      console.log('ballu1')
+      console.log("ballu1");
       socket.on("connect", () => {
         console.log("Socket connected with ID:", socket.id);
         socket.on("activeUsers", (activeUserIds) => {
@@ -61,9 +60,9 @@ const Chat = () => {
     };
   }, []);
   useEffect(() => {
-    scrollToBottom(); 
+    scrollToBottom();
   }, [isTyping]);
- 
+
   useEffect(() => {
     if (userId) {
       console.log("Emitting registerUserId for:", userId);
@@ -110,7 +109,7 @@ const Chat = () => {
   const handleChatClick = async (chat) => {
     setSelectedChat(chat);
     setShowSidebar(false);
-    console.log('chat dekhi',chat)
+    console.log("chat dekhi", chat);
 
     try {
       const response = await axiosInstance.get(
@@ -238,7 +237,7 @@ const Chat = () => {
     };
   }, [hasMore, loading, debouncedScroll, selectedChat]);
 
-  console.log(activeUsers,"theese are active users")
+  console.log(chats, "theese are active users");
 
   return (
     <div className="messenger-container">
@@ -259,10 +258,15 @@ const Chat = () => {
               }
             >
               <img
-                src={`https://backend.butterfly.hurairaconsultancy.com/${chat.image[0].path}` || "https://via.placeholder.com/40"}
+                src={
+                  chat.image?.[0]?.path
+                    ? `https://backend.butterfly.hurairaconsultancy.com/${chat.image[0].path}`
+                    : "https://via.placeholder.com/40" // Fallback if path is null/undefined
+                }
                 alt={`${chat.name} avatar`}
                 className="chat-avatar"
               />
+
               <div className="chat-info">
                 <span className="chat-name">{chat.name}</span>
                 <br />
@@ -298,26 +302,35 @@ const Chat = () => {
                   }`}
                 >
                   <img
-                    src={ userId === message.sender_id ?`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image0[0].path}`:`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}` || "https://via.placeholder.com/40"}
+                    src={
+                      userId === message.sender_id
+                        ? selectedChat.image0?.[0]?.path
+                          ? `https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image0[0].path}`
+                          : "https://via.placeholder.com/40" // Default image if image0 path is null/undefined
+                        : selectedChat.image?.[0]?.path
+                        ? `https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}`
+                        : "https://via.placeholder.com/40" // Default image if image path is null/undefined
+                    }
                     alt={`${message.user} avatar`}
                     className="message-avatar"
                   />
+
                   <p className="message-text">{message.message}</p>
                 </div>
               ))}
 
               {isTyping && (
-                  <div
-                  className={`message ${
-                    false ? "user" : "bot"
-                  }`}
-                  
-                >
+                <div className={`message ${false ? "user" : "bot"}`}>
                   <img
-                    src={`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}` || "https://via.placeholder.com/40"}
-                    alt={`avatar`}
+                    src={
+                      selectedChat.image?.[0]?.path
+                        ? `https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}`
+                        : "https://via.placeholder.com/40" // Fallback if path is null/undefined
+                    }
+                    alt="avatar"
                     className="message-avatar"
                   />
+
                   <p className="message-text">Typing...</p>
                 </div>
               )}
