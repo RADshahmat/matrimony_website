@@ -1,9 +1,20 @@
-import React from "react";
+import React, {useEffect } from 'react';
 import 'aos/dist/aos.css';
 import styles from '../../styles/homepageStyle/HowToFindSec3.module.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function HowToFindSpecialSomeone() {
-
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Adjust as needed
+      easing: 'ease-in-out', // Smoother easing
+      once: false, 
+      mirror: true, // Allows animation to happen again when scrolling back
+      offset: 120, // Distance in pixels from the original trigger point
+    });
+  }, []);
+AOS.refresh();
 
   return (
     <section className={styles.container}>

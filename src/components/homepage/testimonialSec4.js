@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axiosInstance from '../../Axios/axios_instance'; // Import the Axios instance
 import styles from '../../styles/homepageStyle/testimonialSec4.module.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const TestimonialCard = ({ details, name, designation, company, image }) => {
   return (
@@ -19,6 +21,16 @@ const TestimonialCard = ({ details, name, designation, company, image }) => {
 };
 
 const TestimonialSec4 = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Adjust as needed
+      easing: 'ease-in-out', // Smoother easing
+      once: false, 
+      mirror: true, // Allows animation to happen again when scrolling back
+      offset: 120, // Distance in pixels from the original trigger point
+    });
+  }, []);
+
   const [testimonials, setTestimonials] = useState([]); // State to store testimonials
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -30,6 +42,7 @@ const TestimonialSec4 = () => {
         const response = await axiosInstance.get('/testimonial');
         setTestimonials(response.data); // Set fetched testimonials
         console.log('Fetched Testimonials:', response.data); // Log the testimonials to the console
+        AOS.refresh();
       } catch (error) {
         console.error('Error fetching testimonials:', error);
       }

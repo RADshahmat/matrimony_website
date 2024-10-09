@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import HomePage from './pages/homepage';
 import CreateCV from './pages/createCV';
 import CVpreview from './pages/cvpreview';
@@ -16,15 +14,7 @@ import ProtectedRoute from './ProtectedRoute';
 import { AuthProvider } from './Axios/authContext';
 
 function App() {
-  //const { login } = useAuth();
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: false, 
-    });
-    
-  }, []);
+
 
   return (
     <div className="App">
@@ -37,7 +27,6 @@ function App() {
             <Route path="/venuspremium" element={<VenusPremium />} />
             <Route path="/login" element={<UserLoginPage />} />
 
-           
             <Route
               path="/userdashboard"
               element={

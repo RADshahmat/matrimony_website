@@ -19,6 +19,7 @@ const ProfileInformation = (props) => {
     maritalStatus: null,
     nidNumber: "",
     phoneNumber: "",
+    email: "", // Added email field
     physicalStatus: null,
     religion: null,
     comments: "",
@@ -46,23 +47,58 @@ const ProfileInformation = (props) => {
     }));
   };
 
+  // Email validation function
+  const validateEmail = (email) => {
+    // Simple email regex validation
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  // Phone number validation function (optional: adjust regex as needed)
+  const validatePhoneNumber = (phoneNumber) => {
+    // Example: Allows 10-15 digits
+    const phoneRegex = /^[0-9]{10,15}$/;
+    return phoneRegex.test(phoneNumber);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    let validationErrors = {};
+
+    // Image validation
     if (!images) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        image: "Please upload an image.",
-      }));
-      filePickerRef.current.scrollIntoView({ behavior: "smooth" });
-      return;
+      validationErrors.image = "Please upload an image.";
     }
+
+    // Marital Status validation
     if (!localFormData.maritalStatus) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        maritalStatus: "Please select your marital status.",
-      }));
+      validationErrors.maritalStatus = "Please select your marital status.";
+    }
+
+    // Email validation
+    if (!localFormData.email) {
+      validationErrors.email = "Email is required.";
+    } else if (!validateEmail(localFormData.email)) {
+      validationErrors.email = "Please enter a valid email address.";
+    }
+
+    // Phone Number validation
+    if (!localFormData.phoneNumber) {
+      validationErrors.phoneNumber = "Phone number is required.";
+    } else if (!validatePhoneNumber(localFormData.phoneNumber)) {
+      validationErrors.phoneNumber = "Please enter a valid phone number.";
+    }
+
+    // Additional validations can be added here (e.g., fullName, NID, DOB)
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      if (validationErrors.image) {
+        filePickerRef.current.scrollIntoView({ behavior: "smooth" });
+      }
       return;
     }
+
     setErrors({});
     props.formDataFunc((prevData) => ({
       ...prevData,
@@ -73,7 +109,18 @@ const ProfileInformation = (props) => {
   };
 
   const options = {
-    religion: [{ value: "Islam", label: "Islam" }],
+    religion: [
+      { value: "Islam", label: "Islam" },
+      { value: "Christianity", label: "Christianity" },
+      { value: "Hinduism", label: "Hinduism" },
+      { value: "Buddhism", label: "Buddhism" },
+      { value: "Sikhism", label: "Sikhism" },
+      { value: "Judaism", label: "Judaism" },
+      { value: "Atheism", label: "Atheism" },
+      { value: "Agnosticism", label: "Agnosticism" },
+      { value: "Other", label: "Other" },
+    ],
+
     gender: [
       { value: "Female", label: "Female" },
       { value: "Male", label: "Male" },
@@ -82,7 +129,18 @@ const ProfileInformation = (props) => {
       { value: "Normal", label: "Normal" },
       { value: "Physically Challenged", label: "Physically Challenged" },
     ],
-    bloodGroup: [{ value: "A (+ve) Positive", label: "A (+ve) Positive" }],
+
+    bloodGroup: [
+      { value: "A (+ve) Positive", label: "A (+ve) Positive" },
+      { value: "A (-ve) Negative", label: "A (-ve) Negative" },
+      { value: "B (+ve) Positive", label: "B (+ve) Positive" },
+      { value: "B (-ve) Negative", label: "B (-ve) Negative" },
+      { value: "AB (+ve) Positive", label: "AB (+ve) Positive" },
+      { value: "AB (-ve) Negative", label: "AB (-ve) Negative" },
+      { value: "O (+ve) Positive", label: "O (+ve) Positive" },
+      { value: "O (-ve) Negative", label: "O (-ve) Negative" },
+    ],
+
     maritalStatus: [
       { value: "married", label: "Married" },
       { value: "unmarried", label: "Unmarried" },
@@ -91,6 +149,7 @@ const ProfileInformation = (props) => {
       { value: "widow", label: "Widow" },
     ],
   };
+
   console.log("image in info", images);
   return (
     <>
@@ -219,6 +278,11 @@ const ProfileInformation = (props) => {
             {errors.heightFeet && (
               <small className={styles.errorMessage}>{errors.heightFeet}</small>
             )}
+            {errors.heightInches && (
+              <small className={styles.errorMessage}>
+                {errors.heightInches}
+              </small>
+            )}
           </div>
 
           {/* Physical Status */}
@@ -277,6 +341,28 @@ const ProfileInformation = (props) => {
             )}
           </div>
 
+          {/* Email Address */}
+          <div className={styles.formGroup}>
+            <label htmlFor="email" className={styles.label}>
+              Email Address
+            </label>
+            <input
+              type="email"
+              className={`${styles.input} ${
+                errors.email ? styles.inputError : ""
+              }`}
+              id="email"
+              name="email"
+              placeholder="Enter Your Email"
+              value={localFormData.email || ""}
+              onChange={handleChange}
+              required
+            />
+            {errors.email && (
+              <small className={styles.errorMessage}>{errors.email}</small>
+            )}
+          </div>
+
           {/* Blood Group */}
           <div className={styles.formGroup}>
             <label htmlFor="bloodGroup" className={styles.label}>
@@ -318,7 +404,9 @@ const ProfileInformation = (props) => {
                   id={status.value}
                   name="maritalStatus" // Ensure the name is properly set
                   checked={localFormData.maritalStatus === status.value} // Checked logic
-                  onChange={() => handleSelectChange(status, "maritalStatus")}
+                  onChange={() =>
+                    handleSelectChange({ value: status.value }, "maritalStatus")
+                  }
                   autoComplete="off"
                 />
 

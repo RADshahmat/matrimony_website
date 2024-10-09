@@ -2,8 +2,20 @@ import { FaFacebookF, FaTwitter, FaWhatsapp, FaLinkedinIn, FaYoutube, FaInstagra
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../Axios/axios_instance';  // Assuming this is your Axios instance
 import styles from '../../styles/homepageStyle/meetFounder.module.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function MeetFounder() {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Adjust as needed
+      easing: 'ease-in-out', // Smoother easing
+      once: false, 
+      mirror: true, // Allows animation to happen again when scrolling back
+      offset: 120, // Distance in pixels from the original trigger point
+    });
+  }, []);
   // State to store social media links fetched from the backend
   const [socialLinks, setSocialLinks] = useState({
     facebook_link: '',
@@ -20,6 +32,7 @@ function MeetFounder() {
       try {
         const response = await axiosInstance.get('/founder_social_links');
         setSocialLinks(response.data);
+        AOS.refresh();
       } catch (error) {
         console.error('Error fetching social links:', error);
       }

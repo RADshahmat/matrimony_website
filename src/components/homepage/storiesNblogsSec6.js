@@ -2,8 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../Axios/axios_instance'; // Import the Axios instance
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'; // React Icons for arrows
 import styles from '../../styles/homepageStyle/storiesNblogsSec6.module.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const BlogPostsSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Adjust as needed
+      easing: 'ease-in-out', // Smoother easing
+      once: false, 
+      mirror: true, // Allows animation to happen again when scrolling back
+      offset: 120, // Distance in pixels from the original trigger point
+    });
+  }, []);
+
   const [blogs, setBlogs] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(3); // Default to showing 3 cards
@@ -32,6 +44,7 @@ const BlogPostsSection = () => {
       try {
         const response = await axiosInstance.get('/blogs'); // Replace with your backend URL
         setBlogs(response.data);
+        AOS.refresh();
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }
