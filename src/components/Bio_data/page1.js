@@ -32,8 +32,8 @@ function BioDataPage1({ userData }) {
         <h1 className={styles.bioTitle}>Bio-Data</h1>
         <h2 className={styles.name}>{userData.fullName}</h2>
         <p className={styles.details}>
-          City: {userData.city} <br />
-          Country: {userData.country}
+          Date of Birth : {userData.dobDay} / {userData.dobMonth} / {userData.dobYear} <br />
+          {userData.city} , {userData.country}
         </p>
       </section>
       <div className={styles.decorativeColumn}>
