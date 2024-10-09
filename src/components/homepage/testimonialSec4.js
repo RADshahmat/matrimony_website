@@ -13,8 +13,8 @@ const TestimonialCard = ({ details, name, designation, company, image }) => {
       <img src={image} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
       <div className={styles.testimonialText}>{details}</div>
       <div>
-          <h3 className={styles.authorName}>{name}</h3>
-          <p className={styles.authorInfo}>{designation}, {company}</p>
+        <h3 className={styles.authorName}>{name}</h3>
+        <p className={styles.authorInfo}>{designation}, {company}</p>
       </div>
     </div>
   );
@@ -41,7 +41,6 @@ const TestimonialSec4 = () => {
       try {
         const response = await axiosInstance.get('/testimonial');
         setTestimonials(response.data); // Set fetched testimonials
-        console.log('Fetched Testimonials:', response.data); // Log the testimonials to the console
         AOS.refresh();
       } catch (error) {
         console.error('Error fetching testimonials:', error);
@@ -70,7 +69,7 @@ const TestimonialSec4 = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 3000); // Auto slide every 3 seconds
+    }, 6000); // Auto slide every 3 seconds
     return () => clearInterval(interval);
   }, [handleNext]);
 
@@ -78,14 +77,18 @@ const TestimonialSec4 = () => {
     if (testimonialListRef.current) {
       const container = testimonialListRef.current;
       const cardWidth = container.firstChild ? container.firstChild.offsetWidth + 16 : 0; // Include margin
+
+      // Set the transform style to slide the cards
       container.style.transition = isTransitioning ? 'transform 0.7s ease-out' : 'none';
-      //container.style.transform = translateX(-${currentIndex * cardWidth}px);
+      container.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
 
       // Reset to the real first card after sliding through the clone
       if (currentIndex === testimonialsCount) {
         setTimeout(() => {
           setIsTransitioning(false);
           setCurrentIndex(0); // Reset to the original first card
+          container.style.transition = 'none';
+          container.style.transform = `translateX(0px)`;
         }, 500); // Time should match the CSS transition duration
       }
 
@@ -94,6 +97,8 @@ const TestimonialSec4 = () => {
         setTimeout(() => {
           setIsTransitioning(false);
           setCurrentIndex(testimonialsCount - 1); // Jump to the last card in the original list
+          container.style.transition = 'none';
+          container.style.transform = `translateX(-${(testimonialsCount - 1) * cardWidth}px)`;
         }, 500); // Time should match the CSS transition duration
       }
     }

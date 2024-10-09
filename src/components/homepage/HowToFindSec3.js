@@ -2,7 +2,7 @@ import React, {useEffect } from 'react';
 import 'aos/dist/aos.css';
 import styles from '../../styles/homepageStyle/HowToFindSec3.module.css';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
+
 
 function HowToFindSpecialSomeone() {
   useEffect(() => {
