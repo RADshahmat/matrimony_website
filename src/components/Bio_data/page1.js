@@ -1,7 +1,11 @@
 import React from "react";
 import styles from '../../styles/Bio_dataStyle/page1.module.css';
 
-function BioDataPage1() {
+function BioDataPage1({ userData }) {
+  if (!userData) {
+    return <p>Loading...</p>; // Show a loading message or spinner while data is being fetched
+  }
+
   return (
     <main className={styles.container}>
       <section className={styles.content}>
@@ -26,20 +30,20 @@ function BioDataPage1() {
       </section>
       <section className={styles.bioSection}>
         <h1 className={styles.bioTitle}>Bio-Data</h1>
-        <h2 className={styles.name}>Tanvir Ahmed Tamim</h2>
+        <h2 className={styles.name}>{userData.fullName}</h2>
         <p className={styles.details}>
-          Date of Birth: 28 September 1999 <br /> 
-          Dhaka, Bangladesh
+          Date of Birth : {userData.dobDay} / {userData.dobMonth} / {userData.dobYear} <br />
+          {userData.city} , {userData.country}
         </p>
       </section>
       <div className={styles.decorativeColumn}>
-            <img 
-              loading="lazy" 
-              src="/assets/bio_designBottom.svg" 
-              className={styles.decorativeBar} 
-              alt=""
-            />
-          </div>
+        <img 
+          loading="lazy" 
+          src="/assets/bio_designBottom.svg" 
+          className={styles.decorativeBar} 
+          alt=""
+        />
+      </div>
     </main>
   );
 }

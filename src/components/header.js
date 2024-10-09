@@ -54,8 +54,8 @@ const Header = () => {
                             </div>
                         )}
                     </div>
-                    <Link to={'/login'} className={styles.navItem}>Blog</Link>
-                    <Link to={'/biodata'} className={styles.navItem}>Contact</Link>
+                    <Link to={'/userDashboard'} className={styles.navItem}>Blog</Link>
+                    <a href='#contact' className={styles.navItem}>Contact</a>
 
                     {/* Premium Section - Mobile */}
                     <Link to={'/venuspremium'} className={`${styles.navItem} ${styles.premiumSectionMobile}`}>

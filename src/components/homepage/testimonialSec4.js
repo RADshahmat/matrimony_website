@@ -1,113 +1,58 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import axiosInstance from '../../Axios/axios_instance'; // Import the Axios instance
 import styles from '../../styles/homepageStyle/testimonialSec4.module.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-
-const testimonials = [
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/tushi.png",
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/biddya.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/tushi.png",
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/biddya.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-  {
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    name: "Name Name Name",
-    designation: "Designation",
-    company: "Company name",
-    imageSrc: "/assets/siam.png"
-  },
-];
-
-
-const TestimonialCard = ({ content, name, designation, company, imageSrc }) => {
+const TestimonialCard = ({ details, name, designation, company, image }) => {
   return (
     <div className={styles.cardContent}>
-      <img src={imageSrc} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
-      <p className={styles.testimonialText}>{content}</p>
-      <h3 className={styles.authorName}>{name}</h3>
-      <p className={styles.authorInfo}>{designation}, {company}</p>
+      <div className={styles.box1} />
+      <div className={styles.box2} />
+      <div className={styles.box3} />
+      <img src={image} alt={`${name} - ${designation} at ${company}`} className={styles.authorImage} />
+      <div className={styles.testimonialText}>{details}</div>
+      <div>
+        <h3 className={styles.authorName}>{name}</h3>
+        <p className={styles.authorInfo}>{designation}, {company}</p>
+      </div>
     </div>
   );
 };
 
 const TestimonialSec4 = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Adjust as needed
+      easing: 'ease-in-out', // Smoother easing
+      once: false, 
+      mirror: true, // Allows animation to happen again when scrolling back
+      offset: 120, // Distance in pixels from the original trigger point
+    });
+  }, []);
+
+  const [testimonials, setTestimonials] = useState([]); // State to store testimonials
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const testimonialListRef = useRef(null);
-  const testimonialsCount = testimonials.length;
+  
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await axiosInstance.get('/testimonial');
+        setTestimonials(response.data); // Set fetched testimonials
+        AOS.refresh();
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      }
+    };
 
+    fetchTestimonials(); // Call the function to fetch data
+  }, []);
+
+  // Clone testimonials for seamless transition
   const clonedTestimonials = [...testimonials, ...testimonials.slice(0, 3)];
+  const testimonialsCount = testimonials.length;
 
   // Handle next card
   const handleNext = useCallback(() => {
@@ -124,14 +69,16 @@ const TestimonialSec4 = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 3000); // Auto slide every 3 seconds
+    }, 6000); // Auto slide every 3 seconds
     return () => clearInterval(interval);
   }, [handleNext]);
 
   useEffect(() => {
     if (testimonialListRef.current) {
       const container = testimonialListRef.current;
-      const cardWidth = container.firstChild.offsetWidth + 16; // Include margin
+      const cardWidth = container.firstChild ? container.firstChild.offsetWidth + 16 : 0; // Include margin
+
+      // Set the transform style to slide the cards
       container.style.transition = isTransitioning ? 'transform 0.7s ease-out' : 'none';
       container.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
 
@@ -140,6 +87,8 @@ const TestimonialSec4 = () => {
         setTimeout(() => {
           setIsTransitioning(false);
           setCurrentIndex(0); // Reset to the original first card
+          container.style.transition = 'none';
+          container.style.transform = `translateX(0px)`;
         }, 500); // Time should match the CSS transition duration
       }
 
@@ -148,6 +97,8 @@ const TestimonialSec4 = () => {
         setTimeout(() => {
           setIsTransitioning(false);
           setCurrentIndex(testimonialsCount - 1); // Jump to the last card in the original list
+          container.style.transition = 'none';
+          container.style.transform = `translateX(-${(testimonialsCount - 1) * cardWidth}px)`;
         }, 500); // Time should match the CSS transition duration
       }
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import Header from '../components/header'; 
 import Footer from '../components/footer'; 
 import IntroSecHome from '../components/homepage/introSection1';
@@ -8,8 +8,23 @@ import TestimonialSec4 from '../components/homepage/testimonialSec4';
 import MeetFounder from '../components/homepage/meetFounder';
 import BlogPostsSection from '../components/homepage/storiesNblogsSec6';
 import ContactSection from '../components/contact';
+import axiosInstance from '../Axios/axios_instance';
 
 const HomePage = () => {
+    const [testimonials, setTestimonials] = useState([]);
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+          try {
+            const response = await axiosInstance.get('/testimonial');
+            setTestimonials(response.data); 
+            console.log('Fetched Testimonials:', response.data); 
+          } catch (error) {
+            console.error('Error fetching testimonials:', error);
+          }
+        };
+    
+        fetchTestimonials();
+      }, []);
     return (
         <div className="homepage">
             <Header />
@@ -17,7 +32,7 @@ const HomePage = () => {
                 <IntroSecHome />
                 <WhyChooseUsSec2 />
                 <HowToFindSpecialSomeone />
-                <TestimonialSec4 />
+                <TestimonialSec4 testimonials={testimonials} />
                 <MeetFounder />
                 <BlogPostsSection />
             </div>

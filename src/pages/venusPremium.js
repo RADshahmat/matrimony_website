@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import Header from '../components/header'; 
 import Footer from '../components/footer'; 
 import styles from '../styles/venusPremiumStyle.module.css';
 
 const VenusPremium = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Adjust as needed
+      easing: 'ease-in-out', // Smoother easing
+      once: false, 
+      mirror: true, // Allows animation to happen again when scrolling back
+      offset: 120, // Distance in pixels from the original trigger point
+    });
+  }, []);
     return (
         <div >
             <Header />
@@ -14,13 +25,13 @@ const VenusPremium = () => {
             <img src={`${process.env.PUBLIC_URL}/assets/lotapata.png`} alt="" className={styles.lotapata} />
             <img src={`${process.env.PUBLIC_URL}/assets/venusrings.png`} alt="" className={styles.venusrings} />
         </div>
-        <section className={styles.hero}>
+        <section className={styles.hero} data-aos="slide-up">
             <h1 className={styles.heroTitle}>Discover Venus: The Premier Experience with Butterfly Matrimonial</h1>
         </section>
 
         {/* Description Section */}
         <section className={styles.descriptionSection}>
-            <div className={styles.whatVenus}>
+            <div className={styles.whatVenus} data-aos="slide-up" >
                 <div className={styles.sectionTitle}>
                         <h2 className={styles.sectionTitleText}>WHAT IS VENUS</h2>
                         <img src={`${process.env.PUBLIC_URL}/assets/venus 1.png`} alt="" className={styles.sectionTitleIcon} />
@@ -29,7 +40,7 @@ const VenusPremium = () => {
                     Venus, our flagship package designed to elevate your matrimonial journey. At Butterfly Matrimonial, your happiness and success are our top priorities. With Venus, you receive personalized attention from an expert and a dedicated customer relationship manager, ensuring seamless communication and support.
                 </p>
             </div>
-            <div className={styles.whatExpect}> 
+            <div className={styles.whatExpect} data-aos="slide-up"> 
                 <div className={styles.sectionTitle}>
                     <h2 className={styles.sectionTitleText}>WHAT YOU EXPECT</h2>
                     <img src={`${process.env.PUBLIC_URL}/assets/venus 1.png`}  alt="" className={styles.sectionTitleIcon} />

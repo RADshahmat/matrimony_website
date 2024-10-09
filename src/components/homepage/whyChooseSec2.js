@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css'; 
 import CountUp from 'react-countup'; // Import the CountUp component
 import styles from '../../styles/homepageStyle/whyChooseUsSec2.module.css';
 
@@ -25,7 +25,7 @@ const featureData = [
 
 const FeatureCard = ({ iconSrc, title, description, isCountUp }) => {
   return (
-    <article className={styles.card} data-aos="fade-up">
+    <article className={styles.card} data-aos="slide-up">
       <img loading="lazy" src={iconSrc} alt="" className={styles.icon} />
       <h3 className={styles.title}>
         {isCountUp ? (
@@ -42,9 +42,11 @@ const FeatureCard = ({ iconSrc, title, description, isCountUp }) => {
 const WhyChooseUsSec2 = () => {
   useEffect(() => {
     AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: false, // Ensure animations occur on every scroll
+      duration: 800, // Adjust as needed
+      easing: 'ease-in-out', // Smoother easing
+      once: false, 
+      mirror: true, // Allows animation to happen again when scrolling back
+      offset: 120, // Distance in pixels from the original trigger point
     });
   }, []);
 
@@ -53,7 +55,7 @@ const WhyChooseUsSec2 = () => {
       <h3 className={styles.toptitle}>Why Choose Us!</h3>
       <div className={styles.cardList}>
         {featureData.map((feature, index) => (
-          <div key={index} className={styles.cardWrapper} data-aos="slide-up">
+          <div key={index} className={styles.cardWrapper}>
             <FeatureCard
               iconSrc={feature.iconSrc}
               title={feature.title}
