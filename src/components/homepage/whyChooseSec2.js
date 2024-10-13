@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css'; 
 import CountUp from 'react-countup'; // Import the CountUp component
 import styles from '../../styles/homepageStyle/whyChooseUsSec2.module.css';
 
