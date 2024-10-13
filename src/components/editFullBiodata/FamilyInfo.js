@@ -33,8 +33,9 @@ const FamilyInformationForm = (props) => {
         brotherFields,
         sisterFields,
       });
-      setBrotherCount(brotherFields.length);
-      setSisterCount(sisterFields.length);
+      console.log(brotherFields,'dekha jak')
+      setBrotherCount(brotherFields[0]==null?0:brotherFields.length);
+      setSisterCount(sisterFields[0]==null?0:sisterFields.length);
     }
   }, [props.formData]);
   const handleChange = (e) => {
@@ -95,22 +96,19 @@ const FamilyInformationForm = (props) => {
   const renderBrotherFields = () => {
     let brotherFields = [];
     for (let i = 0; i < brotherCount; i++) {
+      const brotherField = formData.brotherFields[i] || {}; // Check if it's null or undefined
       brotherFields.push(
         <div className={styles.fieldRow} key={`brother-${i}`}>
           <div className={styles.fieldColumn}>
             <label className={styles.fieldLabel}>
-              {i === 0
-                ? "Your Elder Brother Name"
-                : `Your ${i + 1}th Brother Name`}
+              {i === 0 ? "Your Elder Brother Name" : `Your ${i + 1}th Brother Name`}
             </label>
             <input
               type="text"
               name="brotherName"
               className={styles.textField}
-              value={formData.brotherFields[i].brotherName || ""}
-              placeholder={`Enter ${
-                i === 0 ? "Elder" : `${i + 1}th`
-              } Brother's Name`}
+              value={brotherField.brotherName || ""} // Default to empty string if null
+              placeholder={`Enter ${i === 0 ? "Elder" : `${i + 1}th`} Brother's Name`}
               onChange={(e) => handleBrotherChange(i, e)}
             />
           </div>
@@ -130,17 +128,14 @@ const FamilyInformationForm = (props) => {
                 handleBrotherChange(i, {
                   target: {
                     name: "brotherOccupation",
-                    value: selectedOption.value || '',
+                    value: selectedOption ? selectedOption.value : "",
                   },
                 })
               }
               value={
-                formData.brotherFields[i]
-                  ? {
-                      value: formData.brotherFields[i].brotherOccupation,
-                      label: formData.brotherFields[i].brotherOccupation,
-                    }
-                  : ""
+                brotherField.brotherOccupation
+                  ? { value: brotherField.brotherOccupation, label: brotherField.brotherOccupation }
+                  : null
               }
             />
           </div>
@@ -149,10 +144,12 @@ const FamilyInformationForm = (props) => {
     }
     return brotherFields;
   };
+  
 
   const renderSisterFields = () => {
     let sisterFields = [];
     for (let i = 0; i < sisterCount; i++) {
+      const sisterField = formData.sisterFields[i] || {}; 
       sisterFields.push(
         <div className={styles.fieldRow} key={`sister-${i}`}>
           <div className={styles.fieldColumn}>
@@ -163,10 +160,8 @@ const FamilyInformationForm = (props) => {
               type="text"
               name="sisterName"
               className={styles.textField}
-              value={formData.sisterFields[i].sisterName || ""}
-              placeholder={`Enter ${
-                i === 0 ? "Elder" : `${i + 1}`
-              } Sister's Name`}
+              value={sisterField.sisterName || ""} 
+              placeholder={`Enter ${i === 0 ? "Elder" : `${i + 1}`} Sister's Name`}
               onChange={(e) => handleSisterChange(i, e)}
             />
           </div>
@@ -186,16 +181,13 @@ const FamilyInformationForm = (props) => {
                 handleSisterChange(i, {
                   target: {
                     name: "sisterOccupation",
-                    value: selectedOption.value,
+                    value: selectedOption ? selectedOption.value : "",
                   },
                 })
               }
               value={
-                formData.sisterFields[i]
-                  ? {
-                      value: formData.sisterFields[i].sisterOccupation,
-                      label: formData.sisterFields[i].sisterOccupation,
-                    }
+                sisterField.sisterOccupation
+                  ? { value: sisterField.sisterOccupation, label: sisterField.sisterOccupation }
                   : null
               }
             />
@@ -205,8 +197,9 @@ const FamilyInformationForm = (props) => {
     }
     return sisterFields;
   };
+  
 
-
+console.log(props.formData,brotherCount,'e ki vai')
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>
@@ -305,7 +298,11 @@ const FamilyInformationForm = (props) => {
                 { value: 3, label: "3" },
                 { value: 4, label: "4" },
               ]}
-              value={{ value: brotherCount, label: brotherCount.toString() }}
+              value={{
+                value: formData.brotherFields[0]? brotherCount : 0,
+                label: brotherCount.toString(),
+              }}
+            
               onChange={(selectedOption) => {
                 const count = selectedOption ? selectedOption.value : 0;
                 setBrotherCount(count);

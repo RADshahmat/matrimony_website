@@ -86,7 +86,7 @@ const BlogPostsSection = () => {
             <article key={post.id} className={styles.card}>
               <div className={styles.cardContent}>
                 <div className={styles.imageWrapper}>
-                  <img src={post.image} alt={post.title} className={styles.image} />
+                  <img src={`${post.image}`} alt={post.title} className={styles.image} />
                   <div className={styles.category}>
                     <span className={styles.categoryTag}>Wedding</span>
                   </div>

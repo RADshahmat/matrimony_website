@@ -7,7 +7,9 @@ function BioDataPage2({ userData }) {
   if (!userData) {
     return <div>Loading...</div>; 
   }
+  
   const { images } = userData;
+
   return (
     <section className={styles.card}>
       <BioHeader />
@@ -20,10 +22,14 @@ function BioDataPage2({ userData }) {
                 {userData.comments || "No introduction available"}
               </p>
               <div className={styles.sideContent}>
-                <img 
-                  src={images[0].path} alt="DP"
-                  className={styles.profilePic}
-                />
+                {images && images.length > 0 ? (
+                  <img 
+                    src={images[0].path} alt="DP"
+                    className={styles.profilePic}
+                  />
+                ) : (
+                  <p>No profile image available</p>
+                )}
               </div>
             </div>
 

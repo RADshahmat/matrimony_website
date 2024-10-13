@@ -72,7 +72,8 @@ function UserDashboard() {
                   Religion: {profileData.religion} Blood Group: {profileData.bloodGroup} <br />
                   Marital status: {profileData.maritalStatus}
                 </p>
-                <button className={styles.editButton}>Edit Full Biodata</button>
+                <Link 
+            to={"/edit_biodata"} ><button className={styles.editButton}>Edit Full Biodata</button></Link>
               </div>
             </div>
           </div>

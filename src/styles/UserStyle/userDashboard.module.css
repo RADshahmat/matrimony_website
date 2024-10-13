@@ -44,6 +44,7 @@
     height: 300px;
     aspect-ratio: 1;
     margin: 0 auto;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
   }

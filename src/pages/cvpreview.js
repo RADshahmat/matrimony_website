@@ -102,7 +102,7 @@ function CVpreview() {
             <Header />
             <div className={styles.CVpreview}>
                 <p className={styles.pagetitle}>Preview Your CV</p>
-                <div className={styles.pagecontainer}>
+                <div className={styles.pagecontainer} style={{flexWrap:'wrap'}}>
                     {visiblePages.map(({ component, pageIndex }) => (
                         <div key={pageIndex} id={`cv-page-${pageIndex}`} className={styles.pageWrapper}>
                             {component}

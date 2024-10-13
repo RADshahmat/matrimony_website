@@ -237,7 +237,7 @@ const Chat = () => {
     };
   }, [hasMore, loading, debouncedScroll, selectedChat]);
 
-  console.log(chats, "theese are active users");
+  console.log(activeUsers,mySocketId, "theese are active users");
 
   return (
     <div className="messenger-container">
@@ -259,7 +259,7 @@ const Chat = () => {
             >
               <img
                 src={
-                  chat.image?.[0]?.path
+                  chat.image0?.[0]?.path
                     ? `https://backend.butterfly.hurairaconsultancy.com/${chat.image[0].path}`
                     : "https://via.placeholder.com/40" // Fallback if path is null/undefined
                 }
