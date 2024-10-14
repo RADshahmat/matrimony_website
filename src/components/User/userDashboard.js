@@ -8,6 +8,7 @@ function UserDashboard() {
   const { login, userId } = useAuth(); // Assuming useAuth provides userId
   const [showDashboard,setShowDashboard]=useState()
   const [profileData, setProfileData] = useState({
+    id:"",
     name: "",
     age: "",
     height: "",
@@ -28,6 +29,7 @@ function UserDashboard() {
 
         const data = response.data;
         setProfileData({
+          id: data.id.toString(),
           name: data.fullName,
           age: data.age,
           height: `${data.height}`,
@@ -49,6 +51,7 @@ function UserDashboard() {
   const handleSupportClick = () => {
     console.log('Support button clicked');
   };
+  console.log(userId,'eda ki ase vai')
 
   return (
     <main className={styles.userDashboard}>
@@ -98,7 +101,7 @@ function UserDashboard() {
           </Link>}
          {showDashboard&& <Link 
             to={"/chat"} 
-            state={{ userId: userId }} // Passing userId through state
+            state={{ userId: profileData.id}} // Passing userId through state
             className={`${styles.actionButton} ${styles.matchButton}`}
           >
             <div className={styles.actionButtonContent}>
