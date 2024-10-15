@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import HomePage from './pages/homepage';
-import CreateCV from './pages/createCV';
-import CVpreview from './pages/cvpreview';
-import UserLoginPage from './pages/userLogin';
-import UserDashboard from './pages/userDashboardPage';
-import MatchListPage from './pages/matchListPage';
-import ProfileViewPage from './pages/profilePreviewPage';
-import VenusPremium from './pages/venusPremium';
-import Chat from './pages/chat';
-import ProtectedRoute from './ProtectedRoute';
-import { AuthProvider } from './Axios/authContext';
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import HomePage from "./pages/homepage";
+import CreateCV from "./pages/createCV";
+import CVpreview from "./pages/cvpreview";
+import UserLoginPage from "./pages/userLogin";
+import UserDashboard from "./pages/userDashboardPage";
+import MatchListPage from "./pages/matchListPage";
+import ProfileViewPage from "./pages/profilePreviewPage";
+import VenusPremium from "./pages/venusPremium";
+import Chat from "./pages/chat";
+import ProtectedRoute from "./ProtectedRoute";
+import MatrimonialForm from "./components/editFullBiodata/MatrimonialForm";
+import { AuthProvider } from "./Axios/authContext";
 
 function App() {
-
   return (
     <div className="App">
       <AuthProvider>
@@ -55,6 +55,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Chat />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/edit_biodata"
+              element={
+                <ProtectedRoute>
+                  <MatrimonialForm />
                 </ProtectedRoute>
               }
             />

@@ -81,6 +81,35 @@ const PartnerPreferences = (props) => {
     notReferredDistricts: [],
     minimumEducationalQualification: "",
   });
+  useEffect(() => {
+    if (props.formDataFunc) {
+      const {
+        age,
+        height,
+        district,
+        educationalQualification,
+        employmentStatus,
+        heightPreference,
+        agePreference,
+        notReferredDistricts,
+        minimumEducationalQualification,
+      } = props.formDataFunc;
+
+      setFormData((prevData) => ({
+        ...prevData,
+        age,
+        height,
+        district,
+        educationalQualification,
+        employmentStatus,
+        heightPreference,
+        agePreference,
+        notReferredDistricts,
+        minimumEducationalQualification,
+      }));
+      setImages(props.images1);
+    }
+  }, [props.formDataFunc]);
 
   const options = {
     age: [{ value: "20", label: "20" }],
@@ -130,6 +159,11 @@ const PartnerPreferences = (props) => {
       images.map(async (image) => {
         const response = await fetch(image);
         const blob = await response.blob();
+        if (blob.size < 30 * 1024) {
+          return new File([blob], `${props.formDataFunc.fullName}.webp`, {
+            type: "image/webp",
+          });
+        }
 
         const options = {
           maxSizeMB: 0.1,
@@ -174,10 +208,7 @@ const PartnerPreferences = (props) => {
   const filteredDistricts = districts.filter(
     (district) => !formData.notReferredDistricts.includes(district.value)
   );
-  console.log(
-    formData.notReferredDistricts,
-    "this is a check for notPrefered Districts"
-  );
+  console.log(props.formDataFunc, props.images1, "yooooooooo");
   return (
     <div className={styles.container}>
       <form encType="multipart/form-data" onSubmit={handleSubmit}>
@@ -358,7 +389,7 @@ const PartnerPreferences = (props) => {
               .map((image, index) => (
                 <div key={index} className={styles.imageWrapper}>
                   <img
-                    src={image}
+                    src={`${image}`}
                     alt={`preview-${index}`}
                     className={styles.imageThumbnail}
                   />

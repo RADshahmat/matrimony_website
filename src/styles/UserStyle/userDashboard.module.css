@@ -40,10 +40,13 @@
     border-radius: 15px;
     background-color: #100000;
     display: flex;
-    width: 295px;
-    height: 305px;
+    width: 300px;
+    height: 300px;
     aspect-ratio: 1;
     margin: 0 auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
   
   .profileInfoColumn {
@@ -86,6 +89,7 @@
     color: #fff;
     font-weight: 400;
     padding: 6px 54px;
+    cursor: pointer;
   }
   
   .actionSection {
@@ -97,7 +101,7 @@
     color: #fff;
     white-space: nowrap;
     flex-wrap: wrap;
-    font: 700 35px Poppins, sans-serif;
+    font: 700 33px Poppins, sans-serif;
   }
   
   .actionButton {
@@ -108,7 +112,7 @@
     overflow: hidden;
     flex: 1;
     flex-basis: auto;
-    padding: 9px 18px 9px 38px;
+    padding: 9px 25px;
     cursor: pointer;
     text-decoration: none;
   }

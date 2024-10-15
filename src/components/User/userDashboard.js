@@ -6,7 +6,9 @@ import axiosInstance from '../../Axios/axios_instance';
 
 function UserDashboard() {
   const { login, userId } = useAuth(); // Assuming useAuth provides userId
+  const [showDashboard,setShowDashboard]=useState()
   const [profileData, setProfileData] = useState({
+    id:"",
     name: "",
     age: "",
     height: "",
@@ -27,6 +29,7 @@ function UserDashboard() {
 
         const data = response.data;
         setProfileData({
+          id: data.id.toString(),
           name: data.fullName,
           age: data.age,
           height: `${data.height}`,
@@ -35,8 +38,10 @@ function UserDashboard() {
           maritalStatus: data.maritalStatus,
           picture: data.picture // Assuming the picture URL is returned as part of the response
         });
+        setShowDashboard(true)
       } catch (error) {
         console.error("Error fetching profile data:", error);
+        setShowDashboard(false)
       }
     };
 
@@ -46,19 +51,20 @@ function UserDashboard() {
   const handleSupportClick = () => {
     console.log('Support button clicked');
   };
+  console.log(userId,'eda ki ase vai')
 
   return (
     <main className={styles.userDashboard}>
       <section className={styles.dashboardContent}>
-        {/* Profile Section */}
-        <div className={styles.profileSection}>
+        {!showDashboard&& <h3>Your Profile has Beeen Expired Please Contact support for Activation.</h3>}
+        {showDashboard&&<div className={styles.profileSection}>
           <div className={styles.profileLayout}>
             <div className={styles.profileImageColumn}>
             <div 
                 className={styles.profileImage} 
                 role="img" 
                 aria-label="Profile picture" 
-                style={{ backgroundImage: `url(${profileData.picture})` }} // Set background image
+                style={{ backgroundImage: `url(https://backend.butterfly.hurairaconsultancy.com/${profileData.picture})` }} 
               />
             </div>
             <div className={styles.profileInfoColumn}>
@@ -69,16 +75,17 @@ function UserDashboard() {
                   Religion: {profileData.religion} Blood Group: {profileData.bloodGroup} <br />
                   Marital status: {profileData.maritalStatus}
                 </p>
-                <button className={styles.editButton}>Edit Full Biodata</button>
+                <Link 
+            to={"/edit_biodata"} ><button className={styles.editButton}>Edit Full Biodata</button></Link>
               </div>
             </div>
           </div>
-        </div>
+        </div>}
 
         {/* Action Buttons Section */}
         <div className={styles.actionSection}>
           {/* Match button sends userId via state */}
-          <Link 
+          {showDashboard&&<Link 
             to={"/matchlist"} 
             state={{ userId: userId }} // Passing userId through state
             className={`${styles.actionButton} ${styles.matchButton}`}
@@ -91,10 +98,10 @@ function UserDashboard() {
               />
               <span className={styles.actionText}>Match</span>
             </div>
-          </Link>
-          <Link 
+          </Link>}
+         {showDashboard&& <Link 
             to={"/chat"} 
-            state={{ userId: userId }} // Passing userId through state
+            state={{ userId: profileData.id}} // Passing userId through state
             className={`${styles.actionButton} ${styles.matchButton}`}
           >
             <div className={styles.actionButtonContent}>
@@ -105,7 +112,7 @@ function UserDashboard() {
               />
               <span className={styles.actionText}>Message</span>
             </div>
-          </Link>
+          </Link>}
 
           <div className={`${styles.actionButton} ${styles.supportButton}`} onClick={handleSupportClick}>
             <div className={styles.actionButtonContent}>

@@ -26,6 +26,8 @@
     line-height: normal;
     text-align: left;
     margin-left: 72px;
+    text-decoration: none;
+    margin-top: 10px;
   }
   
   .profileCard {
@@ -150,23 +152,27 @@
   /* For mobile responsiveness */
 @media (max-width: 768px) {
     .cardcontainer {
-      margin: 0;   /* Remove margin on mobile */
-      padding: 0;  /* Remove padding on mobile */
-      width: 100%; /* Full width on mobile */
-      overflow-y: auto;
+      margin: 10px 0 0 0;  
+      padding: 0; 
+      width: 100%; 
     }
   
     .profileCard {
-      padding: 20px; /* Adjust padding for mobile */
-      margin: 0;     /* No margin on mobile */
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px; 
+      margin: 0 20px;      
     }
-  
+  .actionsSection{
+    margin-top: 10px;
+  }
     .viewProfile {
-      padding: 10px 20px; /* Adjust button size */
+      padding: 9px 10px; /* Adjust button size */
     }
   
     .requestChatContainer {
-      padding: 10px 20px 10px 10px; /* Adjust chat button padding */
+      padding: 9px 10px; 
+      gap: 10px;
     }
   
     .heartIcon {

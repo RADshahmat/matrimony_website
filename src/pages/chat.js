@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "../styles/chatUi.css";
 import { FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import io from "socket.io-client";
 import axiosInstance from "../Axios/axios_instance";
-
-
-const socket = io("", {
-  withCredentials: true,
-});
+import ReportModal from "./report";
 
 function debounce(func, wait) {
   let timeout;
@@ -19,12 +15,13 @@ function debounce(func, wait) {
 }
 
 const Chat = () => {
+  const location = useLocation();
   const [selectedChat, setSelectedChat] = useState(null);
   const [showSidebar, setShowSidebar] = useState(true);
   const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(location.state.userId.toString());
   const [isTyping, setIsTyping] = useState(false);
   const [offset, setOffset] = useState(20);
   const [hasMore, setHasMore] = useState(true);
@@ -33,98 +30,108 @@ const Chat = () => {
   const [selectedPeerSocketId, setSelectedPeerSocketId] = useState("");
   const [activeUsers, setActiveUsers] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
-  const [peerId,setPeerId]=useState('');
+  const [peerId, setPeerId] = useState("");
+  const [socket, setSocket] = useState(null);
+  const [lastMessage, setLastMessage] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
 
   useEffect(() => {
-    console.log('ballu')
-    if (socket) {
-      console.log('ballu1')
-      socket.on("connect", () => {
-        console.log("Socket connected with ID:", socket.id);
-        socket.on("activeUsers", (activeUserIds) => {
-          console.log("Active Users received:", activeUserIds);
-          setActiveUsers(activeUserIds);
-        });
+    const newSocket = io("https://backend.butterfly.hurairaconsultancy.com", {
+      withCredentials: true,
+    });
+    setSocket(newSocket);
 
-        socket.on("registerSocket", (data) => {
-          console.log("Socket registered:", data);
-          setMySocketId(data.socketId);
-        });
-      });
-    }
-    return () => {
-      if (socket) {
-        socket.off("connect");
-        socket.off("activeUsers");
-        socket.off("registerSocket");
-      }
-    };
-  }, []);
-  useEffect(() => {
-    scrollToBottom(); 
-  }, [isTyping]);
- 
-  useEffect(() => {
-    if (userId) {
-      console.log("Emitting registerUserId for:", userId);
-      socket.emit("registerUserId", { userId: userId });
-    }
-  }, [userId]);
-
-  // Fetch chats and handle new messages
-  useEffect(() => {
-    axiosInstance
-      .get(`/chats?socId=${socket.id}`)
-      .then((response) => {
-        setChats(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching chats:", error);
-      });
-
-    socket.on("newMessage", (messageData) => {
-      setMessages((prevMessages) => [...prevMessages, messageData]);
-      setTimeout(() => {
-        scrollToBottom();
-      }, 0);
+    newSocket.on("registerSocket", (data) => {
+      setMySocketId(data.socketId);
     });
 
+    newSocket.on("activeUsers", (activeUserIds) => {
+      setActiveUsers(activeUserIds);
+    });
     return () => {
-      socket.off("newMessage");
+      newSocket.disconnect();
     };
-  }, [selectedChat]);
+  }, []);
 
   useEffect(() => {
-    if (selectedChat) {
-      socket.on("peerTyping", (data) => {
-        console.log("Peer is typing:", data.isTyping);
-        setIsTyping(data.isTyping);
-      });
+    scrollToBottom();
+  }, [typingTimeout]);
+  useEffect(() => {
+    if (socket && userId) {
+      socket.emit("registerUserId", { userId });
     }
+  }, [socket, userId]);
 
-    return () => {
-      socket.off("peerTyping");
-    };
-  }, [selectedChat]);
+  useEffect(() => {
+    axiosInstance
+      .get(`/chats?socId=${mySocketId}`)
+      .then((response) => {
+        setChats(response.data);
+        setLastMessage(() => {
+          const newLastMessages = response.data.map((chat) => ({
+            id: chat.id,
+            lastMessage: chat.lastMessage,
+          }));
+          return newLastMessages;
+        });
+      })
+      .catch((error) => console.error("Error fetching chats:", error));
+
+
+
+      if (socket) {
+        socket.on("newMessage", (messageData) => {
+          console.log(messageData, selectedChat, "bal ki hoise");
+          if (selectedChat && selectedChat.peerId) {
+            if (messageData && messageData.userId === selectedChat.peerId) {
+              setMessages((prevMessages) => [...prevMessages, messageData]);
+            }
+            
+            setLastMessage(messageData.message);
+            setTimeout(() => scrollToBottom(), 10);
+          } else {
+            console.warn("selectedChat is null or missing peerId");
+          }
+        });
+      
+        return () => socket.off("newMessage");
+      }
+      
+  }, [selectedChat, socket]);
+
+  useEffect(() => {
+    if (selectedChat && socket) {
+      socket.on("peerTyping", (data) => {
+        console.log("Peer is typing:", data);
+        if (data?.data?.userId === selectedChat.peerId) {
+          setIsTyping(data.isTyping);
+        }
+      });
+      return () => {
+        socket.off("peerTyping");
+      };
+    }
+  }, [selectedChat, socket]);
+
 
   const handleChatClick = async (chat) => {
     setSelectedChat(chat);
     setShowSidebar(false);
-    console.log('chat dekhi',chat)
 
     try {
       const response = await axiosInstance.get(
         `/messages/${chat.peerId}?limit=20&offset=0`
       );
       setMessages(response.data.messages);
-      setUserId(response.data.userId);
       setPeerId(chat.peerId);
       setOffset(20);
       setHasMore(true);
       setSelectedPeerSocketId(chat.peerSocketId);
-      setTimeout(() => {
-        scrollToBottom();
-      }, 0);
+      setTimeout(() => scrollToBottom(), 0);
     } catch (err) {
       console.error("Error fetching messages:", err);
     }
@@ -139,6 +146,7 @@ const Chat = () => {
     if (newMessage.trim() === "") return;
 
     const messageData = {
+      userId: userId,
       peerId: selectedChat.peerId,
       message: newMessage,
       peerSocketId: selectedPeerSocketId,
@@ -147,7 +155,7 @@ const Chat = () => {
     axiosInstance
       .post("/messages", messageData)
       .then(() => {
-        socket.emit("newMessage", messageData);
+        socket.emit("newMessage", messageData, userId);
         setMessages((prevMessages) => [
           ...prevMessages,
           {
@@ -156,27 +164,23 @@ const Chat = () => {
             avatar: "https://via.placeholder.com/40",
           },
         ]);
-        setTimeout(() => {
-          scrollToBottom();
-        }, 0);
+        setTimeout(() => scrollToBottom(), 0);
         setNewMessage("");
       })
-      .catch((error) => {
-        console.error("Error sending message:", error);
-      });
+      .catch((error) => console.error("Error sending message:", error));
   };
 
   const handleTyping = () => {
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
-    socket.emit("typing", { peerId: selectedChat.peerId });
+    socket.emit("typing", { peerId: selectedChat.peerId, userId: userId });
   };
 
   const handleStopTyping = () => {
     const timeout = setTimeout(() => {
-      socket.emit("stopTyping", { peerId: selectedChat.peerId });
-    }, 2000);
+      socket.emit("stopTyping", { peerId: selectedChat.peerId, userId: userId });
+    }, 1000);
 
     setTypingTimeout(timeout);
   };
@@ -238,7 +242,7 @@ const Chat = () => {
     };
   }, [hasMore, loading, debouncedScroll, selectedChat]);
 
-  console.log(activeUsers,"theese are active users")
+  console.log(activeUsers, selectedChat, "theese are active users");
 
   return (
     <div className="messenger-container">
@@ -250,23 +254,28 @@ const Chat = () => {
           <h3 style={{ marginBottom: "0", width: "85%" }}>Chats</h3>
         </div>
         <ul>
-          {chats.map((chat) => (
+          {chats.map((chat, index) => (
             <li
               key={chat.id}
               onClick={() => handleChatClick(chat)}
               className={
-                selectedChat && selectedChat.id === chat.id ? "active" : ""
+                activeUsers.includes(chat.peerId) ? "active" : ""
               }
             >
               <img
-                src={`https://backend.butterfly.hurairaconsultancy.com/${chat.image[0].path}` || "https://via.placeholder.com/40"}
+                src={
+                  chat.image0?.[0]?.path
+                    ? `https://backend.butterfly.hurairaconsultancy.com/${chat.image[0].path}`
+                    : "https://via.placeholder.com/40" 
+                }
                 alt={`${chat.name} avatar`}
                 className="chat-avatar"
               />
+
               <div className="chat-info">
-                <span className="chat-name">{chat.name}</span>
+                <span className="chat-name">{chat.name}{activeUsers.includes(chat.peerId) && <span className="active-indicator"></span>}</span>
                 <br />
-                <span className="chat-last-message">{chat.lastMessage}</span>
+                <span className="chat-last-message">{lastMessage[index].lastMessage}</span>
               </div>
             </li>
           ))}
@@ -278,13 +287,18 @@ const Chat = () => {
           <>
             <div className="chat-header">
               <h3>
+              <span><button className="back-button" onClick={handleBackButtonClick}>
+                  &#8592;
+                </button></span>
                 {selectedChat.name}
                 {activeUsers.includes(peerId) && (
                   <span className="active-indicator"></span>
+
                 )}
+                
               </h3>
-              <button className="back-button" onClick={handleBackButtonClick}>
-                &#8592;
+              <button className="back-button" onClick={openModal}>
+              &#8942;
               </button>
             </div>
             <div className="chat-body">
@@ -293,31 +307,39 @@ const Chat = () => {
               {messages.map((message, index) => (
                 <div
                   key={index}
-                  className={`message ${
-                    userId === message.sender_id ? "user" : "bot"
-                  }`}
+                  className={`message ${userId === message.sender_id ? "user" : "bot"
+                    }`}
                 >
                   <img
-                    src={ userId === message.sender_id ?`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image0[0].path}`:`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}` || "https://via.placeholder.com/40"}
+                    src={
+                      userId === message.sender_id
+                        ? selectedChat.image0?.[0]?.path
+                          ? `https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image0[0].path}`
+                          : "https://via.placeholder.com/40" 
+                        : selectedChat.image?.[0]?.path
+                          ? `https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}`
+                          : "https://via.placeholder.com/40" 
+                    }
                     alt={`${message.user} avatar`}
                     className="message-avatar"
                   />
+
                   <p className="message-text">{message.message}</p>
                 </div>
               ))}
 
               {isTyping && (
-                  <div
-                  className={`message ${
-                    false ? "user" : "bot"
-                  }`}
-                  
-                >
+                <div className={`message ${false ? "user" : "bot"}`}>
                   <img
-                    src={`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}` || "https://via.placeholder.com/40"}
-                    alt={`avatar`}
+                    src={
+                      selectedChat.image?.[0]?.path
+                        ? `https://backend.butterfly.hurairaconsultancy.com/${selectedChat.image[0].path}`
+                        : "https://via.placeholder.com/40" 
+                    }
+                    alt="avatar"
                     className="message-avatar"
                   />
+
                   <p className="message-text">Typing...</p>
                 </div>
               )}
@@ -346,6 +368,7 @@ const Chat = () => {
           </div>
         )}
       </div>
+      <ReportModal isOpen={isModalOpen} onClose={closeModal} peerId={selectedChat?selectedChat.peerId:''} matchId={selectedChat?selectedChat.id:''} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import ProfileInformation from './ProfileInformation';
 import AddressInfo from './Address';
 import EducationProfessionForm from './EducationProfession';
@@ -8,19 +8,32 @@ import axiosInstance from '../../Axios/axios_instance';
 import { useNavigate } from 'react-router-dom';
 
 const MatrimonialForm = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(3);
   const [formData, setFormData] = useState({});
   const [images, setImages] = useState();
+  const [images1,setImages1]=useState([]);
   const [userId, setUserId] = useState(null); // Initialize userId correctly as null
   const navigate = useNavigate();
+  useEffect(() => {
+    getCvs();
+  }, []);
+
+  const getCvs=async()=>{
+
+    const response=await axiosInstance.get('getCV');
+    console.log('dekhi ki Ai',response.data.result1)
+    setFormData(response.data.result[0])
+    setImages(`https://backend.butterfly.hurairaconsultancy.com/${response.data.result1[0].path}`)
+    setImages1(response.data.images)
+
+  }
   
   console.log('dp: ', images);
 
   const handleSubmit = async (data, compressedImages) => {
     try {
-      // Send the form data
       console.log('this is the data:  ', data);
-      const response = await axiosInstance.post('/submit_cv', data, {
+      const response = await axiosInstance.post('/update_cv', data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -29,9 +42,9 @@ const MatrimonialForm = () => {
       setUserId(response.data.userId);
 
       console.log('Form data response:', response.data.userId);
-
-      // Send the images
+      console.log(compressedImages,'egula images')
       if (compressedImages.length > 0) {
+      
         const formDataImages = new FormData();
         compressedImages.forEach((image) => {
           formDataImages.append('images', image);
@@ -40,7 +53,7 @@ const MatrimonialForm = () => {
         formDataImages.append('images', images);
         formDataImages.append('dp', images.name);
 
-        const responseImages = await axiosInstance.post(`/upload_images?userId=${response.data.userId}`, formDataImages, {
+        const responseImages = await axiosInstance.post(`/update_images`, formDataImages, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -61,7 +74,6 @@ const MatrimonialForm = () => {
         console.log('Image upload response:', responseImages.data);
       }
 
-      // Navigate after userId is set
       navigate(`/cvpreview/${response.data.userId}`);
     } catch (error) {
       console.error('Error submitting form or uploading images:', error);
@@ -81,7 +93,8 @@ const MatrimonialForm = () => {
           pageFunc={setPage}
           formDataFunc={formData} 
           submitCV={handleSubmit}
-          images={setImages}
+          images={setImages1}
+          images1={images1}
         />
       )}
     </div>

@@ -66,7 +66,7 @@ const EducationProfessionForm = (props) => {
     const { id, value } = e.target;
     setFormData({
       ...formData,
-      employedIn: value,
+      [id]: value,
     });
   };
 
