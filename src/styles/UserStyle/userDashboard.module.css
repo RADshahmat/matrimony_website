@@ -92,7 +92,6 @@
     align-self: end;
     display: flex;
     margin-top: 61px;
-    width: 794px;
     max-width: 100%;
     gap: 40px 58px;
     color: #fff;
@@ -108,7 +107,6 @@
     gap: 40px 91px;
     overflow: hidden;
     flex: 1;
-    flex-grow: 1;
     flex-basis: auto;
     padding: 9px 18px 9px 38px;
     cursor: pointer;
@@ -164,7 +162,7 @@
     }
   
     .profileInfo {
-      margin-top: 0;
+      margin: 30px 39px;
     }
   
     .profileDetails {
@@ -177,15 +175,18 @@
     }
   
     .actionSection {
-      margin-top: 40px;
+      margin: 40px;
       white-space: initial;
       justify-content: center;
+      font-size: 30px;
     }
-  
+    .actionIcon{
+      width: 40px;
+    }
     .actionButton {
       padding: 15px 20px;
       white-space: initial;
-      width: 100%;
+      width: 60%;
     }
   
     .actionButtonContent {

@@ -15,7 +15,6 @@ import { AuthProvider } from './Axios/authContext';
 
 function App() {
 
-
   return (
     <div className="App">
       <AuthProvider>
