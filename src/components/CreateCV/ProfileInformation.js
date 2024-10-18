@@ -19,7 +19,7 @@ const ProfileInformation = (props) => {
     maritalStatus: null,
     nidNumber: "",
     phoneNumber: "",
-    email: "", // Added email field
+    email: "", 
     physicalStatus: null,
     religion: null,
     comments: "",
@@ -497,7 +497,7 @@ const ProfileInformation = (props) => {
 
         <div className={styles.formGroup}>
           <label htmlFor="comments" className={styles.label}>
-            Comments
+            About Yourself
           </label>
           <textarea
             className={`${styles.textarea} ${
@@ -517,7 +517,7 @@ const ProfileInformation = (props) => {
 
         <div className={styles.buttonContainer}>
           <button className={styles.submitButton} type="submit">
-            Submit
+            Next
           </button>
         </div>
       </form>

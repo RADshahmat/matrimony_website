@@ -9,6 +9,8 @@ import UserDashboard from "./pages/userDashboardPage";
 import MatchListPage from "./pages/matchListPage";
 import ProfileViewPage from "./pages/profilePreviewPage";
 import VenusPremium from "./pages/venusPremium";
+import BlogDetails from './components/homepage/BlogDetails';
+import AllBlogsPage from './pages/All_Blog_page';
 import Chat from "./pages/chat";
 import ProtectedRoute from "./ProtectedRoute";
 import MatrimonialForm from "./components/editFullBiodata/MatrimonialForm";
@@ -21,10 +23,13 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} />
+            <Route path="/blogAll" element={<AllBlogsPage />} />
             <Route path="/createCV" element={<CreateCV />} />
             <Route path="/cvpreview/:id" element={<CVpreview />} />
             <Route path="/venuspremium" element={<VenusPremium />} />
             <Route path="/login" element={<UserLoginPage />} />
+
 
             <Route
               path="/userdashboard"

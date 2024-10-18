@@ -48,6 +48,22 @@
     background-repeat: no-repeat;
     background-position: center;
   }
+  .logout {
+    margin-top: 20px;
+    background-color: #610d0d;
+    color: #FFFFFF; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .logout:hover {
+    background-color: #ac0b0b; 
+    color: #F1E4E8;
+  }
   
   .profileInfoColumn {
     display: flex;
@@ -73,11 +89,15 @@
   }
   
   .profileDetails {
-    font-size: 22px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+    font-size: 20px;
     font-weight: 300;
     align-self: stretch;
     margin-top: 15px;
     text-align: left;
+    font-family: Poppins;
   }
   
   .editButton {

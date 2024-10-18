@@ -48,6 +48,12 @@ function UserDashboard() {
     fetchProfileData();
   }, [login.token]);
 
+  const handleLogout = () => {
+    //logout();
+    // Redirect user to login page or homepage after logout
+    window.location.href = '/login'; // Adjust based on your route
+  };
+
   const handleSupportClick = () => {
     console.log('Support button clicked');
   };
@@ -60,21 +66,28 @@ function UserDashboard() {
         {showDashboard&&<div className={styles.profileSection}>
           <div className={styles.profileLayout}>
             <div className={styles.profileImageColumn}>
-            <div 
-                className={styles.profileImage} 
-                role="img" 
-                aria-label="Profile picture" 
-                style={{ backgroundImage: `url(https://backend.butterfly.hurairaconsultancy.com/${profileData.picture})` }} 
-              />
+              <div 
+                  className={styles.profileImage} 
+                  role="img" 
+                  aria-label="Profile picture" 
+                  style={{ backgroundImage: `url(https://backend.butterfly.hurairaconsultancy.com/${profileData.picture})` }} 
+                />
+                <button className={styles.logout} onClick={handleLogout}>Log out</button>
             </div>
             <div className={styles.profileInfoColumn}>
               <div className={styles.profileInfo}>
                 <h1 className={styles.profileName}>{profileData.name}</h1>
-                <p className={styles.profileDetails}>
-                  Age: {profileData.age} Height: {profileData.height} <br />
-                  Religion: {profileData.religion} Blood Group: {profileData.bloodGroup} <br />
-                  Marital status: {profileData.maritalStatus}
-                </p>
+                <div className={styles.profileDetails}>
+                    <div>
+                        <p>Age: {profileData.age}</p>
+                        <p>Religion: {profileData.religion}</p>
+                        <p>Marital status: {profileData.maritalStatus}</p>
+                    </div>
+                    <div>
+                        <p>Height: {profileData.height}</p>
+                        <p>Blood Group: {profileData.bloodGroup}</p>
+                    </div>
+                </div>
                 <Link 
             to={"/edit_biodata"} ><button className={styles.editButton}>Edit Full Biodata</button></Link>
               </div>

@@ -27,19 +27,31 @@
       }
       
       @media (max-width: 991px) {
-        .description {
+        .CVpagecontainer{
+          margin: 80px 20px 0 20px;
+        }
+        .CVdescription {
           max-width: 100%;
+        }
+        .pagetitle{
+          font-size: 20px;
         }
       }
       
       @media (max-width: 768px) {
-        .description {
-          font-size: 14px;
+        .CVpagecontainer{
+          margin: 80px 20px 0 20px;
+        }
+        .CVdescription {
+          font-size: 16px;
         }
       }
       
       @media (max-width: 480px) {
-        .description {
-          font-size: 12px;
+        .CVpagecontainer{
+          margin: 80px 20px 0 20px;
+        }
+        .CVdescription {
+          font-size: 14px;
         }
       }

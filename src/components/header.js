@@ -48,13 +48,13 @@ const Header = () => {
                         </a>
                         {isDropdownOpen && (
                             <div className={styles.dropdownMenu}>
-                                <a href="#page1" className={styles.dropdownItem}>Page 1</a>
+                                <Link to={'/userDashboard'} className={styles.dropdownItem}>User Login</Link>
                                 <a href="#page2" className={styles.dropdownItem}>Page 2</a>
                                 <a href="#page3" className={styles.dropdownItem}>Page 3</a>
                             </div>
                         )}
                     </div>
-                    <Link to={'/userDashboard'} className={styles.navItem}>Blog</Link>
+                    <Link to={'/blogAll'} className={styles.navItem}>Blog</Link>
                     <a href='#contact' className={styles.navItem}>Contact</a>
 
                     {/* Premium Section - Mobile */}
