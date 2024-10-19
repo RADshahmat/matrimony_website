@@ -127,7 +127,6 @@ const ReportModal = ({ isOpen, onClose, peerId, matchId }) => {
 
   return (
     <>
-      <ToastContainer /> {/* Add the ToastContainer component */}
       <div className={`report-modal-overlay ${isAnimatingOut ? 'fade-out' : 'fade-in'}`}>
         <div className={`report-modal ${isAnimatingOut ? 'slide-out' : 'slide-in'}`}>
           <button className="close-button" onClick={closeModal}>&times;</button>

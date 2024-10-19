@@ -5,6 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 import io from "socket.io-client";
 import axiosInstance from "../Axios/axios_instance";
 import ReportModal from "./report";
+import { toast,ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css';
 
 function debounce(func, wait) {
   let timeout;
@@ -167,7 +169,9 @@ const Chat = () => {
         setTimeout(() => scrollToBottom(), 0);
         setNewMessage("");
       })
-      .catch((error) => console.error("Error sending message:", error));
+      .catch((error) => {console.error("Error sending message:", error);
+        toast.error('Do not send contact info')
+      });
   };
 
   const handleTyping = () => {
@@ -369,6 +373,7 @@ const Chat = () => {
         )}
       </div>
       <ReportModal isOpen={isModalOpen} onClose={closeModal} peerId={selectedChat?selectedChat.peerId:''} matchId={selectedChat?selectedChat.id:''} />
+    <ToastContainer/>
     </div>
   );
 };
