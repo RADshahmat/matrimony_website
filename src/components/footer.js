@@ -1,11 +1,41 @@
 import React, { useState } from 'react';
 import styles from '../styles/footer.module.css';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
+import axiosInstance from "../Axios/axios_instance"
+import { toast,ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const Footer = () => {
   // State for toggling visibility of each item
   const [serviceVisibility, setServiceVisibility] = useState([false, false, false, false]);
   const [linkVisibility, setLinkVisibility] = useState([false, false, false, false, false]);
+  const [formData, setFormData] = useState({
+    name: '',
+    phoneNumber: '',
+    query: '',
+  });
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axiosInstance.post('/enquire', {
+        name: formData.name,
+        phoneNumber: formData.phoneNumber,
+        query: formData.query,
+      });
+
+      if (response.status === 200) {
+        console.log(response.data)
+        toast.success('Enquiry submitted successfully!');
+        setFormData({name:'',phoneNumber:'',query:''});
+      } else {
+        toast.error('Something went wrong, please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting enquiry:', error);
+      toast.error('Failed to submit enquiry.');
+    }
+  };
+
 
   const toggleServiceVisibility = (index) => {
     setServiceVisibility((prev) => 
@@ -111,19 +141,36 @@ const Footer = () => {
 
         {/* Enquire Section */}
         <div className={styles.formSection}>
-          <h3 className={styles.footerTitle}>Enquire</h3>
-          <input type="text" placeholder="First name here" />
-          <input type="text" placeholder="Phone Number" />
-          {/* New Message Input */}
-          <textarea placeholder="Type your message here..." className={styles.messageInput} />
-          <button className={styles.sendmsgbutton}>Send Message</button>
-        </div>
+      <h3 className={styles.footerTitle}>Enquire</h3>
+      <input
+        type="text"
+        placeholder="First name here"
+        value={formData.name}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+      />
+      <input
+        type="text"
+        placeholder="11 Digit Phone Number"
+        value={formData.phoneNumber}
+        onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+      />
+      <textarea
+        placeholder="Type your message here..."
+        className={styles.messageInput}
+        value={formData.query}
+        onChange={(e) => setFormData({ ...formData, query: e.target.value })}
+      />
+      <button className={styles.sendmsgbutton} onClick={handleSubmit}>
+        Send Message
+      </button>
+    </div>
       </div>
 
       <div className={styles.divider} />
       <div className={styles.footerbottom}>
         <p>&copy; 2024 Butterfly Matrimonial Ltd. All Rights Reserved.<br />A Concern of Butterfly Lighthouse.</p>
       </div>
+      <ToastContainer/>
     </footer>
   );
 };
