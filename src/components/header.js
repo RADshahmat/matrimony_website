@@ -48,9 +48,12 @@ const Header = () => {
                         </a>
                         {isDropdownOpen && (
                             <div className={styles.dropdownMenu}>
-                                <Link to={'/userDashboard'} className={styles.dropdownItem}>User Login</Link>
-                                <a href="#page2" className={styles.dropdownItem}>Page 2</a>
-                                <a href="#page3" className={styles.dropdownItem}>Page 3</a>
+                                <Link to={'/'} className={styles.dropdownItem}>Home</Link>
+                                <Link to={'/userDashboard'} className={styles.dropdownItem}>Venus Login</Link>
+                                <Link to={'/venuspremium'} className={styles.dropdownItem}>Venus Premium</Link>
+                                <Link to={'/contact'} className={styles.dropdownItem}>Contact</Link>
+                                <Link to={'/createCV'} className={styles.dropdownItem}>Create CV</Link>
+                                <Link to={'/blogAll'} className={styles.dropdownItem}>Blog</Link>
                             </div>
                         )}
                     </div>

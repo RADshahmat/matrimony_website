@@ -505,7 +505,7 @@ const ProfileInformation = (props) => {
             }`}
             id="comments"
             name="comments"
-            placeholder="Your Comments"
+            placeholder="Your Bio"
             value={localFormData.comments}
             onChange={handleChange}
             required

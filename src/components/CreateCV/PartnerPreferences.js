@@ -87,11 +87,17 @@ const PartnerPreferences = (props) => {
     height: [{ value: "5'", label: "5'" }],
     educationalQualification: [
       { value: "Higher Secondary", label: "Higher Secondary" },
+      { value: "Secondary School", label: "Secondary School" },
+      { value: "Graduate", label: "Graduate" },
+      { value: "Under Graduate", label: "Under Graduate" },
     ],
     heightPreference: [{ value: "Not More Than", label: "Not More Than" }],
     agePreference: [{ value: "Not less Than", label: "Not less Than" }],
     minimumEducationalQualification: [
       { value: "Higher Secondary", label: "Higher Secondary" },
+      { value: "Secondary School", label: "Secondary School" },
+      { value: "Graduate", label: "Graduate" },
+      { value: "Under Graduate", label: "Under Graduate" },
     ],
   };
 
