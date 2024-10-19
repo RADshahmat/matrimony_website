@@ -67,7 +67,7 @@
 }
 .buttonContainer{
     display: flex;
-    justify-content: right;
+    justify-content: space-around;
 }
 .downloadButton {
     border: none;
@@ -85,7 +85,11 @@
     line-height: 16.5px; /* 103.125% */
     text-transform: capitalize;
     margin-bottom: 40px;
-    margin-right: 20px
+    margin-right: 20px;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .downloadButton:hover {

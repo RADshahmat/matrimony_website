@@ -1,0 +1,19 @@
+.thumbnail{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+.tips{
+    height: 150px;
+    width: auto;
+}
+@media (max-width: 768px) {
+    .thumbnail{
+        width: 120px;
+        height: 120px;
+    }
+    .tips{
+        height: 85px;
+        width: auto;
+    }
+}

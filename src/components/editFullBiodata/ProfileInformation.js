@@ -497,7 +497,7 @@ const ProfileInformation = (props) => {
 
         <div className={styles.formGroup}>
           <label htmlFor="comments" className={styles.label}>
-            Comments
+            About
           </label>
           <textarea
             className={`${styles.textarea} ${

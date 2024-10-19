@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axiosInstance from '../Axios/axios_instance';
 import Header from '../components/header'; 
 import Footer from '../components/footer'; 
@@ -9,6 +9,7 @@ import BioDataPage3 from '../components/Bio_data/page3';
 import styles from '../styles/Bio_dataStyle/cvpreview.module.css';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { FaArrowLeft } from 'react-icons/fa';
 
 function CVpreview() {
     const { id } = useParams(); // Get the ID from the URL
@@ -127,6 +128,9 @@ function CVpreview() {
                     )}
                 </div>
                    <div className={styles.buttonContainer}>
+                   <Link to="/userdashboard" className={styles.downloadButton}>
+                   <FaArrowLeft style={{ marginRight: '8px' }} /> Back to Dashboard
+                    </Link>
                     <button className={styles.downloadButton} onClick={downloadPDF}>
                         Request Venus & Download
                     </button>

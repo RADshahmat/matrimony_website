@@ -3,6 +3,8 @@ import Cropper from "react-easy-crop";
 import { getCroppedImg } from "../cropImage";
 import imageCompression from 'browser-image-compression';
 import { MdOutlineCheck } from "react-icons/md";
+import styles from "../../styles/CreateCvStyle/filepicker.module.css"
+
 
 const FilePicker = (props) => {
   const [image, setImage] = useState(null);
@@ -86,24 +88,22 @@ const FilePicker = (props) => {
   };
 console.log('the image',image,props.images)
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex' , gap: "20px" }}>
       <div
         className="d-flex flex-column align-items-center rounded p-3"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
-        style={{ width: "190px", height: "150px", position: "relative", border: '0px ' }}
+        style={{ position: "relative", border: '0px ' }}
       >
         {!cropping ? (
           <div
             className="d-flex flex-column align-items-center justify-content-center"
-            style={{ width: "150px", height: "150px" }}
             onClick={() => document.getElementById("fileInput").click()}
           >
             <img
               src={image || croppedImage || `${process.env.PUBLIC_URL}/assets/image.png`}
               alt="Selected"
-              style={{ width: "150px", height: "150px", objectFit: "cover" }}
-              className="img-thumbnail"
+              className={styles.thumbnail}
             />
             <input
               type="file"
@@ -148,7 +148,7 @@ console.log('the image',image,props.images)
         )}
       </div>
       <div>
-        <img style={{ height: '150px' }} src={`${process.env.PUBLIC_URL}/assets/tips.png`} alt="Tips" />
+        <img className={styles.tips} src={`${process.env.PUBLIC_URL}/assets/tips.png`} alt="Tips" />
       </div>
     </div>
   );

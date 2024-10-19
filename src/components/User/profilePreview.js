@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from '../../styles/UserStyle/profilePreview.module.css';
+import { Link } from "react-router-dom";
 import BioDataPage1 from '../Bio_data/page1'; 
 
 function ProfileView({ onRequestChat, onInterested, onNotInterested, onPrint, onShare }) {
   return (
     <main className={styles.userDashboard}>
         <div className={styles.profileViewContainer}>
+        <Link to="/matchlist" className={styles.profileViewingText}>&lt; Profile Viewing</Link>
             <div className={styles.headerSection}>
-                    <p className={styles.profileViewingText}>&lt; Profile Viewing</p>
                         <BioDataPage1 />
                     <div className={styles.actionIcons}>
                         <button className={styles.print} onClick={onPrint}>

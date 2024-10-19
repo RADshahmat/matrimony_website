@@ -1,7 +1,7 @@
 import React from "react";
 import Header from '../components/header'; 
 import Footer from '../components/footer'; 
-import VenusLogin from '../components/User/VenusLogin';
+import VenusLogin from '../components/User/VenusLogin'; 
 
 
 function UserLoginPage() {

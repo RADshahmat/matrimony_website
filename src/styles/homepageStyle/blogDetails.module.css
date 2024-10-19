@@ -1,0 +1,87 @@
+/* General container styling */
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: #f0f4f8;
+    margin-top: 40px;
+  }
+  
+  /* Blog Card styling */
+  .blogCard {
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .blogCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Hero section styling */
+  .heroSection {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+  }
+  
+  .heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 10px; 
+    padding: 5px 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+  }
+  
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  /* Content section styling */
+  .contentSection {
+    padding: 30px;
+    line-height: 1.8;
+    font-size: 1rem;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .textContent {
+    margin-bottom: 20px;
+    word-wrap: break-word;
+  }
+  
+  /* Author section styling */
+  .authorSection {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #f9fafb;
+    border-top: 1px solid #ddd;
+  }
+  
+  .authorImage {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }

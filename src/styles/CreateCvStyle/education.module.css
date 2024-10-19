@@ -102,7 +102,12 @@
     transition: background-color 0.3s ease;
     margin-right: 1rem;
   }
-  
+  .buttonGroup {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
   .submitButton:hover,
   .backButton:hover {
     background-color: #0056b3;

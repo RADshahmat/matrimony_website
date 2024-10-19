@@ -1,8 +1,9 @@
-import React, { useState, useCallback,useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import { getCroppedImg } from "../cropImage";
 import imageCompression from 'browser-image-compression';
 import { MdOutlineCheck } from "react-icons/md";
+import styles from "../../styles/CreateCvStyle/filepicker.module.css"
 
 const FilePicker = (props) => {
   const [image, setImage] = useState(null);
@@ -17,10 +18,10 @@ const FilePicker = (props) => {
     if (props.images instanceof File) {
       setImage(URL.createObjectURL(props.images));
     } else {
-      setImage(null); 
+      setImage(null);
     }
   }, [props.images]);
-  
+
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -37,20 +38,20 @@ const FilePicker = (props) => {
   const handleSaveCrop = async () => {
     try {
       const croppedImg = await getCroppedImg(image, croppedAreaPixels);
-      
+
       const options = {
-        maxSizeMB: 0.1, 
+        maxSizeMB: 0.1,
         maxWidthOrHeight: 800,
         useWebWorker: true,
         fileType: 'image/webp',
       };
-      
+
       const croppedBlob = await fetch(croppedImg).then((res) => res.blob());
       const compressedBlob = await imageCompression(croppedBlob, options);
       const compressedFile = new File([compressedBlob], 'dp.webp', { type: 'image/webp' });
-      
-      setCroppedImage(URL.createObjectURL(compressedFile)); 
-      props.setImageFunc(compressedFile); 
+
+      setCroppedImage(URL.createObjectURL(compressedFile));
+      props.setImageFunc(compressedFile);
       setCropping(false);
     } catch (error) {
       console.error("Error compressing the image:", error);
@@ -70,26 +71,24 @@ const FilePicker = (props) => {
       setCropping(true);
     }
   };
-console.log('the image',image)
+  console.log('the image', image)
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', gap: "20px" }}>
       <div
         className="d-flex flex-column align-items-center rounded p-3"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
-        style={{ width: "190px", height: "150px", position: "relative", border: '0px ' }}
+        style={{  position: "relative", border: '0px ' }}
       >
         {!cropping ? (
           <div
             className="d-flex flex-column align-items-center justify-content-center"
-            style={{ width: "150px", height: "150px" }}
             onClick={() => document.getElementById("fileInput").click()}
           >
             <img
               src={image || croppedImage || `${process.env.PUBLIC_URL}/assets/image.png`}
               alt="Selected"
-              style={{ width: "150px", height: "150px", objectFit: "cover" }}
-              className="img-thumbnail"
+              className={styles.thumbnail}
             />
             <input
               type="file"
@@ -97,7 +96,7 @@ console.log('the image',image)
               accept="image/*"
               onChange={handleImageChange}
               style={{ display: "none" }}
-              
+
             />
           </div>
         ) : (
@@ -119,22 +118,22 @@ console.log('the image',image)
                 onCropChange={setCrop}
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
-                style={{ containerStyle: { height: "350px", width: "290px",background:'darkslategrey',zIndex:'500' },    background: 'darkslategrey' }}
+                style={{ containerStyle: { height: "350px", width: "290px", background: 'darkslategrey', zIndex: '500' }, background: 'darkslategrey' }}
               />
             </div>
             <button
               type="button"
               className="btn"
               onClick={handleSaveCrop}
-              style={{ position: "absolute", bottom: "-2rem",zIndex:'501',bottom: '100px',right: '-270px' }}
+              style={{ position: "absolute", bottom: "-2rem", zIndex: '501', bottom: '100px', right: '-270px' }}
             >
-              <MdOutlineCheck size={25}/>
+              <MdOutlineCheck size={25} />
             </button>
           </>
         )}
       </div>
       <div>
-        <img style={{ height: '150px' }} src={`${process.env.PUBLIC_URL}/assets/tips.png`} alt="Tips" />
+        <img  className={styles.tips} src={`${process.env.PUBLIC_URL}/assets/tips.png`} alt="Tips" />
       </div>
     </div>
   );

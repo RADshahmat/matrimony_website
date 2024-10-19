@@ -48,6 +48,22 @@
     background-repeat: no-repeat;
     background-position: center;
   }
+  .logout {
+    margin-top: 20px;
+    background-color: #610d0d;
+    color: #FFFFFF; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .logout:hover {
+    background-color: #ac0b0b; 
+    color: #F1E4E8;
+  }
   
   .profileInfoColumn {
     display: flex;
@@ -73,11 +89,15 @@
   }
   
   .profileDetails {
-    font-size: 22px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+    font-size: 20px;
     font-weight: 300;
     align-self: stretch;
     margin-top: 15px;
     text-align: left;
+    font-family: Poppins;
   }
   
   .editButton {
@@ -89,19 +109,19 @@
     color: #fff;
     font-weight: 400;
     padding: 6px 54px;
+    cursor: pointer;
   }
   
   .actionSection {
     align-self: end;
     display: flex;
     margin-top: 61px;
-    width: 794px;
     max-width: 100%;
     gap: 40px 58px;
     color: #fff;
     white-space: nowrap;
     flex-wrap: wrap;
-    font: 700 35px Poppins, sans-serif;
+    font: 700 33px Poppins, sans-serif;
   }
   
   .actionButton {
@@ -111,9 +131,8 @@
     gap: 40px 91px;
     overflow: hidden;
     flex: 1;
-    flex-grow: 1;
     flex-basis: auto;
-    padding: 9px 18px 9px 38px;
+    padding: 9px 25px;
     cursor: pointer;
     text-decoration: none;
   }
@@ -167,7 +186,7 @@
     }
   
     .profileInfo {
-      margin-top: 0;
+      margin: 30px 39px;
     }
   
     .profileDetails {
@@ -180,15 +199,18 @@
     }
   
     .actionSection {
-      margin-top: 40px;
+      margin: 40px;
       white-space: initial;
       justify-content: center;
+      font-size: 30px;
     }
-  
+    .actionIcon{
+      width: 40px;
+    }
     .actionButton {
       padding: 15px 20px;
       white-space: initial;
-      width: 100%;
+      width: 60%;
     }
   
     .actionButtonContent {

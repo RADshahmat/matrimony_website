@@ -173,21 +173,27 @@
     margin-bottom: 20px;
   }
 .cardlistcontainer{
-  max-width: 430px;
+  max-width: 385px;
+  justify-content: center;
 }
   .cardContent {
     padding: 91px 20px 31px;
+    width: 380px;
+  }
+  .arrowContainer {
+    width: 40px;
+    height: 40px;
   }
 }
 
 @media (max-width: 375px) {
   .testimonialSection {
-    zoom: 45%;
+    zoom: 60%;
   }
 }
 
 @media (max-width: 316px) {
   .testimonialSection {
-    zoom: 45%;
+    zoom: 60%;
   }
 }

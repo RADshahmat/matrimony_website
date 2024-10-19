@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../Axios/axios_instance'; // Import the Axios instance
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'; // React Icons for arrows
+import { Link } from 'react-router-dom';
+import axiosInstance from '../../Axios/axios_instance'; 
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'; 
 import styles from '../../styles/homepageStyle/storiesNblogsSec6.module.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -8,30 +9,29 @@ import 'aos/dist/aos.css';
 const BlogPostsSection = () => {
   useEffect(() => {
     AOS.init({
-      duration: 800, // Adjust as needed
-      easing: 'ease-in-out', // Smoother easing
+      duration: 800, 
+      easing: 'ease-in-out', 
       once: false, 
-      mirror: true, // Allows animation to happen again when scrolling back
-      offset: 120, // Distance in pixels from the original trigger point
+      mirror: true, 
+      offset: 120, 
     });
   }, []);
 
   const [blogs, setBlogs] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(3); // Default to showing 3 cards
+  const [cardsToShow, setCardsToShow] = useState(3); 
 
-  // Adjust number of visible cards based on screen size
   useEffect(() => {
     const updateCardsToShow = () => {
       if (window.innerWidth < 768) {
-        setCardsToShow(1); // Show 1 card on mobile
+        setCardsToShow(1); 
       } else {
-        setCardsToShow(3); // Show 3 cards on desktop
+        setCardsToShow(3); 
       }
     };
 
     window.addEventListener('resize', updateCardsToShow);
-    updateCardsToShow(); // Set initial value
+    updateCardsToShow(); 
 
     return () => {
       window.removeEventListener('resize', updateCardsToShow);
@@ -42,7 +42,7 @@ const BlogPostsSection = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axiosInstance.get('/blogs'); // Replace with your backend URL
+        const response = await axiosInstance.get('/blogs');
         setBlogs(response.data);
         AOS.refresh();
       } catch (error) {
@@ -104,9 +104,13 @@ const BlogPostsSection = () => {
                   <p className={styles.excerpt}>
                     {truncateText(post.details, 100)} {/* Limit to 200 characters */}
                   </p>
-                  <a href="google.com" className={styles.readMore}>
-                    Read More
-                  </a>
+                  <Link 
+                      to={`/blogs/${post.id}`} 
+                      state={{ blog: post }} 
+                      className={styles.readMore}
+                    >
+                      Read More
+                    </Link>
                 </div>
               </div>
             </article>

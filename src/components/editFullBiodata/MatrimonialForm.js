@@ -8,7 +8,7 @@ import axiosInstance from '../../Axios/axios_instance';
 import { useNavigate } from 'react-router-dom';
 
 const MatrimonialForm = () => {
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({});
   const [images, setImages] = useState();
   const [images1,setImages1]=useState([]);
