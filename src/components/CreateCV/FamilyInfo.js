@@ -222,6 +222,7 @@ const FamilyInformationForm = (props) => {
               placeholder="Enter Your Father’s Name here"
               value={formData.fatherName}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.fieldColumn}>
@@ -247,6 +248,7 @@ const FamilyInformationForm = (props) => {
                     }
                   : null
               }
+              required
             />
           </div>
         </div>
@@ -261,6 +263,7 @@ const FamilyInformationForm = (props) => {
               placeholder="Enter Your Mother’s Name here"
               value={formData.motherName}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.fieldColumn}>
@@ -286,6 +289,7 @@ const FamilyInformationForm = (props) => {
                     }
                   : null
               }
+              required
             />
           </div>
         </div>
@@ -314,6 +318,7 @@ const FamilyInformationForm = (props) => {
                   brotherFields: Array(count).fill({}),
                 }));
               }}
+              required
             />
           </div>
         </div>
@@ -341,6 +346,7 @@ const FamilyInformationForm = (props) => {
                   sisterFields: Array(count).fill({}),
                 }));
               }}
+              required
             />
           </div>
         </div>

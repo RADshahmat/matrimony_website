@@ -72,11 +72,11 @@ const MatrimonialForm = () => {
   
   return (
     <div>
-      {page === 4 && <ProfileInformation pageFunc={setPage} formDataFunc={setFormData} formData={formData} image={images} images={setImages} />}
+      {page === 0 && <ProfileInformation pageFunc={setPage} formDataFunc={setFormData} formData={formData} image={images} images={setImages} />}
       {page === 1 && <AddressInfo pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
       {page === 2 && <EducationProfessionForm pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
       {page === 3 && <FamilyInformationForm pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
-      {page === 0 && (
+      {page === 4 && (
         <PartnerPreferences
           pageFunc={setPage}
           formDataFunc={formData} 

@@ -48,19 +48,11 @@
     background-repeat: no-repeat;
     background-position: center;
   }
-  .logout {
-    margin-top: 20px;
+  .logoutButton {
     background-color: #610d0d;
-    color: #FFFFFF; 
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
   }
   
-  .logout:hover {
+  .logoutButton:hover {
     background-color: #ac0b0b; 
     color: #F1E4E8;
   }
@@ -121,7 +113,7 @@
     color: #fff;
     white-space: nowrap;
     flex-wrap: wrap;
-    font: 700 33px Poppins, sans-serif;
+    font: 700 30px Poppins, sans-serif;
   }
   
   .actionButton {

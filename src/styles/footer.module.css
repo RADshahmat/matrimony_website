@@ -83,12 +83,13 @@
   input[type="email"] {
     color: #fff;
     background: var(--preview-themeforest-net-black, #000);
-    border: none; /* Remove all borders */
+    border: none; 
     border-bottom: 2px solid var(--preview-themeforest-net-white, #FFF);
-    outline: none; /* Remove the default focus outline */
-    padding: 8px; /* Adjust padding as needed */
+    outline: none; 
+    padding: 8px; 
     width: 279.13px;
     display: flex;
+    font-family: Poppins;
   }
   .messageInput {
     width: 93%;
@@ -99,6 +100,7 @@
     border-radius: 4px;
     resize: none;
     color: #fff;
+    font-family: Poppins;
   }
   
   .sendmsgbutton {
@@ -108,6 +110,7 @@
     border-radius: 5px;
     border: 2px solid var(--preview-themeforest-net-white, #FFF);
     cursor: pointer;
+    font-family: Poppins;
   }
 
   .sendmsgbutton:hover {

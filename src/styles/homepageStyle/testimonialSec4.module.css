@@ -163,22 +163,18 @@
 }
 
 @media (max-width: 768px) {
-  .testimonialSection {
-    zoom: 82%;
-  }
-
   .testimonialCard {
     width: 100%;
     max-width: 300px;
     margin-bottom: 20px;
   }
 .cardlistcontainer{
-  max-width: 385px;
+  max-width: 311px;
   justify-content: center;
 }
   .cardContent {
     padding: 91px 20px 31px;
-    width: 380px;
+    width: 310px;
   }
   .arrowContainer {
     width: 40px;
@@ -186,14 +182,3 @@
   }
 }
 
-@media (max-width: 375px) {
-  .testimonialSection {
-    zoom: 60%;
-  }
-}
-
-@media (max-width: 316px) {
-  .testimonialSection {
-    zoom: 60%;
-  }
-}

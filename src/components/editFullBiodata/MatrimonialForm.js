@@ -4,6 +4,8 @@ import AddressInfo from './Address';
 import EducationProfessionForm from './EducationProfession';
 import FamilyInformationForm from './FamilyInfo';
 import PartnerPreferences from './PartnerPreferences';
+import Header from '../header';
+import Footer from '../footer';
 import axiosInstance from '../../Axios/axios_instance';
 import { useNavigate } from 'react-router-dom';
 
@@ -84,6 +86,7 @@ const MatrimonialForm = () => {
   
   return (
     <div>
+      <Header />
       {page === 0 && <ProfileInformation pageFunc={setPage} formDataFunc={setFormData} formData={formData} image={images} images={setImages} />}
       {page === 1 && <AddressInfo pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
       {page === 2 && <EducationProfessionForm pageFunc={setPage} formDataFunc={setFormData} formData={formData} />}
@@ -97,6 +100,7 @@ const MatrimonialForm = () => {
           images1={images1}
         />
       )}
+      <Footer />
     </div>
   );
 };

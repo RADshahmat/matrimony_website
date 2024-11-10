@@ -124,3 +124,9 @@
     max-width: 100%;
   }
   
+  @media (max-width: 768px) {
+    .card{
+      transform: scale(0.7); /* scales content without affecting PDF output */
+      transform-origin: top center;
+    }
+    }

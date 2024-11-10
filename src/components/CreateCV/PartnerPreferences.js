@@ -5,7 +5,6 @@ import styles from "../../styles/CreateCvStyle/PartnerPreferences.module.css";
 
 const districts = [
   { value: "Bandarban", label: "Bandarban" },
-  { value: "Bandar", label: "Bandar" },
   { value: "Barguna", label: "Barguna" },
   { value: "Barisal", label: "Barisal" },
   { value: "Brahmanbaria", label: "Brahmanbaria" },
@@ -71,28 +70,28 @@ const districts = [
 const PartnerPreferences = (props) => {
   const [images, setImages] = useState([]);
   const [formData, setFormData] = useState({
-    age: "20",
+    age: "",
     height: "",
     district: "",
     educationalQualification: "",
-    employmentStatus: "Unemployed",
+    employmentStatus: "",
     heightPreference: "",
+    preferredHeightLimit: "",
     agePreference: "",
+    preferredAgeLimit: "",
     notReferredDistricts: [],
     minimumEducationalQualification: "",
   });
 
   const options = {
-    age: [{ value: "20", label: "20" }],
-    height: [{ value: "5'", label: "5'" }],
     educationalQualification: [
       { value: "Higher Secondary", label: "Higher Secondary" },
       { value: "Secondary School", label: "Secondary School" },
       { value: "Graduate", label: "Graduate" },
       { value: "Under Graduate", label: "Under Graduate" },
     ],
-    heightPreference: [{ value: "Not More Than", label: "Not More Than" }],
-    agePreference: [{ value: "Not less Than", label: "Not less Than" }],
+    heightPreference: [{ value: "more than", label: "Not More Than" },{ value: "less Than", label: "Not Less Than" }],
+    agePreference: [{ value: "more than", label: "Not More Than" },{ value: "less Than", label: "Not Less Than" }],
     minimumEducationalQualification: [
       { value: "Higher Secondary", label: "Higher Secondary" },
       { value: "Secondary School", label: "Secondary School" },
@@ -156,7 +155,7 @@ const PartnerPreferences = (props) => {
     const data = { ...props.formDataFunc, ...formData };
     props.images(compressedImages);
 
-    alert("Form submitted successfully!");
+    //alert("Form submitted successfully!");
     props.submitCV(data, compressedImages);
   };
 
@@ -191,30 +190,31 @@ const PartnerPreferences = (props) => {
           Personal Preferences For Partners (Optional)
         </h4>
         <div className={styles.row}>
-          <div className={styles.column}>
-            <label className={styles.label}>Age</label>
-            <Select
-              options={options.age}
-              name="age"
-              value={options.age.find(
-                (option) => option.value === formData.age
-              )}
-              onChange={handleChange}
-            />
+            <div className={styles.column}>
+              <label className={styles.label}>Age</label>
+              <input
+                type="number"
+                className={styles.input}
+                placeholder="Enter age"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className={styles.column}>
+              <label className={styles.label}>Height</label>
+              <input
+                type="text"
+                className={styles.input}
+                placeholder="Enter height"
+                name="height"
+                value={formData.height}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
-          <div className={styles.column}>
-            <label className={styles.label}>Height</label>
-            <Select
-              options={options.height}
-              name="height"
-              value={options.height.find(
-                (option) => option.value === formData.height
-              )}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
 
         <div className={styles.row}>
           <div className={styles.column}>
@@ -248,7 +248,10 @@ const PartnerPreferences = (props) => {
             <input
               type="text"
               className={styles.input}
-              placeholder="Unemployed"
+              name="employmentStatus"
+              placeholder="Current Status"
+              value={formData.employmentStatus}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -270,8 +273,8 @@ const PartnerPreferences = (props) => {
                 type="text"
                 className={styles.input}
                 placeholder="Enter height"
-                name="heightPreferenceValue"
-                id="heightPreferenceValue"
+                name="preferredHeightLimit"
+                value={formData.preferredHeightLimit}
                 onChange={handleChange}
               />
             </div>
@@ -292,8 +295,8 @@ const PartnerPreferences = (props) => {
                 type="text"
                 className={styles.input}
                 placeholder="Enter Age"
-                name="agePreferenceValue"
-                id="agePreferenceValue"
+                name="preferredAgeLimit"
+                value={formData.preferredAgeLimit}
                 onChange={handleChange}
               />
             </div>
@@ -382,10 +385,10 @@ const PartnerPreferences = (props) => {
 
         <div className={styles.buttonGroup}>
           <button type="button" onClick={prev} className={styles.backButton}>
-            Previous
+            Back
           </button>
           <button type="submit" className={styles.submitButton}>
-            Submit
+            Proceed
           </button>
         </div>
       </form>

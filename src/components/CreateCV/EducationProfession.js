@@ -64,11 +64,12 @@ const EducationProfessionForm = (props) => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      employedIn: value,
-    });
-  };
+    setFormData((prevFormData) => ({
+        ...prevFormData,
+        [id]: value, // Dynamically update the field based on its id
+    }));
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,6 +103,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Degree"
                 value={formData.highestEducationDegree}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -110,6 +112,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Department"
                 value={formData.highestEducationDepartment}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -118,6 +121,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Institution Name"
                 value={formData.highestEducationInstitution}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -135,6 +139,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Degree"
                 value={formData.secondEducationDegree}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -143,6 +148,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Department"
                 value={formData.secondEducationDepartment}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -151,6 +157,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Institution Name"
                 value={formData.secondEducationInstitution}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -169,6 +176,7 @@ const EducationProfessionForm = (props) => {
                 id="government"
                 value="Government"
                 onChange={handleChange}
+                required
               />
               <label className={styles.btnLabel} htmlFor="government">
                 Government
@@ -181,6 +189,7 @@ const EducationProfessionForm = (props) => {
                 id="defense"
                 value="Defense"
                 onChange={handleChange}
+                required
               />
               <label className={styles.btnLabel} htmlFor="defense">
                 Defense
@@ -193,6 +202,7 @@ const EducationProfessionForm = (props) => {
                 id="private"
                 value="Private"
                 onChange={handleChange}
+                required
               />
               <label className={styles.btnLabel} htmlFor="private">
                 Private
@@ -205,6 +215,7 @@ const EducationProfessionForm = (props) => {
                 id="business"
                 value="Business"
                 onChange={handleChange}
+                required
               />
               <label className={styles.btnLabel} htmlFor="business">
                 Business
@@ -217,6 +228,7 @@ const EducationProfessionForm = (props) => {
                 id="selfEmployed"
                 value="Self-employed"
                 onChange={handleChange}
+                required
               />
               <label className={styles.btnLabel} htmlFor="selfEmployed">
                 Self-employed
@@ -229,6 +241,7 @@ const EducationProfessionForm = (props) => {
                 id="student"
                 value="Student"
                 onChange={handleChange}
+                required
               />
               <label className={styles.btnLabel} htmlFor="student">
                 Student
@@ -249,6 +262,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Job Title"
                 value={formData.currentProfessionTitle}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -257,6 +271,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Department"
                 value={formData.currentProfessionDepartment}
                 onChange={handleChange}
+                
               />
               <input
                 type="text"
@@ -278,7 +293,7 @@ const EducationProfessionForm = (props) => {
               type="text"
               id="monthlyIncome"
               className={styles.formControl}
-              placeholder="2,40,000"
+              placeholder="2,40,000 taka"
               value={formData.monthlyIncome}
               onChange={handleChange}
             />

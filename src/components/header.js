@@ -43,9 +43,9 @@ const Header = () => {
                 <div className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
                     <Link to={'/'} className={styles.navItem}>Home</Link>
                     <div className={`${styles.navItem} ${styles.dropdownContainer}`}>
-                        <a href="#all-pages" className={styles.navItem} onClick={toggleDropdown}>All Pages
+                        <div className={styles.navItem} onClick={toggleDropdown}>All Pages
                             <img src={`${process.env.PUBLIC_URL}/assets/down arrow.png`} alt="Dropdown Icon" className={styles.dropdownIcon} />
-                        </a>
+                        </div>
                         {isDropdownOpen && (
                             <div className={styles.dropdownMenu}>
                                 <Link to={'/'} className={styles.dropdownItem}>Home</Link>
