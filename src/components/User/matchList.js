@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axiosInstance from "../../Axios/axios_instance";
 
 function UserProfile({
+  id,
   userId,
   name,
   age,
@@ -15,6 +16,11 @@ function UserProfile({
   onHeartClick,
   onChatRequestClick,
 }) {
+
+  const updateView=async (id)=>{
+
+    await axiosInstance.post(`/update_view_stat`,{id})
+  }
   return (
     <div className={styles.profileCard}>
       <input type="hidden" value={userId} /> {/* Hidden card userId */}
@@ -38,6 +44,7 @@ function UserProfile({
           to={"/ProfileViewPage"}
           state={{ userId }}
           className={styles.viewProfile}
+          onClick={updateView(id)}
         >
           View Profile
         </Link>
@@ -134,6 +141,7 @@ console.log(profiles)
         {profiles.map((profile, index) => (
           <UserProfile
             key={index}
+            id={profile.id}
             userId={profile.matchUserId}
             name={profile.name}
             age={profile.age}
