@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center; 
+    width: 100%;
+    justify-content: center;
 }
 
 .CVpreview {
@@ -60,10 +62,13 @@
 }
 
 @media (max-width: 768px) {
-    .pageWrapper{
-        zoom: 60%;
-    }
-  
+.arrowLeft, .arrowRight {
+    width: 30px;
+    height: 30px;
+}
+.pageIndex{
+    margin-top: -211px;
+}
 }
 .buttonContainer{
     display: flex;
@@ -79,17 +84,19 @@
     color: #000;
     text-align: center;
     font-family: Poppins;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 16.5px; /* 103.125% */
+    line-height: 16.5px;
     text-transform: capitalize;
     margin-bottom: 40px;
-    margin-right: 20px;
+    margin-right: 13px;
     text-decoration: none;
     align-items: center;
     justify-content: center;
     display: flex;
+    margin-left: 13px;
+    word-break: break-word;
 }
 
 .downloadButton:hover {

@@ -102,6 +102,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Degree"
                 value={formData.highestEducationDegree}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -110,6 +111,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Department"
                 value={formData.highestEducationDepartment}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -118,6 +120,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Institution Name"
                 value={formData.highestEducationInstitution}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -135,6 +138,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Degree"
                 value={formData.secondEducationDegree}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -143,6 +147,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Department"
                 value={formData.secondEducationDepartment}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -151,6 +156,7 @@ const EducationProfessionForm = (props) => {
                 placeholder="Institution Name"
                 value={formData.secondEducationInstitution}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>

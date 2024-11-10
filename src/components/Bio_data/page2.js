@@ -1,30 +1,36 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import BioHeader from './biodata_header';
 import BioFooter from './biodata_footer';
 import styles from '../../styles/Bio_dataStyle/page2.module.css';
 
 function BioDataPage2({ userData }) {
+  const [images,setImages]=useState([]);
+
+  useEffect(() => {
+    if (userData?.dpImage) {
+      setImages([userData.dpImage]);
+    }
+  }, [userData]);
   if (!userData) {
     return <div>Loading...</div>; 
   }
   
-  const { images } = userData;
 
   return (
-    <section className={styles.card}>
+    <section className={styles.card} data-component>
       <BioHeader />
       <div className={styles.content}>
         <div className={styles.mainInfo}>
           <div className={styles.details}>
-            <h2 className={styles.personName}>{userData.fullName}</h2>
+            <h2 className={styles.personName}>{userData.user.fullName}</h2>
             <div className={styles.sideInfo}>
               <p className={styles.intro}>
-                {userData.comments || "No introduction available"}
+                {userData.user.comments || "No introduction available"}
               </p>
               <div className={styles.sideContent}>
                 {images && images.length > 0 ? (
                   <img 
-                    src={images[0].path} alt="DP"
+                    src={`https://backend.butterfly.hurairaconsultancy.com/${images[0]}`} alt="DP"
                     className={styles.profilePic}
                   />
                 ) : (
@@ -40,42 +46,42 @@ function BioDataPage2({ userData }) {
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Date of Birth:</span>
                   <span className={styles.value}>
-                    {`${userData.dobDay} ${userData.dobMonth} ${userData.dobYear}`}
+                    {`${userData.user.dobDay} ${userData.user.dobMonth} ${userData.user.dobYear}`}
                   </span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Height:</span>
                   <span className={styles.value}>
-                    {`${userData.heightFeet} feet ${userData.heightInches} inches`}
+                    {`${userData.user.heightFeet} feet ${userData.user.heightInches} inches`}
                   </span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Gender:</span>
-                  <span className={styles.value}>{userData.gender}</span>
+                  <span className={styles.value}>{userData.user.gender}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Blood Group:</span>
-                  <span className={styles.value}>{userData.bloodGroup}</span>
+                  <span className={styles.value}>{userData.user.bloodGroup}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Physical Status:</span>
-                  <span className={styles.value}>{userData.physicalStatus}</span>
+                  <span className={styles.value}>{userData.user.physicalStatus}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Religion:</span>
-                  <span className={styles.value}>{userData.religion}</span>
+                  <span className={styles.value}>{userData.user.religion}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Marital Status:</span>
-                  <span className={styles.value}>{userData.maritalStatus}</span>
+                  <span className={styles.value}>{userData.user.maritalStatus}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>NID Number:</span>
-                  <span className={styles.value}>{userData.nidNumber}</span>
+                  <span className={styles.value}>{userData.user.nidNumber}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Citizenship:</span>
-                  <span className={styles.value}>{userData.citizenship}</span>
+                  <span className={styles.value}>{userData.user.citizenship}</span>
                 </div>
               </div>
             </section>
@@ -86,11 +92,11 @@ function BioDataPage2({ userData }) {
               <div className={styles.sectionContent}>
                 <p className={styles.detailItem}>
                   <span className={styles.label}>Phone:</span>
-                  <span className={styles.value}>{userData.phoneNumber}</span>
+                  <span className={styles.value}>{userData.user.phoneNumber}</span>
                 </p>
                 <p className={styles.detailItem}>
                   <span className={styles.label}>Email:</span>
-                  <span className={styles.value}>{userData.email}</span>
+                  <span className={styles.value}>{userData.user.email}</span>
                 </p>
               </div>
             </section>
@@ -98,36 +104,36 @@ function BioDataPage2({ userData }) {
             {/* Address */}
             <section className={styles.container}>
               <h2 className={styles.sectionTitle}>Present Address</h2>
-              <div className={styles.address}>{userData.presentAddress}</div>
+              <div className={styles.address}>{userData.user.presentAddress}</div>
               <div className={styles.sectionContent}>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>City:</span>
-                  <span className={styles.value}>{userData.city}</span>
+                  <span className={styles.value}>{userData.user.city}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Country:</span>
-                  <span className={styles.value}>{userData.country}</span>
+                  <span className={styles.value}>{userData.user.country}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Residence status:</span>
-                  <span className={styles.value}>{userData.residenceStatus}</span>
+                  <span className={styles.value}>{userData.user.residenceStatus}</span>
                 </div>
               </div>
 
               <h2 className={styles.sectionTitle}>Permanent Address</h2>
-              <div className={styles.address}>{userData.permanentAddress}</div>
+              <div className={styles.address}>{userData.user.permanentAddress}</div>
               <div className={styles.sectionContent}>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>City:</span>
-                  <span className={styles.value}>{userData.permanentCity}</span>
+                  <span className={styles.value}>{userData.user.permanentCity}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Country:</span>
-                  <span className={styles.value}>{userData.permanentCountry}</span>
+                  <span className={styles.value}>{userData.user.permanentCountry}</span>
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Residence status:</span>
-                  <span className={styles.value}>{userData.permanentResidenceStatus}</span>
+                  <span className={styles.value}>{userData.user.permanentResidenceStatus}</span>
                 </div>
               </div>
             </section>
@@ -135,12 +141,12 @@ function BioDataPage2({ userData }) {
             {/* Educational Background */}
             <section className={styles.container}>
               <h2 className={styles.sectionTitle}>Educational Background:</h2>
-              <div className={styles.value}>{userData.highestEducationInstitution}</div>
+              <div className={styles.value}>{userData.user.highestEducationInstitution}</div>
               <div className={styles.value}>
-                {userData.highestEducationDegree} - {userData.highestEducationDepartment}
+                {userData.user.highestEducationDegree} - {userData.user.highestEducationDepartment}
               </div>
               <div className={styles.value}>
-                {userData.educationalQualification || "Details not available"}
+                {userData.user.educationalQualification || "Details not available"}
               </div>
             </section>
           </div>

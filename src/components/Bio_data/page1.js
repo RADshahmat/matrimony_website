@@ -7,7 +7,7 @@ function BioDataPage1({ userData }) {
   }
 
   return (
-    <main className={styles.container}>
+    <main className={styles.container} data-component>
       <section className={styles.content}>
         <div className={styles.profileSection}>
           <div className={styles.imageColumn}>
@@ -30,10 +30,10 @@ function BioDataPage1({ userData }) {
       </section>
       <section className={styles.bioSection}>
         <h1 className={styles.bioTitle}>Bio-Data</h1>
-        <h2 className={styles.name}>{userData.fullName}</h2>
+        <h2 className={styles.name}>{userData.user.fullName}</h2>
         <p className={styles.details}>
-          Date of Birth : {userData.dobDay} / {userData.dobMonth} / {userData.dobYear} <br />
-          {userData.city} , {userData.country}
+          Date of Birth : {userData.user.dobDay} / {userData.user.dobMonth} / {userData.user.dobYear} <br />
+          {userData.user.city} , {userData.user.country}
         </p>
       </section>
       <div className={styles.decorativeColumn}>

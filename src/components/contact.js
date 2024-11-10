@@ -48,7 +48,7 @@ const ContactSection = () => {
             </a>
             <a
               className={styles.iconText}
-              href="https://www.google.com/maps/place/House+7,+Road+2%2FC,+Block+J,+Baridhara,+Gulshan,+Dhaka-1212"
+              href="https://www.google.com.bd/maps/place/Butterfly+Matrimonial/@23.7947184,90.4250835,15z/data=!4m2!3m1!1s0x0:0xe570e95050a6ee5c?sa=X&ved=1t:2428&ictx=111"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -63,7 +63,8 @@ const ContactSection = () => {
       <iframe
         className={styles.mapIframe}
         title="Google Map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.622254969754!2d90.41738467556803!3d23.788563585877193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c78809a8c187%3A0x8eb70b205839a91d!2sHouse%207%2C%20Road%202%2FC%2C%20Block%20J%2C%20Baridhara%2C%20Gulshan%2C%20Dhaka-1212!5e0!3m2!1sen!2sbd!4v1694089396821!5m2!1sen!2sbd"        allowFullScreen=""
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.622254969754!2d90.4225086!3d23.7947184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c732234c7979:0xe570e95050a6ee5c!2sButterfly+Matrimonial!5e0!3m2!1sen!2sbd!4v1694089396821!5m2!1sen!2sbd"
+         allowFullScreen=""
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>

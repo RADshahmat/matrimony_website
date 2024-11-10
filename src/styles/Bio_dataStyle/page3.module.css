@@ -1,4 +1,10 @@
 
+@media (max-width: 768px) {
+  .card{
+    transform: scale(0.7); /* scales content without affecting PDF output */
+    transform-origin: top center;
+  }
+  }
 .card {
     background-color: #fff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
@@ -14,7 +20,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-bottom: 10px;
   }
   .content {
     display: flex;
@@ -23,7 +28,7 @@
   .sectionContent {
     display: grid;
     grid-template-columns: 150px auto; /* Adjust the width of the label column as needed */
-    gap: 2px;
+    gap: 1px;
 
     color: #000;
     font-family: Prata;
@@ -86,7 +91,7 @@ padding-right: 20px;
     font-weight: 400;
     line-height: normal;
     margin-bottom: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   
 
@@ -97,8 +102,18 @@ padding-right: 20px;
     }
   }
   @media (max-width: 768px) {
-    .card {
-      width: 100%; /* Full width on smaller screens */
-    }
+
   }
   
+  .extraItem{
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    margin-top: 10px;
+  }
+  .extraImages{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+
+  }

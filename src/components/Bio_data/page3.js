@@ -1,34 +1,53 @@
 // BioDataPage3.js
 
-import React from 'react';
+import React,{useState,useEffect} from "react";
 import styles from '../../styles/Bio_dataStyle/page3.module.css'; // Ensure this CSS file exists and is correctly styled
 import BioHeader from './biodata_header';
 import Footer from './biodata_footer';
 
 const BioDataPage3 = ({ userData }) => {
+
+  const [brothers, setBrothers] = useState([]);
+  const [sisters, setSisters] = useState([]);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    if (userData) {
+      setBrothers(userData.brothers || []);
+      setSisters(userData.sisters || []);
+      setImages(userData.extraImage||[])
+    }
+  }, [userData]);
   if (!userData) {
     return <div>Loading...</div>; // Handle loading state
   }
 
   const {
     fullName,
-    occupationType,
-    institutionName,
-    jobTitle,
-    department,
+    employedIn,
+    currentProfessionCompany,
+    currentProfessionTitle,
+    currentProfessionDepartment,
     monthlyIncome,
     fatherName,
     fatherOccupation,
     motherName,
     motherOccupation,
-    siblings,
-    agePreference
-  } = userData;
+    educationalQualification,
+    employmentStatus,
+    notReferredDistricts,
+    district,
+    age,
+    height,
+    heightPreference,
+    preferredHeightLimit,
+    agePreference,
+    preferredAgeLimit
+  } = userData.user;
 
-  const { brothers, sisters } = userData;
-
+  console.log(images,userData,"this is the kakaest data")
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-component>
       <BioHeader />
 
       {/* Main Information Section */}
@@ -39,19 +58,19 @@ const BioDataPage3 = ({ userData }) => {
           <div className={styles.sectionContent}>
             <div className={styles.detailItem}>
               <span className={styles.label}>Occupation Type:</span>
-              <span className={styles.value}>{occupationType}</span>
+              <span className={styles.value}>{employedIn}</span>
             </div>
             <div className={styles.detailItem}>
               <span className={styles.label}>Institution Name:</span>
-              <span className={styles.value}>{institutionName}</span>
+              <span className={styles.value}>{currentProfessionCompany}</span>
             </div>
             <div className={styles.detailItem}>
               <span className={styles.label}>Job Title:</span>
-              <span className={styles.value}>{jobTitle}</span>
+              <span className={styles.value}>{currentProfessionTitle}</span>
             </div>
             <div className={styles.detailItem}>
               <span className={styles.label}>Department:</span>
-              <span className={styles.value}>{department}</span>
+              <span className={styles.value}>{currentProfessionDepartment}</span>
             </div>
             <div className={styles.detailItem}>
               <span className={styles.label}>Monthly Income:</span>
@@ -79,14 +98,18 @@ const BioDataPage3 = ({ userData }) => {
             </div>
             <div className={styles.detailItem}>
               <span className={styles.label}>Number of Siblings:</span>
-              <span className={styles.value}>{siblings || "Siblings"}</span>
+              <span className={styles.value}>
+                  {brothers.length > 0 || sisters.length > 0
+                    ? `${brothers.length} ${brothers.length === 1 ? 'Brother' : 'Brothers'} and ${sisters.length} ${sisters.length === 1 ? 'Sister' : 'Sisters'}`
+                    : "0"}
+                </span>
             </div>
 
             {/* Dynamic Brothers Information */}
             {brothers && brothers.length > 0 && (
               <>
                 {brothers.map((brother, index) => (
-                  <div key={brother.id} className={styles.detailItem}>
+                  <div key={index} className={styles.detailItem}>
                     <span className={styles.label}>Brother {index + 1} Name:</span>
                     <span className={styles.value}>{brother.brotherName || `Brother ${index + 1} Name`}</span>
                     <span className={styles.label}>Occupation:</span>
@@ -100,7 +123,7 @@ const BioDataPage3 = ({ userData }) => {
             {sisters && sisters.length > 0 && (
               <>
                 {sisters.map((sister, index) => (
-                  <div key={sister.id} className={styles.detailItem}>
+                  <div key={index} className={styles.detailItem}>
                     <span className={styles.label}>Sister {index + 1} Name:</span>
                     <span className={styles.value}>{sister.sisterName || `Sister ${index + 1} Name`}</span>
                     <span className={styles.label}>Occupation:</span>
@@ -115,11 +138,99 @@ const BioDataPage3 = ({ userData }) => {
           <section className={styles.sec3}>
             <h2 className={styles.sectionTitle}>Preference:</h2>
             <div className={styles.value}>
-              I am looking for a person age around {agePreference} years old, Height around 5 feet 7, and from Dhaka. 
-              I am open for Educational qualification and Employment. I may not prefer someone age more than 20 years 
-              or height less than 5 feet or he lives in Rangpur, Chittagong and Barishal.
-            </div>
+            I am looking for a person{" "}
+                {(() => {
+                  const items = [];
+
+                  if (age && age !== "N/A") {
+                    items.push(`age around ${age} years old`);
+                  }
+                  if (height && height !== "N/A") {
+                    items.push(`height around ${height}`);
+                  }
+                  if (district && district !== "N/A") {
+                    items.push(`from ${district}`);
+                  }
+
+                  if (items.length === 0) {
+                    return ""; 
+                  }
+
+                  if (items.length === 1) {
+                    return items[0];
+                  }
+
+                  const lastItem = items.pop(); 
+                  return `${items.join(", ")} and ${lastItem}`; 
+                })()} . 
+
+                {(() => {
+                  const qualifications = [];
+                  
+                  if (educationalQualification && educationalQualification !== "N/A") {
+                    qualifications.push(educationalQualification);
+                  }
+                  if (employmentStatus && employmentStatus !== "N/A") {
+                    qualifications.push(employmentStatus);
+                  }
+
+                  if (qualifications.length === 0) {
+                    return ""; 
+                  }
+
+                  return (
+                    <>
+                      {qualifications.length === 1 
+                        ? ` I am open for ${qualifications[0]} . ` 
+                        : ` I am open for ${qualifications.join(" and ")} . `}
+                    </>
+                  );
+                })()}
+
+                {(() => {
+                    const preferences = [];
+
+                    if (agePreference && agePreference !== "N/A" && preferredAgeLimit && preferredAgeLimit !== "N/A") {
+                      preferences.push(`age ${agePreference} ${preferredAgeLimit} years`);
+                    }
+
+                    if (heightPreference && heightPreference !== "N/A" && preferredHeightLimit && preferredHeightLimit !== "N/A") {
+                      preferences.push(`height ${heightPreference} ${preferredHeightLimit}`);
+                    }
+
+                    if (notReferredDistricts && notReferredDistricts !== "N/A") {
+                      preferences.push(`lives in ${notReferredDistricts}`);
+                    }
+
+                    if (preferences.length === 0) {
+                      return ""; 
+                    }
+
+                    return (
+                      <>
+                      I may not prefer someone{" "}
+                      {preferences.length === 1
+                        ? preferences[0] 
+                        : preferences.join(" or ")}
+                      .
+                    </>
+                    );
+                  })()}
+              </div>
+
+
           </section>
+          <div className={styles.extraItem}> 
+              {images && images.length > 0 && (
+                  <>
+                    {images.map((image, index) => (
+                      <div key={index}  >
+                        <img src={`https://backend.butterfly.hurairaconsultancy.com/${image.path}`} className={styles.extraImages} />
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
         </div>
       </div>
       <Footer />

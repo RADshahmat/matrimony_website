@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
-import CountUp from 'react-countup'; // Import the CountUp component
+import CountUp from 'react-countup';
+import axiosInstance from "../../Axios/axios_instance"; 
 import styles from '../../styles/homepageStyle/whyChooseUsSec2.module.css';
 
-const featureData = [
+const featureDataTemplate = [
   {
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/d45712a6d61e538c8047624a028b7ca606d3b931da8ee3c987c9ee5923e0fe04?apiKey=68c669943f1543b88775d643f2be81f3&&apiKey=68c669943f1543b88775d643f2be81f3",
+    iconSrc: "/assets/whyChous1st.svg",
     title: "Genuine profiles",
     description: "Genuine Profiles with 100% Verification by Varvel Communication"
   },
   {
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/468df2e0fd0628a03195333dc430cfb98bbd24b9642947f0d4bc746e683c7fe6?apiKey=68c669943f1543b88775d643f2be81f3&&apiKey=68c669943f1543b88775d643f2be81f3",
+    iconSrc: "/assets/whyChous2nd.svg",
     title: "Confidential",
     description: "We Respect Your Privacy, Ensuring Complete Confidentiality"
   },
   {
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/d3d45e80e536b5246ef94688ba100b1d01712a9df766dac2c98b1f692763d833?apiKey=68c669943f1543b88775d643f2be81f3&&apiKey=68c669943f1543b88775d643f2be81f3",
+    iconSrc: "/assets/whyChous3rd.svg",
     title: "2000+ Success",
     description: "A Trusted Platform for Thousands of People",
-    isCountUp: true // Adding a flag to indicate this card should have a count-up effect
+    isCountUp: true 
   }
 ];
 
@@ -29,7 +30,7 @@ const FeatureCard = ({ iconSrc, title, description, isCountUp }) => {
       <img loading="lazy" src={iconSrc} alt="" className={styles.icon} />
       <h3 className={styles.title}>
         {isCountUp ? (
-          <CountUp start={0} end={2000} duration={5} suffix="+" />
+          <CountUp start={0} end={parseInt(title)} duration={5} suffix="+" />
         ) : (
           title
         )}
@@ -40,14 +41,39 @@ const FeatureCard = ({ iconSrc, title, description, isCountUp }) => {
 };
 
 const WhyChooseUsSec2 = () => {
+  const [featureData, setFeatureData] = useState(featureDataTemplate);
+
   useEffect(() => {
     AOS.init({
-      duration: 800, // Adjust as needed
-      easing: 'ease-in-out', // Smoother easing
-      once: false, 
-      mirror: true, // Allows animation to happen again when scrolling back
-      offset: 120, // Distance in pixels from the original trigger point
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false,
+      mirror: true,
+      offset: 120,
     });
+
+    // Fetch data for the third card from the backend
+    const fetchSuccessData = async () => {
+      try {
+        const response = await axiosInstance.get('/success');
+        const { count, text } = response.data;
+
+        // Update the third card's data
+        setFeatureData(prevData => {
+          const updatedData = [...prevData];
+          updatedData[2] = {
+            ...updatedData[2],
+            title: `${count} Success`,
+            description: text
+          };
+          return updatedData;
+        });
+      } catch (error) {
+        console.error('Error fetching success data:', error);
+      }
+    };
+
+    fetchSuccessData();
   }, []);
 
   return (
@@ -60,7 +86,7 @@ const WhyChooseUsSec2 = () => {
               iconSrc={feature.iconSrc}
               title={feature.title}
               description={feature.description}
-              isCountUp={feature.isCountUp} // Pass the flag to determine if CountUp should be used
+              isCountUp={feature.isCountUp && index === 2}
             />
           </div>
         ))}

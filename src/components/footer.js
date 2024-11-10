@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/footer.module.css';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import axiosInstance from "../Axios/axios_instance"
@@ -6,7 +6,7 @@ import { toast,ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Footer = () => {
-  // State for toggling visibility of each item
+  const [companyDetails, setCompanyDetails] = useState(null);
   const [serviceVisibility, setServiceVisibility] = useState([false, false, false, false]);
   const [linkVisibility, setLinkVisibility] = useState([false, false, false, false, false]);
   const [formData, setFormData] = useState({
@@ -14,6 +14,18 @@ const Footer = () => {
     phoneNumber: '',
     query: '',
   });
+
+  useEffect(() => {
+    const fetchCompanyDetails = async () => {
+      try {
+        const response = await axiosInstance.get('/company_details');
+        setCompanyDetails(response.data);
+      } catch (error) {
+        console.error('Error fetching company details:', error);
+      }
+    };
+    fetchCompanyDetails();
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -87,20 +99,28 @@ const Footer = () => {
         <div className={styles.footersection}>
           <h3 className={styles.footerTitle}>About Us</h3>
           <p>Toast father bridesmaid forever happy salad open bar open bar magic church. First aisle cheers</p>
-          <div className={styles.socialLinks} >
-                  <a href="https://www.facebook.com" className={styles.iconLink}>
-                    <FaFacebookF />
-                  </a>
-                  <a href="https://www.twitter.com" className={styles.iconLink}>
-                    <FaTwitter />
-                  </a>
-                  <a href="https://www.linkedin.com" className={styles.iconLink}>
-                    <FaLinkedinIn />
-                  </a>
-                  <a href="https://www.youtube.com" className={styles.iconLink}>
-                    <FaYoutube />
-                  </a>
-            </div>
+          <div className={styles.socialLinks}>
+            {companyDetails?.facebook_link && (
+              <a href={companyDetails.facebook_link} className={styles.iconLink} target="_blank" rel="noopener noreferrer">
+                <FaFacebookF />
+              </a>
+            )}
+            {companyDetails?.twitter_link && (
+              <a href={companyDetails.twitter_link} className={styles.iconLink} target="_blank" rel="noopener noreferrer">
+                <FaTwitter />
+              </a>
+            )}
+            {companyDetails?.linkedin_link && (
+              <a href={companyDetails.linkedin_link} className={styles.iconLink} target="_blank" rel="noopener noreferrer">
+                <FaLinkedinIn />
+              </a>
+            )}
+            {companyDetails?.youtube_link && (
+              <a href={companyDetails.youtube_link} className={styles.iconLink} target="_blank" rel="noopener noreferrer">
+                <FaYoutube />
+              </a>
+            )}
+          </div>
         </div>
 
         {/* Our Services Section */}

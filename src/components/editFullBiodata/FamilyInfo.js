@@ -215,6 +215,7 @@ console.log(props.formData,brotherCount,'e ki vai')
               placeholder="Enter Your Father’s Name here"
               value={formData.fatherName}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.fieldColumn}>
@@ -240,6 +241,7 @@ console.log(props.formData,brotherCount,'e ki vai')
                     }
                   : null
               }
+              required
             />
           </div>
         </div>
@@ -254,6 +256,7 @@ console.log(props.formData,brotherCount,'e ki vai')
               placeholder="Enter Your Mother’s Name here"
               value={formData.motherName}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.fieldColumn}>
@@ -279,6 +282,7 @@ console.log(props.formData,brotherCount,'e ki vai')
                     }
                   : null
               }
+              required
             />
           </div>
         </div>
@@ -311,6 +315,7 @@ console.log(props.formData,brotherCount,'e ki vai')
                   brotherFields: Array(count).fill({}),
                 }));
               }}
+              required
             />
           </div>
         </div>
@@ -338,6 +343,7 @@ console.log(props.formData,brotherCount,'e ki vai')
                   sisterFields: Array(count).fill({}),
                 }));
               }}
+              required
             />
           </div>
         </div>

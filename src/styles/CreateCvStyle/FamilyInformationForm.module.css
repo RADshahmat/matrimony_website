@@ -2,7 +2,7 @@
 
 .container {
     width: 80%;
-    margin: 2rem auto;
+    margin: 5rem auto;
     font-family: Nunito;
   }
   .title{
@@ -59,8 +59,8 @@
   }
   
   .button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 0.75rem 4rem;
+    background-color: #070e16;
     color: white;
     border: none;
     border-radius: 4px;
@@ -69,6 +69,11 @@
   }
   
   .button:hover {
-    background-color: #0056b3;
+    background-color: #1b1b28;
   }
-  
+  @media (max-width: 768px){
+    .button {
+      padding: 0.75rem 2rem;
+    }
+
+  }

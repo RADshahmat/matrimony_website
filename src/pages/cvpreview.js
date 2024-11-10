@@ -21,6 +21,7 @@ function CVpreview() {
         const fetchData = async () => {
             try {
                 const response = await axiosInstance.get(`/users/${id}`);
+                console.log(response.data,"kaka plz work")
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -64,46 +65,55 @@ function CVpreview() {
     };
 
     const downloadPDF = async () => {
-        // Temporarily render all pages to the DOM
-        setCurrentIndex(0); // Set to the first page index for rendering
+        setCurrentIndex(0);
         const doc = new jsPDF("portrait", "mm", "a4");
-
+    
         for (let i = 0; i < pages.length; i++) {
-            setCurrentIndex(i); // Show each page one by one
+            setCurrentIndex(i); 
             await new Promise(resolve => setTimeout(resolve, 500)); // Wait for the page to render
-
+    
             const pageElement = document.getElementById(`cv-page-${i + 1}`);
             if (!pageElement) continue;
-
-            const canvas = await html2canvas(pageElement, { scale: 2 });
-            const imgData = canvas.toDataURL('image/png');
-            let imgWidth = 210; // A4 width in mm
-            const pageHeight = 297; // A4 height in mm
+    
+    
+            const componentElement = pageElement.querySelector('[data-component]'); 
+    
+            if (!componentElement) continue; 
+    
+            componentElement.style.transform = "scale(1)";
+            componentElement.style.transformOrigin = "top center";
+    
+            const canvas = await html2canvas(componentElement, { scale: 2 });
+            const imgData = canvas.toDataURL("image/png");
+    
+            let imgWidth = 210; 
+            const pageHeight = 297; 
             let imgHeight = (canvas.height * imgWidth) / canvas.width;
-
+    
             if (imgHeight > pageHeight) {
                 const ratio = pageHeight / imgHeight;
                 imgWidth *= ratio;
                 imgHeight = pageHeight;
             }
-
-            if (i > 0) doc.addPage(); // Add new page after the first one
-            doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    
+            if (i > 0) doc.addPage();
+            doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+    
+            componentElement.style.transform = "";
+            componentElement.style.transformOrigin = "";
         }
-
-        // Save the PDF
-        doc.save('cv-preview.pdf');
-
-        // Restore the currentIndex back to original position
-        setCurrentIndex(0);
+    
+        doc.save("cv-preview.pdf");
+        setCurrentIndex(0); 
     };
+    
 
     return (
         <div>
             <Header />
             <div className={styles.CVpreview}>
                 <p className={styles.pagetitle}>Preview Your CV</p>
-                <div className={styles.pagecontainer} style={{flexWrap:'wrap'}}>
+                <div className={styles.pagecontainer} >
                     {visiblePages.map(({ component, pageIndex }) => (
                         <div key={pageIndex} id={`cv-page-${pageIndex}`} className={styles.pageWrapper}>
                             {component}
@@ -127,13 +137,13 @@ function CVpreview() {
                         />
                     )}
                 </div>
-                   <div className={styles.buttonContainer}>
-                   <Link to="/userdashboard" className={styles.downloadButton}>
-                   <FaArrowLeft style={{ marginRight: '8px' }} /> Back to Dashboard
-                    </Link>
-                    <button className={styles.downloadButton} onClick={downloadPDF}>
-                        Request Venus & Download
-                    </button>
+                    <div className={styles.buttonContainer}>
+                    <Link to="/userdashboard" className={styles.downloadButton}>
+                    <FaArrowLeft style={{ marginRight: '8px' }} /> Back to Dashboard
+                        </Link>
+                        <button className={styles.downloadButton} onClick={downloadPDF}>
+                            Request Venus & Download
+                        </button>
                 </div>
             </div>
             <Footer />

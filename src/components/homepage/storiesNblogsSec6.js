@@ -62,9 +62,13 @@ const BlogPostsSection = () => {
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? blogs.length - cardsToShow : prevIndex - cardsToShow
-    );
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === 0) {
+        // If we're at the start, we can't go further back, so return the same index
+        return prevIndex;
+      }
+      return Math.max(prevIndex - cardsToShow, 0);
+    });
   };
 
   const handleNext = () => {
@@ -82,39 +86,43 @@ const BlogPostsSection = () => {
       <div className={styles.sliderContainer}>
         <MdArrowBackIos className={styles.arrowIcon} onClick={handlePrev} />
         <div className={styles.blogscardContainer}>
-          {visibleBlogs.map((post) => (
-            <article key={post.id} className={styles.card}>
-              <div className={styles.cardContent}>
-                <div className={styles.imageWrapper}>
-                  <img src={`${post.image}`} alt={post.title} className={styles.image} />
-                  <div className={styles.category}>
-                    <span className={styles.categoryTag}>Wedding</span>
+          {visibleBlogs.length > 0 ? (
+            visibleBlogs.map((post) => (
+              <article key={post.id} className={styles.card}>
+                <div className={styles.cardContent}>
+                  <div className={styles.imageWrapper}>
+                    <img src={`${post.image}`} alt={post.title} className={styles.image} />
+                    <div className={styles.category}>
+                      <span className={styles.categoryTag}>Wedding</span>
+                    </div>
                   </div>
-                </div>
-                <div className={styles.textContent}>
-                  <div className={styles.pinType}>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/assets/pin.svg`}
-                      alt="pin"
-                      className={styles.pin}
-                    />
-                    <span className={styles.pintext}>Wedding</span>
-                  </div>
-                  <h2 className={styles.title}>{post.title}</h2>
-                  <p className={styles.excerpt}>
-                    {truncateText(post.details, 100)} {/* Limit to 200 characters */}
-                  </p>
-                  <Link 
+                  <div className={styles.textContent}>
+                    <div className={styles.pinType}>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/assets/pin.svg`}
+                        alt="pin"
+                        className={styles.pin}
+                      />
+                      <span className={styles.pintext}>Wedding</span>
+                    </div>
+                    <h2 className={styles.title}>{post.title}</h2>
+                    <p className={styles.excerpt}>
+                      {truncateText(post.details, 100)}
+                    </p>
+                    <Link 
                       to={`/blogs/${post.id}`} 
                       state={{ blog: post }} 
                       className={styles.readMore}
                     >
                       Read More
                     </Link>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))
+          ) : (
+            <p>No blogs available</p>
+          )}
         </div>
         <MdArrowForwardIos className={styles.arrowIcon} onClick={handleNext} />
       </div>

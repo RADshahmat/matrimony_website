@@ -74,6 +74,7 @@
   text-decoration: none;
   color: #66451C;
   position: relative;
+  cursor: pointer;
 }
 
 /* Hover effect for nav links */

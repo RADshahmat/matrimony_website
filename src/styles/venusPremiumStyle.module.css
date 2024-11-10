@@ -21,7 +21,7 @@
   bottom: -83px;
   left: 13px;
   width: 250px;
-  opacity: 0.2;
+  opacity: 0.5;
 }
 .venusrings{
   position: absolute;
@@ -339,21 +339,21 @@
 
   .heroTitle {
     max-width: 100%;
-    font-size: 18px;
+    font-size: 16px;
     padding: 15px;
-    margin: -50px 1rem 1rem 1rem;
+    margin: -50px 1.5rem 1.5rem 1.5rem;
   }
   .whatVenus{
-    margin: 0 1rem;
+    margin: 0 1.5rem;
   }
   .whatExpect{
-    margin: 0 1rem;
+    margin: 0 1.5rem;
   }
   .sectionTitle {
     margin-top: 20px;
   }
   .sectionTitleText{
-    font-size: 18px;
+    font-size: 16px;
   }
   .descriptionSection {
     max-width: 100%;

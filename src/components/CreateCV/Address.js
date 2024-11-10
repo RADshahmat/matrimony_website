@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import countryList from "react-select-country-list"; // Assuming you're using this to get the country list
 import styles from "../../styles/CreateCvStyle/AddressInfo.module.css";
 
 const AddressInfo = (props) => {
   const [sameAddress, setSameAddress] = useState(false);
-  const[navigation,setNavigation]=useState(1);
+  const [navigation, setNavigation] = useState(1);
   const [formData, setFormData] = useState({
     presentAddress: "",
     country: "",
@@ -32,7 +33,7 @@ const AddressInfo = (props) => {
         permanentResidenceStatus = "",
         permanentCity = ""
       } = props.formData;
-  
+
       setFormData((prevData) => ({
         ...prevData,
         presentAddress,
@@ -48,19 +49,27 @@ const AddressInfo = (props) => {
       }));
     }
   }, [props.formData]);
-  
 
+  // Fetch all countries and arrange them
+  const allCountries = countryList().getData();
   const countryOptions = [
     { value: "Bangladesh", label: "Bangladesh" },
-
+    ...allCountries.filter(country => country.value !== "Bangladesh"), // all countries except Bangladesh
   ];
 
+  // Assuming citizenship is the same as country for now
   const citizenshipOptions = [
-    { value: "Bangladeshi", label: "Bangladeshi" },
+    { value: "Bangladesh", label: "Bangladesh" },
+    ...countryOptions.map(country => ({
+      value: country.value,
+      label: country.label,
+    })).filter(option => option.value !== "Bangladesh"), // all except Bangladeshi
   ];
 
   const residenceStatusOptions = [
     { value: "Citizen", label: "Citizen" },
+    { value: "Resident", label: "Resident" },
+    { value: "Other", label: "Other" },
   ];
 
   const handleCheckboxChange = () => {
@@ -107,12 +116,12 @@ const AddressInfo = (props) => {
     const formErrors = {};
 
     if (Object.keys(formErrors).length === 0) {
-      if(navigation==1){
+      if (navigation === 1) {
         props.pageFunc(2);
-      }else{
+      } else {
         props.pageFunc(0);
       }
-      
+
       //alert("Form submitted successfully!");
       props.formDataFunc((prevData) => ({
         ...prevData,
@@ -121,8 +130,7 @@ const AddressInfo = (props) => {
     }
   };
 
-
-  console.log('this is formData', formData); 
+  console.log('this is formData', formData);
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>
@@ -138,7 +146,7 @@ const AddressInfo = (props) => {
             placeholder="Enter Present Address"
             value={formData.presentAddress}
             onChange={handleChange}
-            required={navigation == 1}
+            required={navigation === 1}
           />
         </div>
         <div className={styles.row}>
@@ -153,7 +161,7 @@ const AddressInfo = (props) => {
               options={countryOptions}
               value={countryOptions.find(option => option.value === formData.country) || null}
               onChange={handleSelectChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
           <div className={styles.column}>
@@ -167,7 +175,7 @@ const AddressInfo = (props) => {
               options={citizenshipOptions}
               value={citizenshipOptions.find(option => option.value === formData.citizenship) || null}
               onChange={handleSelectChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
         </div>
@@ -183,7 +191,7 @@ const AddressInfo = (props) => {
               options={residenceStatusOptions}
               value={residenceStatusOptions.find(option => option.value === formData.residenceStatus) || null}
               onChange={handleSelectChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
           <div className={styles.column}>
@@ -197,7 +205,7 @@ const AddressInfo = (props) => {
               placeholder="Enter Your City"
               value={formData.city}
               onChange={handleChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
         </div>
@@ -226,7 +234,7 @@ const AddressInfo = (props) => {
             placeholder="Enter Permanent Address"
             value={formData.permanentAddress}
             onChange={handleChange}
-            required={navigation == 1}
+            required={navigation === 1}
           />
         </div>
         <div className={styles.row}>
@@ -241,7 +249,7 @@ const AddressInfo = (props) => {
               options={countryOptions}
               value={countryOptions.find(option => option.value === formData.permanentCountry) || null}
               onChange={handleSelectChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
           <div className={styles.column}>
@@ -255,7 +263,7 @@ const AddressInfo = (props) => {
               options={citizenshipOptions}
               value={citizenshipOptions.find(option => option.value === formData.permanentCitizenship) || null}
               onChange={handleSelectChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
         </div>
@@ -271,7 +279,7 @@ const AddressInfo = (props) => {
               options={residenceStatusOptions}
               value={residenceStatusOptions.find(option => option.value === formData.permanentResidenceStatus) || null}
               onChange={handleSelectChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
           <div className={styles.column}>
@@ -285,14 +293,14 @@ const AddressInfo = (props) => {
               placeholder="Enter Your City"
               value={formData.permanentCity || ""}
               onChange={handleChange}
-              required={navigation == 1}
+              required={navigation === 1}
             />
           </div>
         </div>
 
         <div className={styles.buttonGroup}>
-          <button type="submit" onClick={()=>{{setNavigation(0)}}} className={styles.button}>
-            Back
+          <button type="submit" onClick={() => { setNavigation(0); }} className={styles.button}>
+            Prev
           </button>
           <button type="submit" className={styles.button}>
             Next

@@ -292,7 +292,7 @@ const AddressInfo = (props) => {
 
         <div className={styles.buttonGroup}>
           <button type="submit" onClick={()=>{{setNavigation(0)}}} className={styles.button}>
-            Back
+            Previous
           </button>
           <button type="submit" className={styles.button}>
             Next

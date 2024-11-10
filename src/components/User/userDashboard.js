@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import styles from '../../styles/UserStyle/userDashboard.module.css';
 import { useAuth } from '../../Axios/authContext';
 import axiosInstance from '../../Axios/axios_instance';
+import SupportChat from "./supportChat";
 
 function UserDashboard() {
-  const { login, userId } = useAuth(); // Assuming useAuth provides userId
-  const [showDashboard,setShowDashboard]=useState()
+  const { login, userId } = useAuth();
+  const [showDashboard, setShowDashboard] = useState(false);
   const [profileData, setProfileData] = useState({
-    id:"",
+    id: "",
     name: "",
     age: "",
     height: "",
@@ -23,7 +24,7 @@ function UserDashboard() {
       try {
         const response = await axiosInstance.get(`/user-profile`, {
           headers: {
-            Authorization: `Bearer ${login.token}`, // Assuming you have a token from login
+            Authorization: `Bearer ${login.token}`,
           },
         });
 
@@ -36,12 +37,12 @@ function UserDashboard() {
           religion: data.religion,
           bloodGroup: data.bloodGroup,
           maritalStatus: data.maritalStatus,
-          picture: data.picture // Assuming the picture URL is returned as part of the response
+          picture: data.picture
         });
-        setShowDashboard(true)
+        setShowDashboard(true);
       } catch (error) {
         console.error("Error fetching profile data:", error);
-        setShowDashboard(false)
+        setShowDashboard(false);
       }
     };
 
@@ -49,93 +50,87 @@ function UserDashboard() {
   }, [login.token]);
 
   const handleLogout = () => {
-    //logout();
-    // Redirect user to login page or homepage after logout
-    window.location.href = '/login'; // Adjust based on your route
+    localStorage.removeItem("butterfly_user_session_token");
+    window.location.href = "/login";
   };
-
-  const handleSupportClick = () => {
-    console.log('Support button clicked');
-  };
-  console.log(userId,'eda ki ase vai')
 
   return (
     <main className={styles.userDashboard}>
       <section className={styles.dashboardContent}>
-        {!showDashboard&& <h3>Your Profile has Beeen Expired Please Contact support for Activation.</h3>}
-        {showDashboard&&<div className={styles.profileSection}>
-          <div className={styles.profileLayout}>
-            <div className={styles.profileImageColumn}>
-              <div 
-                  className={styles.profileImage} 
-                  role="img" 
-                  aria-label="Profile picture" 
-                  style={{ backgroundImage: `url(https://backend.butterfly.hurairaconsultancy.com/${profileData.picture})` }} 
+        {!showDashboard && <h3>Your Profile has been expired. Please contact support for activation.</h3>}
+        {showDashboard && (
+          <div className={styles.profileSection}>
+            <div className={styles.profileLayout}>
+              <div className={styles.profileImageColumn}>
+                <div
+                  className={styles.profileImage}
+                  role="img"
+                  aria-label="Profile picture"
+                  style={{ backgroundImage: `url(https://backend.butterfly.hurairaconsultancy.com/${profileData.picture})` }}
                 />
-                <button className={styles.logout} onClick={handleLogout}>Log out</button>
-            </div>
-            <div className={styles.profileInfoColumn}>
-              <div className={styles.profileInfo}>
-                <h1 className={styles.profileName}>{profileData.name}</h1>
-                <div className={styles.profileDetails}>
+              </div>
+              <div className={styles.profileInfoColumn}>
+                <div className={styles.profileInfo}>
+                  <h1 className={styles.profileName}>{profileData.name}</h1>
+                  <div className={styles.profileDetails}>
                     <div>
-                        <p>Age: {profileData.age}</p>
-                        <p>Religion: {profileData.religion}</p>
-                        <p>Marital status: {profileData.maritalStatus}</p>
+                      <p>Age: {profileData.age}</p>
+                      <p>Religion: {profileData.religion}</p>
+                      <p>Marital status: {profileData.maritalStatus}</p>
                     </div>
                     <div>
-                        <p>Height: {profileData.height}</p>
-                        <p>Blood Group: {profileData.bloodGroup}</p>
+                      <p>Height: {profileData.height}</p>
+                      <p>Blood Group: {profileData.bloodGroup}</p>
                     </div>
+                  </div>
+                  <Link to={"/edit_biodata"}>
+                    <button className={styles.editButton}>Edit Full Biodata</button>
+                  </Link>
                 </div>
-                <Link 
-            to={"/edit_biodata"} ><button className={styles.editButton}>Edit Full Biodata</button></Link>
               </div>
             </div>
           </div>
-        </div>}
+        )}
 
-        {/* Action Buttons Section */}
         <div className={styles.actionSection}>
-          {/* Match button sends userId via state */}
-          {showDashboard&&<Link 
-            to={"/matchlist"} 
-            state={{ userId: userId }} // Passing userId through state
-            className={`${styles.actionButton} ${styles.matchButton}`}
-          >
-            <div className={styles.actionButtonContent}>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/03ffc636607730b55f260859a5e3721cca0f6240b725fd6cf2e79ef30b895d06"
-                alt="Match icon"
-                className={styles.actionIcon}
-              />
-              <span className={styles.actionText}>Match</span>
-            </div>
-          </Link>}
-         {showDashboard&& <Link 
-            to={"/chat"} 
-            state={{ userId: profileData.id}} // Passing userId through state
-            className={`${styles.actionButton} ${styles.matchButton}`}
-          >
-            <div className={styles.actionButtonContent}>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/03ffc636607730b55f260859a5e3721cca0f6240b725fd6cf2e79ef30b895d06"
-                alt="Match icon"
-                className={styles.actionIcon}
-              />
-              <span className={styles.actionText}>Message</span>
-            </div>
-          </Link>}
+          {showDashboard && (
+            <Link
+              to={"/matchlist"}
+              state={{ userId: userId }}
+              className={`${styles.actionButton} ${styles.matchButton}`}
+            >
+              <div className={styles.actionButtonContent}>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/03ffc636607730b55f260859a5e3721cca0f6240b725fd6cf2e79ef30b895d06"
+                  alt="Match icon"
+                  className={styles.actionIcon}
+                />
+                <span className={styles.actionText}>Match</span>
+              </div>
+            </Link>
+          )}
+          {showDashboard && (
+            <Link
+              to={"/chat"}
+              state={{ userId: profileData.id }}
+              className={`${styles.actionButton} ${styles.matchButton}`}
+            >
+              <div className={styles.actionButtonContent}>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/03ffc636607730b55f260859a5e3721cca0f6240b725fd6cf2e79ef30b895d06"
+                  alt="Match icon"
+                  className={styles.actionIcon}
+                />
+                <span className={styles.actionText}>Message</span>
+              </div>
+            </Link>
+          )}
 
-          <div className={`${styles.actionButton} ${styles.supportButton}`} onClick={handleSupportClick}>
-            <div className={styles.actionButtonContent}>
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/b9d22d0cc660212d6cd000ca585cc53e8a02ede7998970d84361912195fba421"
-                alt="Support icon"
-                className={styles.actionIcon}
-              />
-              <span className={styles.actionText}>Support</span>
-            </div>
+          {/* Support Button */}
+          <SupportChat />
+
+          <div className={`${styles.actionButton} ${styles.logoutButton}`} onClick={handleLogout}>
+            <div className={styles.actionButtonContent}>Log out</div>
           </div>
         </div>
       </section>

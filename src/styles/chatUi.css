@@ -81,7 +81,7 @@
 
 .chat-header {
     padding: 10px;
-    background-color: #ff00b3;
+    background-color: #28292b;
     color: white;
     display: flex;
     align-items: center;
@@ -125,7 +125,7 @@
 }
 
 .message.user {
-    background-color: #007bff;
+    background-color: #6e91a0;
     color: white;
     align-self: flex-end;
 }
@@ -172,7 +172,7 @@
 .chat-footer button {
     padding: 10px 15px;
     margin-left: 10px;
-    background-color: #007bff;
+    background-color: #28292b;
     color: white;
     border: none;
     border-radius: 5px;

@@ -497,7 +497,7 @@ const ProfileInformation = (props) => {
 
         <div className={styles.formGroup}>
           <label htmlFor="comments" className={styles.label}>
-            About
+            About Yourself
           </label>
           <textarea
             className={`${styles.textarea} ${
@@ -505,7 +505,7 @@ const ProfileInformation = (props) => {
             }`}
             id="comments"
             name="comments"
-            placeholder="Your Comments"
+            placeholder="Update Your Short Bio"
             value={localFormData.comments}
             onChange={handleChange}
             required
@@ -517,7 +517,7 @@ const ProfileInformation = (props) => {
 
         <div className={styles.buttonContainer}>
           <button className={styles.submitButton} type="submit">
-            Submit
+            Next
           </button>
         </div>
       </form>
