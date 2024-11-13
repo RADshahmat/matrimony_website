@@ -112,4 +112,33 @@
     border-radius: 10px;
     border: none;
   }
-  
+  .biopreview{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+  }
+    
+  @media (max-width: 768px) {
+    .profileViewContainer{
+      width: 100%;
+    }
+    .profileViewingText{
+      text-align: center;
+    }
+    .headerSection {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .actionIcons{
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+    }
+    }

@@ -35,8 +35,7 @@ function UserProfile({
       </div>
       <div className={styles.actionsSection}>
         <Link
-          to={"/ProfileViewPage"}
-          state={{ userId }}
+          to={`/ProfileViewPage/${userId}`}
           className={styles.viewProfile}
         >
           View Profile
@@ -124,7 +123,7 @@ function MatchList() {
       console.error("Error updating like status:", error);
     }
   };
-console.log(profiles)
+console.log("profile ayse", profiles)
   return (
     <main className={styles.userDashboard}>
       <div className={styles.cardcontainer}>

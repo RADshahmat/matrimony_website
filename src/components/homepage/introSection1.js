@@ -45,16 +45,16 @@ const IntroSecHome = () => {
 
       <section className={styles.intro}>
         <div className={styles.introframe} data-aos="flip-right">
-          <div className={styles.intro_upper}>
-            <div className={styles.intro_heading}>Butterfly Matrimony</div>
-            <div className={styles.subheading_intro}>Your perfect matchmaker</div>
-          </div>
-          <div className={styles.matrimony_desc}>
-            {introText || 'Loading...'} {/* Display introText from backend */}
-          </div>
-          <div className={styles.intro_footer}>
-            <span className={styles.footer_spn}>#1</span> MATRIMONY
-          </div>
+            <div className={styles.intro_upper}>
+              <div className={styles.intro_heading}>Butterfly Matrimony</div>
+              <div className={styles.subheading_intro}>Your perfect matchmaker</div>
+            </div>
+            <div className={styles.matrimony_desc}>
+              {introText || 'Loading...'} {/* Display introText from backend */}
+            </div>
+            <div className={styles.intro_footer}>
+              <span className={styles.footer_spn}>#1</span> MATRIMONY
+            </div>
         </div>
       </section>
 
