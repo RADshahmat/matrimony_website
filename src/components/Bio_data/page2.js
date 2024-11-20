@@ -3,7 +3,7 @@ import BioHeader from './biodata_header';
 import BioFooter from './biodata_footer';
 import styles from '../../styles/Bio_dataStyle/page2.module.css';
 
-function BioDataPage2({ userData }) {
+function BioDataPage2({ userData, style }) {
   const [images,setImages]=useState([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function BioDataPage2({ userData }) {
   
 
   return (
-    <section className={styles.card} data-component>
+    <section className={styles.card} data-component style={style}>
       <BioHeader />
       <div className={styles.content}>
         <div className={styles.mainInfo}>

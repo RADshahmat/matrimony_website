@@ -5,7 +5,7 @@ import styles from '../../styles/Bio_dataStyle/page3.module.css'; // Ensure this
 import BioHeader from './biodata_header';
 import Footer from './biodata_footer';
 
-const BioDataPage3 = ({ userData }) => {
+function BioDataPage3({ userData, style }) {
 
   const [brothers, setBrothers] = useState([]);
   const [sisters, setSisters] = useState([]);
@@ -47,7 +47,7 @@ const BioDataPage3 = ({ userData }) => {
 
   console.log(images,userData,"this is the kakaest data")
   return (
-    <div className={styles.card} data-component>
+    <div className={styles.card} data-component style={style}>
       <BioHeader />
 
       {/* Main Information Section */}

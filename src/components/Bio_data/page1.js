@@ -1,13 +1,13 @@
 import React from "react";
 import styles from '../../styles/Bio_dataStyle/page1.module.css';
 
-function BioDataPage1({ userData }) {
+function BioDataPage1({ userData, style }) {
   if (!userData) {
     return <p>Loading...</p>; // Show a loading message or spinner while data is being fetched
   }
 
   return (
-    <main className={styles.container} data-component>
+    <main className={styles.container} data-component style={style}>
       <section className={styles.content}>
         <div className={styles.profileSection}>
           <div className={styles.imageColumn}>

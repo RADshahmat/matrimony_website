@@ -31,6 +31,7 @@
     align-items: center;
     position: relative;
     top: -180px;
+    padding: 26px 0;
   }
   
   .intro_upper {
@@ -62,8 +63,8 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    width: 810px;
-    margin: 20px 0;
+    width: 826px;
+    margin: 30px 0;
     word-break: break-all;
   }
   
@@ -75,9 +76,9 @@
     font-weight: 400;
     line-height: 33px; /* 150% */
     text-transform: uppercase;
-    position: absolute;
-    bottom: 20px;
-    right: 60px;
+    text-align: right;
+    width: 100%;
+    margin-right: 128px;
   }
   .footer_spn{
     font-size: 42px;

@@ -42,9 +42,9 @@ const ContactSection = () => {
               <img src={`${process.env.PUBLIC_URL}/assets/mail.svg`} alt="Email" />
               <span>info@butterflymatrimonial.com</span>
             </a>
-            <a className={styles.iconText} href="tel:+880123346777">
+            <a className={styles.iconText} href="tel:+8801823346777">
               <img src={`${process.env.PUBLIC_URL}/assets/phone.svg`} alt="Phone" />
-              <span>+880 12334 6777</span>
+              <span>+880 182334 6777</span>
             </a>
             <a
               className={styles.iconText}

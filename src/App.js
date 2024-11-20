@@ -52,7 +52,7 @@ function App() {
               }
             />
             <Route
-              path="/ProfileViewPage"
+              path="/ProfileViewPage/:id"
               element={
                 <ProtectedRoute>
                   <ProfileViewPage />
