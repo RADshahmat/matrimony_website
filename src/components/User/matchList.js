@@ -17,9 +17,9 @@ function UserProfile({
   onChatRequestClick,
 }) {
 
-  const updateView=async (id)=>{
+  const updateView = async (id) => {
 
-    await axiosInstance.post(`/update_view_stat`,{id})
+    await axiosInstance.post(`/update_view_stat`, { id })
   }
   return (
     <div className={styles.profileCard}>
@@ -41,15 +41,18 @@ function UserProfile({
       </div>
       <div className={styles.actionsSection}>
         <Link
-          to={`/ProfileViewPage/${userId}`}
+          to={{
+            pathname: `/ProfileViewPage`,
+          }}
+          state={{ userId,isLiked,chatRequested }} // Pass the id in the state
           className={styles.viewProfile}
-          onClick={updateView(id)}
+          onClick={() => updateView(id)} // Call the updateView function when the link is clicked
         >
           View Profile
         </Link>
         <div
           className={styles.requestChatContainer}
-          onClick={() => onChatRequestClick(userId,chatRequested)}
+          onClick={() => onChatRequestClick(userId, chatRequested)}
         >
           <img
             loading="lazy"
@@ -58,12 +61,12 @@ function UserProfile({
             alt="Chat Icon"
           />
           <button className={styles.requestChat}>
-            {chatRequested=='1' ? "Cancel Request" : "Request Chat"}
+            {chatRequested == '1' ? "Cancel Request" : "Request Chat"}
           </button>
         </div>
         <div
-          className={`${styles.heartIcon} ${isLiked=='1' ? styles.liked : ""}`}
-          onClick={() => onHeartClick(userId,isLiked)}
+          className={`${styles.heartIcon} ${isLiked == '1' ? styles.liked : ""}`}
+          onClick={() => onHeartClick(userId, isLiked)}
         ></div>
       </div>
     </div>
@@ -88,9 +91,9 @@ function MatchList() {
     }
   };
 
-  const handleChatRequestClick = async (userId,chatreq) => {
-    const isChatRequested = chatreq=='0';
-    console.log(userId,"jay too")
+  const handleChatRequestClick = async (userId, chatreq) => {
+    const isChatRequested = chatreq == '0';
+    console.log(userId, "jay too")
     try {
       const response = await axiosInstance.post("/toggleChatRequest", {
         userId: userId,
@@ -100,8 +103,8 @@ function MatchList() {
       if (response.data.success) {
         setChatRequests((prev) =>
           isChatRequested
-            ? prev.filter((id) => id !== userId) 
-            : [...prev, userId] 
+            ? prev.filter((id) => id !== userId)
+            : [...prev, userId]
         );
         fetchProfiles()
       }
@@ -110,12 +113,12 @@ function MatchList() {
     }
   };
 
-  const handleHeartClick = async (userId,liked) => {
-    const isLiked = liked=='0';
+  const handleHeartClick = async (userId, liked) => {
+    const isLiked = liked == '0';
     try {
       const response = await axiosInstance.post("/toggleInterest", {
         userId,
-        liked: isLiked, 
+        liked: isLiked,
       });
 
       if (response.data.success) {
@@ -130,7 +133,7 @@ function MatchList() {
       console.error("Error updating like status:", error);
     }
   };
-console.log("profile ayse", profiles)
+  console.log("profile ayse", profiles)
   return (
     <main className={styles.userDashboard}>
       <div className={styles.cardcontainer}>
