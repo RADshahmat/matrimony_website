@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../Axios/axios_instance'; // Update with the correct path
 import styles from '../../styles/UserStyle/profilePreview.module.css';
 import BioDataPage1 from '../Bio_data/page1';
 import BioDataPage2 from '../Bio_data/page2';
 import BioDataPage3 from '../Bio_data/page3';
+import { toast,ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function ProfileView({ onRequestChat, onInterested, onNotInterested, onPrint, onShare }) {
     const location = useLocation();
-    const { userId, isLiked, chatRequested } = location.state || {}; 
+    const navigate=useNavigate();
+    const { userId, isLiked, chatRequested,flag } = location.state || {}; 
     const id=userId;
     const [userData, setUserData] = useState(null);
     const [marginBottomStyle, setMarginBottomStyle] = useState({});
@@ -16,6 +19,8 @@ function ProfileView({ onRequestChat, onInterested, onNotInterested, onPrint, on
     const [selectedCards,setSelectedCards]=useState('');
     const [reqchat,setReqChat]=useState('');
     const [interested,setInterested]=useState('');
+    const [showModal,setShowModal]=useState(false);
+    const [loading,setIsLoading]=useState(false);
 console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
     // Fetch user data from API
     useEffect(() => {
@@ -96,7 +101,7 @@ console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
       const fetchProfiles = async () => {
         try {
             const response = await axiosInstance.get("/user_matches_list_individual", {
-                params: { peerId: userId }  // Use 'params' instead of body for GET requests
+                params: { peerId: userId }
             });
           console.log(response.data,"theese are indi");
           setReqChat(response.data[0].chatRequest);
@@ -106,6 +111,23 @@ console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
         }
       };
 
+      const handleNotInterested = async()=>{
+       setIsLoading(true);
+        try {
+          const response = await axiosInstance.post('/not_interested', { userId: id });
+          if (response.status==200) {
+              console.log('Match removed successfully');
+              setShowModal(false);
+              setIsLoading(false);
+              navigate('/matchlist');
+          }
+      } catch (error) {
+          console.error('Error removing match:', error);
+          setIsLoading(false);
+          toast.error('Something Went wrong. Please try again.')
+      }
+      }
+
     return (
         <main className={styles.userDashboard}>
             <div className={styles.profileViewContainer}>
@@ -113,7 +135,7 @@ console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
                 <div className={styles.headerSection}>
                     <div className={styles.biopreview}>
                         <BioDataPage1 userData={userData} style={marginBottomStyle} />
-                        <BioDataPage2 userData={userData} style={marginBottomStyle} />
+                        <BioDataPage2 permission={flag} userData={userData} style={marginBottomStyle} />
                         <BioDataPage3 userData={userData} style={marginBottomStyle} />
                     </div>
 
@@ -137,12 +159,27 @@ console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
                         <img src={`${process.env.PUBLIC_URL}/assets/korrahLove.svg`} alt="Heart Icon" />
                        {interested=='1'?'Interested':'Send Intereste'} 
                     </button>
-                    <button className={styles.notInterested} onClick={onNotInterested}>
+                    <button className={styles.notInterested} onClick={()=>setShowModal(true)}>
                         <img src={`${process.env.PUBLIC_URL}/assets/redbgCross.svg`} alt="Cross Icon" />
                         Not Interested
                     </button>
                 </div>
             </div>
+            {showModal && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <button className={styles.closeButton} onClick={() => setShowModal(false)}>
+                            &times;
+                        </button>
+                        <p>Are you sure? This match will be removed.</p>
+                        <div className={styles.modalActions}>
+                            <button className={styles.yesButton} onClick={handleNotInterested}>{loading?'Loading...':'Yes'}</button>
+                            <button className={styles.noButton} onClick={() => setShowModal(false)}>No</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            <ToastContainer/>
         </main>
     );
 }

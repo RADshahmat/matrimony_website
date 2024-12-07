@@ -30,7 +30,7 @@ function App() {
             <Route path="/blogAll" element={<AllBlogsPage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/createCV" element={<CreateCV />} />
-            <Route path="/cvpreview/:id" element={<CVpreview />} />
+            <Route path="/cvpreview" element={<CVpreview />} />
             <Route path="/venuspremium" element={<VenusPremium />} />
             <Route path="/login" element={<UserLoginPage />} />
 

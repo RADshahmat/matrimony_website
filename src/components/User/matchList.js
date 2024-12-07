@@ -16,8 +16,10 @@ function UserProfile({
   onHeartClick,
   onChatRequestClick,
 }) {
+  const flag='permission_ni';
 
   const updateView = async (id) => {
+    
 
     await axiosInstance.post(`/update_view_stat`, { id })
   }
@@ -44,9 +46,9 @@ function UserProfile({
           to={{
             pathname: `/ProfileViewPage`,
           }}
-          state={{ userId,isLiked,chatRequested }} // Pass the id in the state
+          state={{ userId,isLiked,chatRequested,flag }} 
           className={styles.viewProfile}
-          onClick={() => updateView(id)} // Call the updateView function when the link is clicked
+          onClick={() => updateView(id)} 
         >
           View Profile
         </Link>

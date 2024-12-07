@@ -76,7 +76,9 @@ const MatrimonialForm = () => {
         console.log('Image upload response:', responseImages.data);
       }
 
-      navigate(`/cvpreview/${response.data.userId}`);
+      navigate('/cvpreview', {
+        state: { userId: response.data.userId }
+    });
     } catch (error) {
       console.error('Error submitting form or uploading images:', error);
     }

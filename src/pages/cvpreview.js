@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,useLocation } from "react-router-dom";
 import axiosInstance from '../Axios/axios_instance';
 import Header from '../components/header'; 
 import Footer from '../components/footer'; 
@@ -12,7 +12,8 @@ import jsPDF from 'jspdf';
 import { FaArrowLeft } from 'react-icons/fa';
 
 function CVpreview() {
-    const { id } = useParams(); // Get the ID from the URL
+    const location = useLocation();
+    const { userId } = location.state || {};
     const [userData, setUserData] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -20,8 +21,8 @@ function CVpreview() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axiosInstance.get(`/users/${id}`);
-                console.log(response.data,"kaka plz work")
+                const response = await axiosInstance.get(`/users/${userId}`);
+                //console.log(response.data,"kaka plz work")
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -29,7 +30,7 @@ function CVpreview() {
         };
 
         fetchData();
-    }, [id]);
+    }, [userId]);
 
     useEffect(() => {
         const handleResize = () => {

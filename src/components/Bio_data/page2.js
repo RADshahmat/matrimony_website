@@ -3,8 +3,9 @@ import BioHeader from './biodata_header';
 import BioFooter from './biodata_footer';
 import styles from '../../styles/Bio_dataStyle/page2.module.css';
 
-function BioDataPage2({ userData, style }) {
+function BioDataPage2({ userData, style ,permission}) {
   const [images,setImages]=useState([]);
+  const det=permission?false:true;
 
   useEffect(() => {
     if (userData?.dpImage) {
@@ -87,7 +88,7 @@ function BioDataPage2({ userData, style }) {
             </section>
 
             {/* Contact info */}
-            <section className={styles.container}>
+          { det&& <section className={styles.container}>
               <h2 className={styles.sectionTitle}>Contact Information:</h2>
               <div className={styles.sectionContent}>
                 <p className={styles.detailItem}>
@@ -99,7 +100,7 @@ function BioDataPage2({ userData, style }) {
                   <span className={styles.value}>{userData.user.email}</span>
                 </p>
               </div>
-            </section>
+            </section>}
 
             {/* Address */}
             <section className={styles.container}>
