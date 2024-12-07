@@ -91,8 +91,8 @@ function SupportChat({ apiUrl, sessionToken }) {
           right: "20px",
           backgroundColor: "rgba(11, 185, 199, 0.8)",
           borderRadius: "50%",
-          width: "50px",
-          height: "50px",
+          width: "70px",
+          height: "70px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -101,7 +101,7 @@ function SupportChat({ apiUrl, sessionToken }) {
           zIndex: 1000,
         }}
       >
-        <img src="/assets/support.png" style={{ width: "50px" }} />
+        <img src="/assets/support.png" style={{ width: "70px" }} />
         {!isChatOpen && unreadCount > 0 && (
           <span
             style={{
@@ -123,25 +123,41 @@ function SupportChat({ apiUrl, sessionToken }) {
           </span>
         )}
       </div>
-
+        
       {/* Chat Window */}
       {isChatOpen && (
-        <div
+          <div
           ref={chatRef}
           style={{
             position: "fixed",
-            bottom: "80px",
+            bottom: "90px",
             right: "20px",
             width: "300px",
             height: "400px",
             border: "1px solid #ddd",
             borderRadius: "8px",
-            overflowY: "auto",
+            overflow: "hidden", // Ensures the header stays within bounds
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
             zIndex: 1000,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          <MainContainer>
+          {/* Header Section */}
+          <div
+            style={{
+              backgroundColor: "rgba(11, 185, 199, 0.9)",
+              color: "white",
+              padding: "10px",
+              textAlign: "center",
+              fontWeight: "bold",
+              fontSize: "16px",
+              borderBottom: "1px solid #ddd",
+            }}
+          >
+            Support Chat
+          </div>
+          <MainContainer style={{ flexGrow: 1 }}>
             <ChatContainer>
               <MessageList>
                 {messages.map((msg, index) => (
