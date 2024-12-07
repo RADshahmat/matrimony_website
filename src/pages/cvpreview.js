@@ -83,7 +83,7 @@ function CVpreview() {
             componentElement.style.transform = "scale(1)";
             componentElement.style.transformOrigin = "top center";
     
-            const canvas = await html2canvas(componentElement, { scale: 2 });
+            const canvas = await html2canvas(componentElement, { scale: 2 , useCORS: true});
             const imgData = canvas.toDataURL("image/png");
     
             let imgWidth = 210; 
