@@ -104,7 +104,8 @@ function CVpreview() {
             componentElement.style.transformOrigin = "";
         }
     
-        doc.save("cv-preview.pdf");
+        doc.save(`${userData.user.fullName}.pdf`);  
+
         setCurrentIndex(0); 
     };
     

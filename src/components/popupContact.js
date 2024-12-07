@@ -78,7 +78,8 @@ const PopupContact = ({ closePopup }) => {
             <div className={styles.expertInfo}>
               <h4 className={styles.expertName}>Huraira Shishir</h4>
               <p className={styles.expertTitle}>Marriage Consultant</p>
-              <button className={styles.askButton}>Ask your doubts</button>
+              <button className={styles.askButton} onClick={() => (window.location.href = `tel:${companyDetails.phone}`)}>Ask your doubts</button>
+
             </div>
           </div>
         </div>
