@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import axiosInstance from "../../Axios/axios_instance"
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {
   ChatContainer,
@@ -8,60 +9,77 @@ import {
   MainContainer,
 } from "@chatscope/chat-ui-kit-react";
 
-function SupportChat() {
+function SupportChat({ apiUrl, sessionToken }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { content: "Welcome! How can we help you?", sender: "support" },
-  ]);
-  const chatRef = useRef(null); // Reference for the chat window
+  const [messages, setMessages] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const chatRef = useRef(null);
 
   const handleToggleChat = () => {
     setIsChatOpen((prev) => !prev);
-  };
-
-  const handleSendMessage = (text) => {
-    setMessages((prev) => [
-      ...prev,
-      { content: text, sender: "user" },
-      { content: "Thanks! We’ll get back to you soon.", sender: "support" },
-    ]);
-  };
-
-  const disableBodyScroll = () => {
-    document.body.style.overflow = "hidden";
-  };
-
-  const enableBodyScroll = () => {
-    document.body.style.overflow = "auto";
-  };
-
-  const handleWheel = (e) => {
-    // Check if the mouse is over the chat window and if it's scrollable
-    if (chatRef.current && chatRef.current.contains(e.target)) {
-      const chatElement = chatRef.current;
-      const atTop = chatElement.scrollTop === 0;
-      const atBottom = chatElement.scrollHeight - chatElement.scrollTop === chatElement.clientHeight;
-
-      // If at the top and scrolling up or at the bottom and scrolling down, allow body scroll
-      if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
-        enableBodyScroll();
-      } else {
-        disableBodyScroll();
-      }
+    if (!isChatOpen) {
+      fetchMessages();
+      markMessagesAsRead();
     }
   };
 
-  useEffect(() => {
-    // Attach the wheel event listener
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    
-    // Clean up event listener on unmount
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      enableBodyScroll(); // Ensure body scroll is re-enabled on unmount
-    };
-  }, []);
+  // Fetch messages from the backend
+  const fetchMessages = async () => {
+    try {
+      const { data } = await axiosInstance.get(`/support_chat`);
+      setMessages(data);
+    } catch (error) {
+      console.error("Error fetching messages", error);
+    }
+  };
 
+  // Fetch unread message count
+  const fetchUnreadCount = async () => {
+    try {
+      const { data } = await axiosInstance.get(`/support_chat/unread-count`);
+      setUnreadCount(data.unreadCount);
+    } catch (error) {
+      console.error("Error fetching unread count", error);
+    }
+  };
+//sending message
+  const handleSendMessage = async (text) => {
+    try {
+      const messagePayload = { message: text, sender: "user" };
+      const { data } = await axiosInstance.post(`/support_chat`, messagePayload);
+      console.log('received message',data)
+      setMessages((prev) => [...prev, data]);
+    } catch (error) {
+      console.error("Error sending message", error);
+    }
+  };
+
+  const markMessagesAsRead = async () => {
+    try {
+      await axiosInstance.put(`/support_chat/mark-read`);
+      setUnreadCount(0); 
+    } catch (error) {
+      console.error("Error marking messages as read", error);
+    }
+  };
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+  useEffect(() => {
+    const fetchUnreadCountAndMessages = () => {
+      fetchUnreadCount();
+      if (unreadCount && isChatOpen > 0) {
+        fetchMessages();
+        markMessagesAsRead();
+      }
+    };
+  
+    fetchUnreadCountAndMessages(); 
+    const interval = setInterval(fetchUnreadCountAndMessages, 25000);
+  
+    return () => clearInterval(interval);
+  }, [unreadCount]);
+  
   return (
     <div>
       {/* Support Button */}
@@ -71,7 +89,7 @@ function SupportChat() {
           position: "fixed",
           bottom: "20px",
           right: "20px",
-          backgroundColor: "#007bff",
+          backgroundColor: "rgba(11, 185, 199, 0.8)",
           borderRadius: "50%",
           width: "50px",
           height: "50px",
@@ -83,7 +101,27 @@ function SupportChat() {
           zIndex: 1000,
         }}
       >
-        💬
+        <img src="/assets/support.png" style={{ width: "50px" }} />
+        {!isChatOpen && unreadCount > 0 && (
+          <span
+            style={{
+              position: "absolute",
+              top: "5px",
+              right: "5px",
+              backgroundColor: "red",
+              color: "white",
+              borderRadius: "50%",
+              width: "20px",
+              height: "20px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "12px",
+            }}
+          >
+            {unreadCount}
+          </span>
+        )}
       </div>
 
       {/* Chat Window */}
@@ -110,10 +148,10 @@ function SupportChat() {
                   <Message
                     key={index}
                     model={{
-                      message: msg.content,
-                      sentTime: "just now",
+                      message: msg.message,
+                      sentTime: msg.created_at,
                       sender: msg.sender,
-                      direction: msg.sender === "user" ? "outgoing" : "incoming",
+                      direction: msg.sender !== "admin" ? "outgoing" : "incoming",
                     }}
                   />
                 ))}

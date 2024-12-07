@@ -228,5 +228,9 @@
     font-size: 14px; 
   }
   
+  .cs-button--attachment {
+    display: none !important;
+  }
+  
 
   
