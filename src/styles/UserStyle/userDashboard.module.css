@@ -50,6 +50,7 @@
   }
   .logoutButton {
     background-color: #610d0d;
+    justify-content: center;
   }
   
   .logoutButton:hover {

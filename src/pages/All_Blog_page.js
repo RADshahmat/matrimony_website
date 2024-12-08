@@ -48,7 +48,7 @@ const AllBlogsPage = () => {
                  <Header />
         <section className={styles.container}>
         <h3 className={styles.sectionTitle}>All Blogs</h3>
-        <div className={styles.blogscardContainer} style={{justifyContent: "flex-start"}}>
+        <div className={styles.blogscardContainer}>
             {blogs.map((post) => (
             <article key={post.id} className={styles.card}>
                 <div className={styles.cardContent}>

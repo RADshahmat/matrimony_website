@@ -1,4 +1,3 @@
-// BioDataPage3.js
 
 import React,{useState,useEffect} from "react";
 import styles from '../../styles/Bio_dataStyle/page3.module.css'; // Ensure this CSS file exists and is correctly styled

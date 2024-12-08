@@ -15,7 +15,7 @@ function BioDataPage1({ userData, style }) {
               loading="lazy" 
               src="/assets/bio_designTop.svg" 
               className={styles.profileImage} 
-              alt="Profile of Tanvir Ahmed Tamim"
+              alt="Profile of Name"
             />
           </div>
           <div className={styles.logoColumn}>

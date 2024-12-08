@@ -84,7 +84,7 @@ function CVpreview() {
             componentElement.style.transform = "scale(1)";
             componentElement.style.transformOrigin = "top center";
     
-            const canvas = await html2canvas(componentElement, { scale: 2 });
+            const canvas = await html2canvas(componentElement, { scale: 2 , useCORS: true});
             const imgData = canvas.toDataURL("image/png");
     
             let imgWidth = 210; 
@@ -104,7 +104,8 @@ function CVpreview() {
             componentElement.style.transformOrigin = "";
         }
     
-        doc.save("cv-preview.pdf");
+        doc.save(`${userData.user.fullName}.pdf`);  
+
         setCurrentIndex(0); 
     };
     

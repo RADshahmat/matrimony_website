@@ -126,13 +126,12 @@ function UserDashboard() {
             </Link>
           )}
 
-          {/* Support Button */}
-          <SupportChat />
-
           <div className={`${styles.actionButton} ${styles.logoutButton}`} onClick={handleLogout}>
-            <div className={styles.actionButtonContent}>Log out</div>
+              <div className={styles.actionButtonContent}>Log out</div>
           </div>
         </div>
+          {/* Support Button */}
+          <SupportChat />
       </section>
     </main>
   );
