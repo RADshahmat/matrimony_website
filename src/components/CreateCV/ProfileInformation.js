@@ -56,8 +56,7 @@ const ProfileInformation = (props) => {
 
   // Phone number validation function (optional: adjust regex as needed)
   const validatePhoneNumber = (phoneNumber) => {
-    // Example: Allows 10-15 digits
-    const phoneRegex = /^[0-9]{10,15}$/;
+    const phoneRegex = /^\+?[0-9]{10,15}$/;
     return phoneRegex.test(phoneNumber);
   };
 
