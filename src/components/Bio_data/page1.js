@@ -1,7 +1,8 @@
 import React from "react";
 import styles from '../../styles/Bio_dataStyle/page1.module.css';
 
-function BioDataPage1({ userData, style }) {
+function BioDataPage1({ userData, style ,permission}) {
+  const det=permission?false:true;
   if (!userData) {
     return <p>Loading...</p>; // Show a loading message or spinner while data is being fetched
   }

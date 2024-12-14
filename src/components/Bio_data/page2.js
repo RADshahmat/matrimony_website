@@ -105,7 +105,7 @@ function BioDataPage2({ userData, style ,permission}) {
             {/* Address */}
             <section className={styles.container}>
               <h2 className={styles.sectionTitle}>Present Address</h2>
-              <div className={styles.address}>{userData.user.presentAddress}</div>
+              {det?<div className={styles.address}>{userData.user.presentAddress}</div>:''}
               <div className={styles.sectionContent}>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>City:</span>
@@ -122,7 +122,7 @@ function BioDataPage2({ userData, style ,permission}) {
               </div>
 
               <h2 className={styles.sectionTitle}>Permanent Address</h2>
-              <div className={styles.address}>{userData.user.permanentAddress}</div>
+              {det?<div className={styles.address}>{userData.user.permanentAddress}</div>:''}
               <div className={styles.sectionContent}>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>City:</span>

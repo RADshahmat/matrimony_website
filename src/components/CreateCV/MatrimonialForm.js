@@ -61,7 +61,7 @@ const MatrimonialForm = () => {
         console.log('Image upload response:', responseImages.data);
       }
 
-      // Navigate after userId is set
+       //Navigate after userId is set
       navigate('/cvpreview', {
         state: { userId: response.data.userId }
     });

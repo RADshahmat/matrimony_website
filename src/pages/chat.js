@@ -263,7 +263,8 @@ const Chat = () => {
               key={chat.id}
               onClick={() => handleChatClick(chat)}
               className={
-                activeUsers.includes(chat.peerId) ? "active" : ""
+                (chat.not_interested=='0' && chat.admin_block=='0')?
+                (activeUsers.includes(chat.peerId) ? "active" : ""):''
               }
             >
               <img
@@ -348,7 +349,7 @@ const Chat = () => {
                 </div>
               )}
             </div>
-            <div className="chat-footer">
+           {(selectedChat.not_interested==0 && selectedChat.admin_block=='0')?<div className="chat-footer">
               <input
                 type="text"
                 placeholder="Type a message..."
@@ -364,7 +365,7 @@ const Chat = () => {
                 onKeyUp={handleStopTyping}
               />
               <button onClick={handleSendMessage}>Send</button>
-            </div>
+            </div>:<div className="chat-footer">This person is not available right now...</div>}
           </>
         ) : (
           <div className="chat-placeholder">

@@ -13,22 +13,31 @@ function UserProfile({
   profileImg,
   isLiked,
   chatRequested,
+  not_interested,
+  admin_block,
   onHeartClick,
   onChatRequestClick,
 }) {
-  const flag='permission_ni';
+  const flag = 'permission_ni';
 
   const updateView = async (id) => {
-    
+    await axiosInstance.post(`/update_view_stat`, { id });
+  };
 
-    await axiosInstance.post(`/update_view_stat`, { id })
-  }
+  const isDisabled = not_interested !== '0' || admin_block!=='0';
+  const profileCardClass = `${styles.profileCard} ${isDisabled ? styles.disabled : ''}`;
+
   return (
-    <div className={styles.profileCard}>
+    <div className={profileCardClass}>
       <input type="hidden" value={userId} /> {/* Hidden card userId */}
       <div className={styles.userInfo}>
         <div className={styles.avatarSection}>
-          <img loading="lazy" src={`https://backend.butterfly.hurairaconsultancy.com/${profileImg}`} className={styles.img} alt="" />
+          <img
+            loading="lazy"
+            src={`https://backend.butterfly.hurairaconsultancy.com/${profileImg}`}
+            className={styles.img}
+            alt=""
+          />
         </div>
         <div className={styles.detailsSection}>
           <div className={styles.exampleCodeName}>{name}</div>
@@ -46,15 +55,15 @@ function UserProfile({
           to={{
             pathname: `/ProfileViewPage`,
           }}
-          state={{ userId,isLiked,chatRequested,flag }} 
+          state={{ userId, isLiked, chatRequested, flag }}
           className={styles.viewProfile}
-          onClick={() => updateView(id)} 
+          onClick={isDisabled ? undefined : () => updateView(id)} 
         >
           View Profile
         </Link>
         <div
           className={styles.requestChatContainer}
-          onClick={() => onChatRequestClick(userId, chatRequested)}
+          onClick={isDisabled ? undefined : () => onChatRequestClick(userId, chatRequested)} 
         >
           <img
             loading="lazy"
@@ -63,17 +72,18 @@ function UserProfile({
             alt="Chat Icon"
           />
           <button className={styles.requestChat}>
-            {chatRequested == '1' ? "Cancel Request" : "Request Chat"}
+            {chatRequested == '1' ? 'Cancel Request' : 'Request Chat'}
           </button>
         </div>
         <div
-          className={`${styles.heartIcon} ${isLiked == '1' ? styles.liked : ""}`}
-          onClick={() => onHeartClick(userId, isLiked)}
+          className={`${styles.heartIcon} ${isLiked == '1' ? styles.liked : ''}`}
+          onClick={isDisabled ? undefined : () => onHeartClick(userId, isLiked)} // Disable click
         ></div>
       </div>
     </div>
   );
 }
+
 
 function MatchList() {
   const [selectedCards, setSelectedCards] = useState([]);
@@ -154,6 +164,8 @@ function MatchList() {
             profileImg={profile.profileImg}
             isLiked={profile.interest}
             chatRequested={profile.chatRequest}
+            not_interested={profile.not_interested}
+            admin_block={profile.admin_block}
             onHeartClick={handleHeartClick}
             onChatRequestClick={handleChatRequestClick}
           />

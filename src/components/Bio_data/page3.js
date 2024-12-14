@@ -4,11 +4,12 @@ import styles from '../../styles/Bio_dataStyle/page3.module.css'; // Ensure this
 import BioHeader from './biodata_header';
 import Footer from './biodata_footer';
 
-function BioDataPage3({ userData, style }) {
+function BioDataPage3({ userData, style , permission}) {
 
   const [brothers, setBrothers] = useState([]);
   const [sisters, setSisters] = useState([]);
   const [images, setImages] = useState([]);
+  const det=permission?false:true;
 
   useEffect(() => {
     if (userData) {
@@ -59,10 +60,10 @@ function BioDataPage3({ userData, style }) {
               <span className={styles.label}>Occupation Type:</span>
               <span className={styles.value}>{employedIn}</span>
             </div>
-            <div className={styles.detailItem}>
+            {det?<div className={styles.detailItem}>
               <span className={styles.label}>Institution Name:</span>
               <span className={styles.value}>{currentProfessionCompany}</span>
-            </div>
+            </div>:''}
             <div className={styles.detailItem}>
               <span className={styles.label}>Job Title:</span>
               <span className={styles.value}>{currentProfessionTitle}</span>

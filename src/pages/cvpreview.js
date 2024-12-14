@@ -13,7 +13,10 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 function CVpreview() {
     const location = useLocation();
-    const { userId } = location.state || {};
+    const queryParams = new URLSearchParams(location.search); // Extract query parameters
+    const flag = queryParams.get('flag'); 
+    const userId = location.state?.userId || flag || "no";
+    console.log(userId,flag,"this is the flag");
     const [userData, setUserData] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
