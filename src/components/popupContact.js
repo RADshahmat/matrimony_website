@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube, FaWhatsapp , FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube, FaWhatsapp } from 'react-icons/fa';
 import axiosInstance from '../Axios/axios_instance'; // Assuming your Axios instance is set up
 import styles from '../styles/popupContact.module.css';
 
