@@ -101,9 +101,7 @@ padding-right: 20px;
       margin-right: 10px;
     }
   }
-  @media (max-width: 768px) {
 
-  }
   
   .extraItem{
     display: flex;
@@ -112,8 +110,8 @@ padding-right: 20px;
     margin-top: 10px;
   }
   .extraImages{
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
     object-fit: cover;
 
   }
