@@ -277,6 +277,7 @@ const FamilyInformationForm = (props) => {
                 { value: "Government Job", label: "Government Job" },
                 { value: "Business", label: "Business" },
                 { value: "Self-employed", label: "Self-employed" },
+                { value: "Retired", label: "Retired" },
               ]}
               onChange={(selectedOption) =>
                 handleSelectChange("motherOccupation", selectedOption)

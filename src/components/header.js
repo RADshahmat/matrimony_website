@@ -37,7 +37,7 @@ const Header = () => {
                             animationDuration={0.5}
                         />
                     </div>
-                    <img src={`${process.env.PUBLIC_URL}/assets/butterfly_matrimony.png`} alt="Company Logo" className={styles.logo} />
+                    <Link to={'/'} > <img src={`${process.env.PUBLIC_URL}/assets/butterfly_matrimony.png`} alt="Company Logo" className={styles.logo} /> </Link>
                 </div>
 
                 <div className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
