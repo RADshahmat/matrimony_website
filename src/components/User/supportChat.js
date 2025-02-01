@@ -47,7 +47,7 @@ function SupportChat({ apiUrl, sessionToken }) {
     try {
       const messagePayload = { message: text, sender: "user" };
       const { data } = await axiosInstance.post(`/support_chat`, messagePayload);
-      console.log('received message',data)
+      //console.log('received message',data)
       setMessages((prev) => [...prev, data]);
     } catch (error) {
       console.error("Error sending message", error);

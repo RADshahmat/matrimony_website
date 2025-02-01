@@ -36,7 +36,7 @@ const Footer = () => {
       });
 
       if (response.status === 200) {
-        console.log(response.data)
+        //console.log(response.data)
         toast.success('Enquiry submitted successfully!');
         setFormData({name:'',phoneNumber:'',query:''});
       } else {

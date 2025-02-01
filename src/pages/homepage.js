@@ -17,7 +17,7 @@ const HomePage = () => {
           try {
             const response = await axiosInstance.get('/testimonial');
             setTestimonials(response.data); 
-            console.log('Fetched Testimonials:', response.data); 
+            //console.log('Fetched Testimonials:', response.data); 
           } catch (error) {
             console.error('Error fetching testimonials:', error);
           }

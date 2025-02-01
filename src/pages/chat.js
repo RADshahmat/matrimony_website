@@ -87,7 +87,7 @@ const Chat = () => {
 
       if (socket) {
         socket.on("newMessage", (messageData) => {
-          console.log(messageData, selectedChat, "bal ki hoise");
+          //console.log(messageData, selectedChat, "bal ki hoise");
           if (selectedChat && selectedChat.peerId) {
             if (messageData && messageData.userId === selectedChat.peerId) {
               setMessages((prevMessages) => [...prevMessages, messageData]);
@@ -108,7 +108,7 @@ const Chat = () => {
   useEffect(() => {
     if (selectedChat && socket) {
       socket.on("peerTyping", (data) => {
-        console.log("Peer is typing:", data);
+        //console.log("Peer is typing:", data);
         if (data?.data?.userId === selectedChat.peerId) {
           setIsTyping(data.isTyping);
         }
@@ -246,7 +246,7 @@ const Chat = () => {
     };
   }, [hasMore, loading, debouncedScroll, selectedChat]);
 
-  console.log(activeUsers, selectedChat, "theese are active users");
+  //console.log(activeUsers, selectedChat, "theese are active users");
 
   return (
     <div className="messenger-container">

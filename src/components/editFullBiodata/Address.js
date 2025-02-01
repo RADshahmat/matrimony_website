@@ -122,7 +122,7 @@ const AddressInfo = (props) => {
   };
 
 
-  console.log('this is formData', formData); 
+  //console.log('this is formData', formData); 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>

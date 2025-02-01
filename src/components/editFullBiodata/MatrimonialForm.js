@@ -23,18 +23,18 @@ const MatrimonialForm = () => {
   const getCvs=async()=>{
 
     const response=await axiosInstance.get('getCV');
-    console.log('dekhi ki Ai',response.data.result1)
+    //console.log('dekhi ki Ai',response.data.result1)
     setFormData(response.data.result[0])
     setImages(`https://backend.butterfly.hurairaconsultancy.com/${response.data.result1[0].path}`)
     setImages1(response.data.images)
 
   }
   
-  console.log('dp: ', images);
+  //console.log('dp: ', images);
 
   const handleSubmit = async (data, compressedImages) => {
     try {
-      console.log('this is the data:  ', data);
+      //console.log('this is the data:  ', data);
       const response = await axiosInstance.post('/update_cv', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -43,15 +43,15 @@ const MatrimonialForm = () => {
 
       setUserId(response.data.userId);
 
-      console.log('Form data response:', response.data.userId);
-      console.log(compressedImages,'egula images')
+      //console.log('Form data response:', response.data.userId);
+      //console.log(compressedImages,'egula images')
       if (compressedImages.length > 0) {
       
         const formDataImages = new FormData();
         compressedImages.forEach((image) => {
           formDataImages.append('images', image);
         });
-        console.log('dp name', userId);
+        //console.log('dp name', userId);
         formDataImages.append('images', images);
         formDataImages.append('dp', images.name);
 
@@ -61,7 +61,7 @@ const MatrimonialForm = () => {
           },
         });
 
-        console.log('Image upload response:', responseImages.data);
+        //console.log('Image upload response:', responseImages.data);
       }else{
         const formDataImages = new FormData();
         formDataImages.append('images', images);
@@ -73,7 +73,7 @@ const MatrimonialForm = () => {
           },
         });
 
-        console.log('Image upload response:', responseImages.data);
+        //console.log('Image upload response:', responseImages.data);
       }
 
       navigate('/cvpreview', {
@@ -84,7 +84,7 @@ const MatrimonialForm = () => {
     }
   };
 
-  console.log('dp name', images);
+  //console.log('dp name', images);
   
   return (
     <div>

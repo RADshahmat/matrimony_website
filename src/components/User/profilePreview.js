@@ -21,14 +21,14 @@ function ProfileView({ onRequestChat, onInterested, onNotInterested, onPrint, on
     const [interested,setInterested]=useState('');
     const [showModal,setShowModal]=useState(false);
     const [loading,setIsLoading]=useState(false);
-console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
+//console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
     // Fetch user data from API
     useEffect(() => {
-        console.log("dhokar age id",id)
+        //console.log("dhokar age id",id)
         const fetchData = async () => {
             try {
                 const response = await axiosInstance.get(`/users/${userId}`);
-                console.log(response.data, "User data fetched");
+                //console.log(response.data, "User data fetched");
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -53,7 +53,7 @@ console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
 
     const handleChatRequestClick = async (userId,chatreq) => {
         const isChatRequested = chatreq=='0';
-        console.log(userId,"jay too")
+        //console.log(userId,"jay too")
         try {
           const response = await axiosInstance.post("/toggleChatRequest", {
             userId: userId,
@@ -103,7 +103,7 @@ console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
             const response = await axiosInstance.get("/user_matches_list_individual", {
                 params: { peerId: userId }
             });
-          console.log(response.data,"theese are indi");
+          //console.log(response.data,"theese are indi");
           setReqChat(response.data[0].chatRequest);
           setInterested(response.data[0].interest);
         } catch (error) {
@@ -116,7 +116,7 @@ console.log(id,isLiked,chatRequested,"ki re vai kaj kore na knn")
         try {
           const response = await axiosInstance.post('/not_interested', { userId: id });
           if (response.status==200) {
-              console.log('Match removed successfully');
+              //console.log('Match removed successfully');
               setShowModal(false);
               setIsLoading(false);
               navigate('/matchlist');

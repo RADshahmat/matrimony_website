@@ -86,7 +86,7 @@ const FilePicker = (props) => {
       setCropping(true);
     }
   };
-console.log('the image',image,props.images)
+//console.log('the image',image,props.images)
   return (
     <div style={{ display: 'flex' , gap: "20px" }}>
       <div

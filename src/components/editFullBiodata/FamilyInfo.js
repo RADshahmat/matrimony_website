@@ -33,7 +33,7 @@ const FamilyInformationForm = (props) => {
         brotherFields,
         sisterFields,
       });
-      console.log(brotherFields,'dekha jak')
+      //console.log(brotherFields,'dekha jak')
       setBrotherCount(brotherFields[0]==null?0:brotherFields.length);
       setSisterCount(sisterFields[0]==null?0:sisterFields.length);
     }
@@ -199,7 +199,7 @@ const FamilyInformationForm = (props) => {
   };
   
 
-console.log(props.formData,brotherCount,'e ki vai')
+//console.log(props.formData,brotherCount,'e ki vai')
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>

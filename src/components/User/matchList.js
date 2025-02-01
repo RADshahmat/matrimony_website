@@ -105,7 +105,7 @@ function MatchList() {
 
   const handleChatRequestClick = async (userId, chatreq) => {
     const isChatRequested = chatreq == '0';
-    console.log(userId, "jay too")
+    //console.log(userId, "jay too")
     try {
       const response = await axiosInstance.post("/toggleChatRequest", {
         userId: userId,
@@ -145,7 +145,7 @@ function MatchList() {
       console.error("Error updating like status:", error);
     }
   };
-  console.log("profile ayse", profiles)
+  //console.log("profile ayse", profiles)
   return (
     <main className={styles.userDashboard}>
       <div className={styles.cardcontainer}>

@@ -16,7 +16,7 @@ function CVpreview() {
     const queryParams = new URLSearchParams(location.search); // Extract query parameters
     const flag = queryParams.get('flag'); 
     const userId = location.state?.userId || flag || "no";
-    console.log(userId,flag,"this is the flag");
+    //console.log(userId,flag,"this is the flag");
     const [userData, setUserData] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -25,7 +25,7 @@ function CVpreview() {
         const fetchData = async () => {
             try {
                 const response = await axiosInstance.get(`/users/${userId}`);
-                //console.log(response.data,"kaka plz work")
+                ////console.log(response.data,"kaka plz work")
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);

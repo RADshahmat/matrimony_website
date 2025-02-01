@@ -213,7 +213,7 @@ const PartnerPreferences = (props) => {
   const filteredDistricts = districts.filter(
     (district) => !formData.notReferredDistricts.includes(district.value)
   );
-  console.log(props.formDataFunc, props.images1, "yooooooooo");
+  //console.log(props.formDataFunc, props.images1, "yooooooooo");
   return (
     <div className={styles.container}>
       <form encType="multipart/form-data" onSubmit={handleSubmit}>

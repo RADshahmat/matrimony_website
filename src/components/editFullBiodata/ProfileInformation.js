@@ -150,7 +150,7 @@ const ProfileInformation = (props) => {
     ],
   };
 
-  console.log("image in info", images);
+  //console.log("image in info", images);
   return (
     <>
       <form className={styles.formContainer} onSubmit={handleSubmit}>

@@ -14,12 +14,12 @@ const MatrimonialForm = () => {
   const [userId, setUserId] = useState(null); // Initialize userId correctly as null
   const navigate = useNavigate();
   
-  console.log('dp: ', images);
+  //console.log('dp: ', images);
 
   const handleSubmit = async (data, compressedImages) => {
     try {
       // Send the form data
-      console.log('this is the data:  ', data);
+      //console.log('this is the data:  ', data);
       const response = await axiosInstance.post('/submit_cv', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const MatrimonialForm = () => {
 
       setUserId(response.data.userId);
 
-      console.log('Form data response:', response.data.userId);
+      //console.log('Form data response:', response.data.userId);
 
       // Send the images
       if (compressedImages.length > 0) {
@@ -36,7 +36,7 @@ const MatrimonialForm = () => {
         compressedImages.forEach((image) => {
           formDataImages.append('images', image);
         });
-        console.log('dp name', userId);
+        //console.log('dp name', userId);
         formDataImages.append('images', images);
         formDataImages.append('dp', images.name);
 
@@ -46,7 +46,7 @@ const MatrimonialForm = () => {
           },
         });
 
-        console.log('Image upload response:', responseImages.data);
+        //console.log('Image upload response:', responseImages.data);
       }else{
         const formDataImages = new FormData();
         formDataImages.append('images', images);
@@ -58,7 +58,7 @@ const MatrimonialForm = () => {
           },
         });
 
-        console.log('Image upload response:', responseImages.data);
+        //console.log('Image upload response:', responseImages.data);
       }
 
        //Navigate after userId is set
@@ -71,7 +71,7 @@ const MatrimonialForm = () => {
     }
   };
 
-  console.log('dp name', images);
+  //console.log('dp name', images);
   
   return (
     <div>

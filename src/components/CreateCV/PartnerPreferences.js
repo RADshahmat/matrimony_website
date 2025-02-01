@@ -181,10 +181,7 @@ const PartnerPreferences = (props) => {
   const filteredDistricts = districts.filter(
     (district) => !formData.notReferredDistricts.includes(district.value)
   );
-  console.log(
-    formData.notReferredDistricts,
-    "this is a check for notPrefered Districts"
-  );
+ 
   return (
     <div className={styles.container}>
       <form encType="multipart/form-data" onSubmit={handleSubmit}>
