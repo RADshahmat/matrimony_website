@@ -345,7 +345,7 @@ const Chat = () => {
                     className="message-avatar"
                   />
 
-                  <p className="message-text">Typing...</p>
+                  <p className="message-text">Typing....</p>
                 </div>
               )}
             </div>
