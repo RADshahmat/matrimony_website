@@ -7,6 +7,14 @@ function BioDataPage1({ userData, style ,permission}) {
     return <p>Loading...</p>; // Show a loading message or spinner while data is being fetched
   }
 
+  const monthNames = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  
+  const formattedDOB = `${userData.user.dobDay} ${monthNames[parseInt(userData.user.dobMonth) - 1]} ${userData.user.dobYear}`;
+  
+
   return (
     <main className={styles.container} data-component style={style}>
       <section className={styles.content}>
@@ -33,8 +41,8 @@ function BioDataPage1({ userData, style ,permission}) {
         <h1 className={styles.bioTitle}>Bio-Data</h1>
         <h2 className={styles.name}>{userData.user.fullName}</h2>
         <p className={styles.details}>
-          Date of Birth : {userData.user.dobDay} / {userData.user.dobMonth} / {userData.user.dobYear} <br />
-          {userData.user.city} , {userData.user.country}
+          Date of Birth: {formattedDOB} <br />
+          {userData.user.city}, {userData.user.country}
         </p>
       </section>
       <div className={styles.decorativeColumn}>

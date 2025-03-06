@@ -8,6 +8,8 @@ const ProfileInformation = (props) => {
   const [errors, setErrors] = useState({});
   const filePickerRef = useRef(null);
   const [localFormData, setLocalFormData] = useState({
+    hasBaby: "",
+    numOfBabies: null,
     fullName: "",
     dobDay: "",
     dobMonth: "",
@@ -40,12 +42,29 @@ const ProfileInformation = (props) => {
     }));
   };
 
-  const handleSelectChange = (selectedOption, name) => {
-    setLocalFormData((prevData) => ({
-      ...prevData,
-      [name]: selectedOption ? selectedOption.value : "",
-    }));
+  const handleSelectChange = (option, field) => {
+    setLocalFormData((prevData) => {
+      let updatedData = {
+        ...prevData,
+        [field]: option.value,
+      };
+  
+      // Reset baby-related fields if marital status changes
+      if (field === "maritalStatus" && !["widow", "separated", "divorced"].includes(option.value)) {
+        updatedData.hasBaby = "";
+        updatedData.numOfBabies = "";
+        
+      }
+  
+      // Reset number of babies if "No Baby" is selected
+      if (field === "hasBaby" && option.value === "No Baby") {
+        updatedData.numOfBabies = 0;
+      }
+  
+      return updatedData;
+    });
   };
+  
 
   // Email validation function
   const validateEmail = (email) => {
@@ -75,6 +94,13 @@ const ProfileInformation = (props) => {
       validationErrors.maritalStatus = "Please select your marital status.";
     }
 
+        // Marital Status validation
+        if (!localFormData.maritalStatus) {
+          validationErrors.maritalStatus = "Please select your marital status.";
+        }
+        if (!localFormData.hasBaby && ['widow', 'separated', 'divorced'].includes(localFormData.maritalStatus)) {
+          validationErrors.hasBaby = "Please select your Baby status.";
+        }
     // Email validation
     if (!localFormData.email) {
       validationErrors.email = "Email is required.";
@@ -148,6 +174,19 @@ const ProfileInformation = (props) => {
       { value: "separated", label: "Separated" },
       { value: "widow", label: "Widow" },
     ],
+    hasBabyOptions: [
+      { value: 'With Baby', label: 'With Baby' },
+      { value: 'No Baby', label: 'No Baby' },
+    ],
+
+    numOfBabiesOptions: [
+      { value: "", label: "Select" },
+      { value: "1", label: "1" },
+      { value: "2", label: "2" },
+      { value: "3", label: "3" },
+      { value: "4", label: "4" },
+      { value: "5", label: "5+" },
+    ]
   };
 
   //console.log("image in info", images);
@@ -392,36 +431,87 @@ const ProfileInformation = (props) => {
           </div>
         </div>
 
-        {/* Marital Status */}
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Marital Status</label>
-          <div className={styles.radioGroup}>
-            {options.maritalStatus.map((status) => (
-              <div key={status.value} className={styles.radioContainer}>
-                <input
-                  type="radio"
-                  className={styles.radioInput}
-                  id={status.value}
-                  name="maritalStatus" // Ensure the name is properly set
-                  checked={localFormData.maritalStatus === status.value} // Checked logic
-                  onChange={() =>
-                    handleSelectChange({ value: status.value }, "maritalStatus")
-                  }
-                  autoComplete="off"
-                />
+      {/* Marital Status */}
+<div className={styles.formGroup}>
+  <label className={styles.label}>Marital Status</label>
+  <div className={styles.radioGroup}>
+    {options.maritalStatus.map((status) => (
+      <div key={status.value} className={styles.radioContainer}>
+        <input
+          type="radio"
+          className={styles.radioInput}
+          id={status.value}
+          name="maritalStatus"
+          checked={localFormData.maritalStatus === status.value}
+          onChange={() =>
+            handleSelectChange({ value: status.value }, "maritalStatus")
+          }
+          autoComplete="off"
+        />
+        <label className={styles.radioLabel} htmlFor={status.value}>
+          {status.label}
+        </label>
+      </div>
+    ))}
+  </div>
+  {errors.maritalStatus && (
+    <small className={styles.errorMessage}>
+      {errors.maritalStatus}
+    </small>
+  )}
+</div>
 
-                <label className={styles.radioLabel} htmlFor={status.value}>
-                  {status.label}
-                </label>
-              </div>
-            ))}
-          </div>
-          {errors.maritalStatus && (
-            <small className={styles.errorMessage}>
-              {errors.maritalStatus}
-            </small>
-          )}
+{/* Show "With Baby?" option if Widow, Separated, or Divorced is selected */}
+{['widow', 'separated', 'divorced'].includes(localFormData.maritalStatus) && (
+  <div className={styles.formGroup}>
+    <label className={styles.label}>With Baby?</label>
+    <div className={styles.radioGroup}>
+      {options.hasBabyOptions.map((option) => (
+        <div key={option.value} className={styles.radioContainer}>
+          <input
+            type="radio"
+            className={styles.radioInput}
+            id={option.value}
+            name="hasBaby"
+            checked={localFormData.hasBaby === option.value}
+            onChange={() =>
+              handleSelectChange({ value: option.value }, 'hasBaby')
+            }
+            autoComplete="off"
+          />
+          <label className={styles.radioLabel} htmlFor={option.value}>
+            {option.label}
+          </label>
         </div>
+      ))}
+    </div>
+    {errors.hasBaby && (
+      <small className={styles.errorMessage}>
+        {errors.hasBaby}
+      </small>
+    )}
+  </div>
+)}
+
+{/* Show "Number of Babies" dropdown if "With Baby" is selected */}
+{localFormData.hasBaby === 'With Baby' && (
+  <div className={styles.formGroup}>
+    <label className={styles.label}>Number of Babies</label>
+    <Select
+      id="numOfBabiesOptions"
+      name="numOfBabiesOptions"
+      className={`${styles.select} ${
+        errors.numOfBabiesOptions ? styles.inputError : ""
+      }`}
+      value={options.numOfBabiesOptions.find(option => option.value === localFormData.numOfBabies) || null}
+      onChange={(option) => handleSelectChange(option, 'numOfBabies')}
+      options={options.numOfBabiesOptions}
+      isSearchable={false}
+      required
+    />
+    {errors.numOfBabiesOptions && (<small className={styles.errorMessage}>{errors.numOfBabiesOptions}</small>)}
+  </div>
+)}
 
         <div className={styles.formGroupContainer}>
           {/* Date Of Birth */}

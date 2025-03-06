@@ -233,6 +233,7 @@ const FamilyInformationForm = (props) => {
               className={styles.selectField}
               options={[
                 { value: "Government Job", label: "Government Job" },
+                { value: "Private Job", label: "Private Job" },
                 { value: "Business", label: "Business" },
                 { value: "Self-employed", label: "Self-employed" },
                 { value: "Retired", label: "Retired" },
@@ -275,6 +276,7 @@ const FamilyInformationForm = (props) => {
               options={[
                 { value: "Housewife", label: "Housewife" },
                 { value: "Government Job", label: "Government Job" },
+                { value: "Private Job", label: "Private Job" },
                 { value: "Business", label: "Business" },
                 { value: "Self-employed", label: "Self-employed" },
                 { value: "Retired", label: "Retired" },

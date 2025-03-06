@@ -74,8 +74,18 @@ function BioDataPage2({ userData, style ,permission}) {
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Marital Status:</span>
-                  <span className={styles.value}>{userData.user.maritalStatus}</span>
+                  <span className={styles.value}>
+                    {userData.user.maritalStatus.charAt(0).toUpperCase() + userData.user.maritalStatus.slice(1)}
+                    {userData.user.hasBaby === 'With Baby'
+                      ? ` with ${userData.user.numOfBabies} ${userData.user.numOfBabies === '1' ? 'baby' : 'babies'}`
+                      : userData.user.hasBaby === 'No Baby'
+                      ? ' with No baby'
+                      : ''}
+                  </span>
                 </div>
+
+
+
                 <div className={styles.detailItem}>
                   <span className={styles.label}>NID Number:</span>
                   <span className={styles.value}>{userData.user.nidNumber}</span>
