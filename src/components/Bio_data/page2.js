@@ -47,7 +47,7 @@ function BioDataPage2({ userData, style ,permission}) {
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Date of Birth:</span>
                   <span className={styles.value}>
-                    {`${userData.user.dobDay} ${userData.user.dobMonth} ${userData.user.dobYear}`}
+                    {`${userData.user.dobDay}-${userData.user.dobMonth}-${userData.user.dobYear}`}
                   </span>
                 </div>
                 <div className={styles.detailItem}>

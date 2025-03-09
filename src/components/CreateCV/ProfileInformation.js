@@ -494,7 +494,7 @@ const ProfileInformation = (props) => {
 {/* Show "Number of Babies" dropdown if "With Baby" is selected */}
 {localFormData.hasBaby === 'With Baby' && (
   <div className={styles.formGroup}>
-    <label className={styles.label}>Number of Babies</label>
+    <label className={styles.label}>Number of Children</label>
     <Select
       id="numOfBabiesOptions"
       name="numOfBabiesOptions"
