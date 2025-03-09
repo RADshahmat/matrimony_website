@@ -46,7 +46,7 @@ const IntroSecHome = () => {
       <section className={styles.intro}>
         <div className={styles.introframe} data-aos="flip-right">
             <div className={styles.intro_upper}>
-              <div className={styles.intro_heading}>Butterfly Matrimony</div>
+              <div className={styles.intro_heading}>Butterfly Matrimonial</div>
               <div className={styles.subheading_intro}>Your perfect matchmaker</div>
             </div>
             <div className={styles.matrimony_desc}>
