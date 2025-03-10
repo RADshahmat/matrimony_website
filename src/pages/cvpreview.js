@@ -147,7 +147,7 @@ function CVpreview() {
                     <FaArrowLeft style={{ marginRight: '8px' }} /> Back to Dashboard
                         </Link>
                         <button className={styles.downloadButton} onClick={downloadPDF}>
-                            Request Venus & Download
+                            Download
                         </button>
                 </div>
             </div>
