@@ -117,18 +117,23 @@ const PartnerPreferences = (props) => {
   }, [props.formDataFunc]);
 
   const options = {
-    age: [{ value: "20", label: "20" }],
-    height: [{ value: "5'", label: "5'" }],
     educationalQualification: [
+      { value: "Secondary School", label: "Secondary School" },
       { value: "Higher Secondary", label: "Higher Secondary" },
+      { value: "Graduate", label: "Graduate" },
+      { value: "Under Graduate", label: "Under Graduate" },
+      { value: "Post Graduate", label: "Post Graduate" },
     ],
-    heightPreference: [{ value: "more than", label: "Not More Than" },{ value: "less Than", label: "Not Less Than" }],
-    agePreference: [{ value: "more than", label: "Not More Than" },{ value: "less Than", label: "Not Less Than" }],
+    heightPreference: [{ value: "more than", label: "Not More Than" },{ value: "less than", label: "Not Less Than" }],
+    agePreference: [{ value: "more than", label: "Not More Than" },{ value: "less than", label: "Not Less Than" }],
     minimumEducationalQualification: [
+      { value: "Secondary School", label: "Secondary School" },
       { value: "Higher Secondary", label: "Higher Secondary" },
+      { value: "Graduate", label: "Graduate" },
+      { value: "Under Graduate", label: "Under Graduate" },
+      { value: "Post Graduate", label: "Post Graduate" },
     ],
   };
-
   const handleChange = (eventOrOption, actionMeta) => {
     if (actionMeta) {
       // This handles react-select's onChange
